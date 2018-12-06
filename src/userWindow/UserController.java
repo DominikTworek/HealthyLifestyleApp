@@ -1,4 +1,4 @@
-package sample;
+package userWindow;
 
 public class UserController {
 }
