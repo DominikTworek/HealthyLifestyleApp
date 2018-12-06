@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="115.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuUser.menuUserController">
+   <children>
+      <JFXButton onAction="#loadEditProfile" prefHeight="85.0" prefWidth="126.0" text="Edycja Profilu" />
+      <JFXButton onAction="#loadChooseTrainer" prefHeight="85.0" prefWidth="150.0" text="Wybierz Trenera" />
+      <JFXButton onAction="#loadNutritionPlan" prefHeight="85.0" prefWidth="146.0" text="Plan Żywieniowy" />
+      <JFXButton onAction="#loadTrainingPlan" prefHeight="85.0" prefWidth="130.0" text="Plan Treningowy" />
+      <JFXButton onAction="#loadUpdateProgress" prefHeight="85.0" prefWidth="132.0" text="Aktualizuj Postępy" />
+      <JFXButton onAction="#loadCalendar" prefHeight="85.0" prefWidth="133.0" text="Kalendarz" />
+      <JFXButton onAction="#loadMessage" prefHeight="85.0" prefWidth="179.0" text="Wiadomości" />
+   </children>
+</VBox>
