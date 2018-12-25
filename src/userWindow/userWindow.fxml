@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userWindow.UserController">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <center>
+                <AnchorPane prefHeight="550.0" prefWidth="800.0" stylesheets="@../layout/Dark.css" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane fx:id="mainWindow" prefHeight="550.0" prefWidth="650.0" />
+                  <JFXHamburger fx:id="hamburger" layoutX="737.0" layoutY="13.0" prefHeight="35.0" prefWidth="40.0" styleClass="jfx-hambueger-icon" stylesheets="@../layout/Dark.css" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="13.0" />
+               </children></AnchorPane>
+            </center>
+            <top>
+                <AnchorPane prefHeight="34.0" prefWidth="800.0" stylesheets="@../layout/Dark.css" BorderPane.alignment="CENTER">
+                    <children>
+                        <JFXButton layoutX="682.0" layoutY="2.0" prefHeight="40.0" prefWidth="78.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Wyloguj" AnchorPane.rightAnchor="5.0" />
+                        <Text layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UserNick" wrappingWidth="104.13671875" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                    </children>
+                </AnchorPane>
+            </top>
+         <right>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="150.0" direction="RIGHT" prefWidth="0.0" resizableOnDrag="true" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="drawerVbox" prefHeight="200.0" prefWidth="100.0" stylesheets="@../layout/Dark.css" visible="false">
+                     <children>
+                        <JFXButton onAction="#loadEditProfile" prefHeight="85.0" prefWidth="152.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Edycja Profilu" />
+                        <JFXButton onAction="#loadChooseTrainer" prefHeight="85.0" prefWidth="150.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Wybierz Trenera" />
+                        <JFXButton onAction="#loadNutritionPlan" prefHeight="85.0" prefWidth="150.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Plan Żywieniowy" />
+                        <JFXButton onAction="#loadTrainingPlan" prefHeight="85.0" prefWidth="150.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Plan Treningowy" />
+                        <JFXButton onAction="#loadUpdateProgress" prefHeight="85.0" prefWidth="150.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Aktualizuj Postępy" />
+                        <JFXButton onAction="#loadCalendar" prefHeight="85.0" prefWidth="150.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Kalendarz" />
+                        <JFXButton onAction="#loadMessage" prefHeight="85.0" prefWidth="150.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Wiadomości" />
+                     </children>
+                  </VBox>
+               </children></JFXDrawer>
+         </right>
+        </BorderPane>
+    </children>
+</StackPane>

@@ -1,0 +1,70 @@
+
+* {
+    -fx-glowny: #2c2c2c;
+    -fx-drugi: #00B1C7;
+    -fx-glownytekst: #BABABA;
+    -fx-tekstniebieski:#00E5FB;
+    -fx-blad: #ba0e1b;
+
+}
+
+.root{
+    -fx-background-color: -fx-glowny;
+}
+
+.text-field{
+    -fx-text-fill: -fx-glownytekst;
+    -jfx-focus-color: -fx-drugi;
+}
+
+.button{
+    -fx-text-fill: -fx-glownytekst;
+    -fx-background-color: -fx-glowny;
+}
+
+/* GLOWNE OKNO */
+
+.tab{
+    -fx-pref-width: 180;
+    -fx-pref-height: 30;
+    -fx-background-color: -fx-glowny;
+    -jfx-rippler-fill:RED;
+}
+
+.tab-header-background{
+    -fx-background-color: -fx-glowny;
+}
+
+
+
+
+.jfx-hambueger-icon{
+    -fx-spacing: 7;
+}
+
+.jfx-hambueger-icon StackPane
+{
+    -fx-background-color: -fx-drugi;
+    -fx-background-radius: 5px;
+}
+
+.menu-button{
+    -fx-background-color: derive(-fx-glowny, 20%);
+}
+
+.menu-button:hover{
+    -fx-background-color: -fx-drugi;
+    -fx-blend-mode: COLOR_DODGE;
+    -fx-text-fill: -fx-tekstniebieski;
+
+}
+
+.menu-button:hover .imageview{
+    -fx-blend-mode: COLOR_DODGE;
+}
+
+
+
+
+
+
