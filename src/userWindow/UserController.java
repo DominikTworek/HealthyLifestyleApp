@@ -1,29 +1,22 @@
 package userWindow;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import windowFunctions.functions;
 
-public class UserController {
+public class UserController extends functions {
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
+    private JFXButton logoutButton;
 
     @FXML
     public AnchorPane mainWindow;
@@ -37,65 +30,41 @@ public class UserController {
     @FXML
     private VBox drawerVbox;
 
-    private String source;
-
     public void initialize() {
-        initMenu();
+        functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
     }
-
-    private void initMenu() {
-        HamburgerSlideCloseTransition zadanie = new HamburgerSlideCloseTransition(hamburger);
-        zadanie.setRate(-1);
-        hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (Event event) -> {
-            zadanie.setRate(zadanie.getRate() * -1);
-            zadanie.play();
-            if (drawer.isClosed()) {
-                drawer.open();
-                drawer.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                drawerVbox.setVisible(true);
-                mainWindow.setLayoutX(0);
-            } else {
-                drawer.close();
-                drawer.setPrefWidth(0);
-                drawerVbox.setVisible(false);
-                mainWindow.setLayoutX(150);
-            }
-        });
-    }
-
-
-    void loadMainWindow(String source) throws IOException {
-        AnchorPane change = FXMLLoader.load(getClass().getResource(source));
-        mainWindow.getChildren().setAll(change);
-    }
-
 
     public void loadEditProfile(ActionEvent actionEvent) throws IOException {
-        loadMainWindow("../mainWindow/Profile.fxml");
+        functions.loadMainWindow("../mainWindowUser/ProfileU.fxml", mainWindow);
     }
 
     public void loadChooseTrainer(ActionEvent actionEvent) throws IOException {
-        loadMainWindow("../mainWindow/Trainer.fxml");
+        functions.loadMainWindow("../mainWindowUser/TrainerU.fxml", mainWindow);
     }
 
     public void loadNutritionPlan(ActionEvent actionEvent) throws IOException {
-        loadMainWindow("../mainWindow/NutritionPlan.fxml");
+        functions.loadMainWindow("../mainWindowUser/NutritionPlanU.fxml", mainWindow);
     }
 
     public void loadTrainingPlan(ActionEvent actionEvent) throws IOException {
-        loadMainWindow("../mainWindow/TrainingPlan.fxml");
+        functions.loadMainWindow("../mainWindowUser/TrainingPlanU.fxml", mainWindow);
     }
 
     public void loadUpdateProgress(ActionEvent actionEvent) throws IOException {
-        loadMainWindow("../mainWindow/UpdateProgress.fxml");
+        functions.loadMainWindow("../mainWindowUser/UpdateProgressU.fxml", mainWindow);
     }
 
     public void loadCalendar(ActionEvent actionEvent) throws IOException {
-        loadMainWindow("../mainWindow/Calendar.fxml");
+        functions.loadMainWindow("../mainWindowUser/CalendarU.fxml", mainWindow);
     }
 
 
     public void loadMessage(ActionEvent actionEvent) throws IOException {
-        loadMainWindow("../mainWindow/Message.fxml");
+        functions.loadMainWindow("../mainWindowUser/MessageU.fxml", mainWindow);
+    }
+
+    public void logout(ActionEvent actionEvent) {
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        stage.close();
     }
 }

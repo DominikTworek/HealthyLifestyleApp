@@ -6,7 +6,7 @@
 
 <AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="64.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kalendarz" wrappingWidth="523.0">
+      <Text layoutX="64.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inne opcje" wrappingWidth="523.0">
          <font>
             <Font size="92.0" />
          </font>
