@@ -13,54 +13,54 @@ public class User implements Externalizable {
     private final StringProperty Password = new SimpleStringProperty();
     private final StringProperty Imie = new SimpleStringProperty();
     private final StringProperty Nazwisko = new SimpleStringProperty();
-    private final LongProperty Plec = new SimpleLongProperty();
-    private final LongProperty Pesel = new SimpleLongProperty();
-    private final LongProperty Rola = new SimpleLongProperty();
+    private final StringProperty Plec = new SimpleStringProperty();
+    private final StringProperty Pesel = new SimpleStringProperty();
+    private final StringProperty Rola = new SimpleStringProperty();
 
-    public long getRola() {
+    public String getRola() {
         return Rola.get();
     }
 
-    public LongProperty rolaProperty() {
+    public StringProperty rolaProperty() {
 
         return Rola;
     }
 
-    public void setRola(long value) {
+    public void setRola(String value) {
 
         Rola.set(value);
     }
 
 
 
-    public long getPesel() {
+    public String getPesel() {
 
         return Pesel.get();
     }
 
-    public LongProperty peselProperty() {
+    public StringProperty peselProperty() {
 
         return Pesel;
     }
 
-    public void setPesel(long value) {
+    public void setPesel(String value) {
 
         Pesel.set(value);
     }
 
 
 
-    public long getPlec() {
+    public String getPlec() {
 
         return Plec.get();
     }
 
-    public LongProperty plecProperty() {
+    public StringProperty plecProperty() {
 
         return Plec;
     }
 
-    public void setPlec(long value) {
+    public void setPlec(String value) {
 
         Plec.set(value);
     }
@@ -161,8 +161,8 @@ public class User implements Externalizable {
         setPassword((String) in.readObject());
         setImie((String) in.readObject());
         setNazwisko((String) in.readObject());
-        setPlec(in.readLong());
-        setPesel(in.readLong());
-        setRola(in.readLong());
+        setPlec((String) in.readObject());
+        setPesel((String) in.readObject());
+        setRola((String) in.readObject());
     }
 }

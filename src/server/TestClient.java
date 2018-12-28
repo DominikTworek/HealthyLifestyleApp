@@ -19,13 +19,13 @@ public class TestClient extends Application{
         UserService userService = (UserService) registry.lookup("service");
 
         User p = new User();
-        p.setLogin("test");
-        p.setPassword("haslotest");
-        p.setImie("imietest");
-        p.setNazwisko("nazwiskotest");
-        p.setPlec(1);
-        p.setPesel(333333333);
-        p.setRola(3);
+        p.setLogin("trzcina");
+        p.setPassword("to");
+        p.setImie("pizda");
+        p.setNazwisko("z farter");
+        p.setPlec("1");
+        p.setPesel("332342342");
+        p.setRola("3");
 
         p = userService.insertUser(p);
 

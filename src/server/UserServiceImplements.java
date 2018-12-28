@@ -17,22 +17,22 @@ public class UserServiceImplements implements UserService {
     public User insertUser(User user) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "insert into user(IdUser, Login, Password, Imie, Nazwisko, Plec, Pesel, rola) values (NULL, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into user(IdUser, Login, Password, Imie, Nazwisko, Plec, Pesel, Rola) values (NULL, ?, ?, ?, ?, ?, ?, ?)";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getImie());
             statement.setString(4, user.getNazwisko());
-            statement.setLong(5, user.getPlec());
-            statement.setLong(6, user.getPesel());
-            statement.setLong(7, user.getRola());
+            statement.setString(5, user.getPlec());
+            statement.setString(6, user.getPesel());
+            statement.setString(7, user.getRola());
 
             statement.executeUpdate();
 
             ResultSet result = statement.getGeneratedKeys();
             if (result.next()) {
-                user.setIdUser(result.getLong(0));
+                user.setIdUser(result.getLong(1));
         }
         result.close();
         return user;
@@ -68,9 +68,9 @@ public class UserServiceImplements implements UserService {
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getImie());
             statement.setString(4, user.getNazwisko());
-            statement.setLong(5, user.getPlec());
-            statement.setLong(6, user.getPesel());
-            statement.setLong(7, user.getRola());
+            statement.setString(5, user.getPlec());
+            statement.setString(6, user.getPesel());
+            statement.setString(7, user.getRola());
             statement.setLong(8, user.getIdUser());
 
             statement.executeUpdate();
@@ -127,13 +127,13 @@ public class UserServiceImplements implements UserService {
             if(result.next()){
                 user = new User();
                 user.setIdUser(result.getLong("IdUser"));
-                user.setLogin(result.getString("Login"));
+                user.setLogin(result.getString("LoginWindow"));
                 user.setPassword(result.getString("Password"));
                 user.setImie(result.getString("Imie"));
                 user.setNazwisko(result.getString("Nazwisko"));
-                user.setPlec(result.getLong("Plec"));
-                user.setPesel(result.getLong("Pesel"));
-                user.setRola(result.getLong("rola"));
+                user.setPlec(result.getString("Plec"));
+                user.setPesel(result.getString("Pesel"));
+                user.setRola(result.getString("rola"));
             }
             result.close();
             return user;
@@ -165,12 +165,12 @@ public class UserServiceImplements implements UserService {
             if(result.next()){
                 user = new User();
                 user.setIdUser(result.getLong("IdUser"));
-                user.setLogin(result.getString("Login"));
+                user.setLogin(result.getString("LoginWindow"));
                 user.setPassword(result.getString("Password"));
                 user.setImie(result.getString("Imie"));
                 user.setNazwisko(result.getString("Nazwisko"));
-                user.setPlec(result.getLong("Plec"));
-                user.setPesel(result.getLong("Pesel"));
+                user.setPlec(result.getString("Plec"));
+                user.setPesel(result.getString("Pesel"));
             }
             result.close();
             return user;
@@ -202,12 +202,12 @@ public class UserServiceImplements implements UserService {
             while(result.next()){
                 User user = new User();
                 user.setIdUser(result.getLong("IdUser"));
-                user.setLogin(result.getString("Login"));
+                user.setLogin(result.getString("LoginWindow"));
                 user.setPassword(result.getString("Password"));
                 user.setImie(result.getString("Imie"));
                 user.setNazwisko(result.getString("Nazwisko"));
-                user.setPlec(result.getLong("Plec"));
-                user.setPesel(result.getLong("Pesel"));
+                user.setPlec(result.getString("Plec"));
+                user.setPesel(result.getString("Pesel"));
                 list.add(user);
             }
 
