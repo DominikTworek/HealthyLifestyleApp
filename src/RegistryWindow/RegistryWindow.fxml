@@ -29,7 +29,7 @@
             </RadialGradient>
          </fill>
       </Text>
-      <JFXTextField alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="98.0" prefWidth="200.0" promptText="Wpisz login" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="90.0">
+      <JFXTextField fx:id="loginField" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="98.0" prefWidth="200.0" promptText="Wpisz login" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="90.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.3953488372093023">
                <stops>
@@ -47,7 +47,7 @@
             </RadialGradient>
          </focusColor>
       </JFXTextField>
-      <JFXPasswordField alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="142.0" prefWidth="200.0" promptText="Wpisz hasło" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="135.0">
+      <JFXPasswordField fx:id="passwordField" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="142.0" prefWidth="200.0" promptText="Wpisz hasło" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="135.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.4">
                <stops>
@@ -65,7 +65,7 @@
             </RadialGradient>
          </focusColor>
       </JFXPasswordField>
-      <JFXTextField alignment="CENTER" labelFloat="true" layoutX="25.0" layoutY="100.0" prefWidth="200.0" promptText="Wpisz swoje imię" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="180.0">
+      <JFXTextField fx:id="nameField" alignment="CENTER" labelFloat="true" layoutX="25.0" layoutY="100.0" prefWidth="200.0" promptText="Wpisz swoje imię" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="180.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.3953488372093023">
                <stops>
@@ -83,7 +83,7 @@
             </RadialGradient>
          </focusColor>
       </JFXTextField>
-      <JFXTextField alignment="CENTER" labelFloat="true" layoutX="25.0" layoutY="100.0" prefWidth="200.0" promptText="Wpisz swoje nazwisko" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="225.0">
+      <JFXTextField fx:id="lastNameField" alignment="CENTER" labelFloat="true" layoutX="25.0" layoutY="100.0" prefWidth="200.0" promptText="Wpisz swoje nazwisko" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="225.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.3953488372093023">
                <stops>
@@ -101,7 +101,7 @@
             </RadialGradient>
          </focusColor>
       </JFXTextField>
-      <JFXComboBox fx:id="comboBox" layoutX="10.0" layoutY="10.0" onMouseClicked="#setComboBox" promptText="Wybierz płeć" styleClass="button" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="270.0">
+      <JFXComboBox fx:id="genderComboBox" layoutX="10.0" layoutY="10.0" onMouseClicked="#setComboBox" promptText="Wybierz płeć" styleClass="button" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="270.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                <stops>
@@ -122,7 +122,7 @@
             </RadialGradient>
          </focusColor>
       </JFXComboBox>
-      <JFXTextField alignment="CENTER" labelFloat="true" layoutX="25.0" layoutY="100.0" prefWidth="200.0" promptText="Wpisz swój wiek" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="315.0">
+      <JFXTextField fx:id="ageField" alignment="CENTER" labelFloat="true" layoutX="25.0" layoutY="100.0" prefWidth="200.0" promptText="Wpisz swój wiek" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="315.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.3953488372093023">
                <stops>
@@ -140,8 +140,8 @@
             </RadialGradient>
          </focusColor>
       </JFXTextField>
-      <JFXButton layoutX="61.0" layoutY="351.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zarejestruj się" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="360.0" />
-      <ImageView fx:id="exitImage" fitHeight="17.0" fitWidth="17.0" layoutX="218.0" layoutY="16.0" onMouseClicked="#closeApp" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="392.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+      <JFXButton layoutX="61.0" layoutY="351.0" onMouseClicked="#registryUser" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zarejestruj się" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="360.0" />
+      <ImageView fx:id="exitImage" fitHeight="17.0" fitWidth="17.0" layoutX="218.0" layoutY="16.0" onMouseClicked="#changeToLoginWindow" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="392.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
          <image>
             <Image url="@../media/delete-button.png" />
          </image>
