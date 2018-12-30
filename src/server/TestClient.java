@@ -25,7 +25,7 @@ public class TestClient extends Application{
         p.setNazwisko("z farter");
         p.setPlec("a");
         p.setPesel("a");
-        p.setRola("a");
+        p.setRola("admin");
 
        p = userService.insertUser(p);
 

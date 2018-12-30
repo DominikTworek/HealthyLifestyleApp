@@ -58,54 +58,8 @@ public class RegistryController {
         stage.setScene(new Scene(LoginWindowParent));
         stage.show();
     }
-    /*
-        @FXML
-        void registryUser() {
-
-            try {
-
-                if (isIncorrectLength(loginField,5)){
-                    throw new IllegalArgumentException("Nie podano loginu lub jest za krótki, minimum to 5 znaków!");
-                }
-
-                else if (isIncorrectLength(passwordField)){
-                    throw new IllegalArgumentException("Nie podano hasła lub jest za krótkie, minimum to 6 znaków!");
-                }
-
-                else if (isIncorrectLength(nameField, 3)) {
-                    throw new IllegalArgumentException("Nie podano imienia lub jest za krótkie!");
-                }
-
-                else if (isIncorrectLength(lastNameField, 3)) {
-                    throw new IllegalArgumentException("Nie podano nazwiska lub jest za krótkie!");
-                }
-
-                else if (isIncorrectLength(genderComboBox)) {
-                    throw new IllegalArgumentException("Nie wybrano płci!");
-                }
-
-                else if (isIncorrectAgeLength(ageField)) {
-                    throw new IllegalArgumentException("Nie podano wieku lub jesteś za młody/młoda!");
-                }
-                else {
-            User user = new User();
-            user.setLogin(loginField.getText().trim());
-            user.setPassword(passwordField.getText().trim());
-            user.setImie(nameField.getText().trim());
-            user.setNazwisko(lastNameField.getText().trim());
-            user.setPlec(genderComboBox.getValue().toString().trim());
-            user.setPesel(ageField.getText().trim());
-            user.setRola("consumer");
-            userService.insertUser(user);
-
-            clearField();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
 
 
-    }
-*/
 private void clearField(){
         loginField.setText("");
         passwordField.setText("");

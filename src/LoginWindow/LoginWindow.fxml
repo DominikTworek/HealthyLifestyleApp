@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="217.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginWindow.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="217.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginWindow.LoginController">
    <children>
       <Text layoutX="27.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Panel Logowania" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
          <font>
@@ -27,9 +28,9 @@
             </RadialGradient>
          </fill>
       </Text>
-      <JFXTextField alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="98.0" prefWidth="200.0" promptText="Wpisz swój login" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="115.0">
+      <JFXTextField fx:id="loginField" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="98.0" onKeyPressed="#loginAction" prefWidth="200.0" promptText="Wpisz swój login" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="115.0">
          <unFocusColor>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="0.3953488372093023">
+            <RadialGradient centerX="0.5055555555555555" centerY="0.5" radius="0.3953488372093023">
                <stops>
                   <Stop color="#00d0ff" />
                   <Stop color="#2c2c2c" offset="1.0" />
@@ -37,15 +38,18 @@
             </RadialGradient>
          </unFocusColor>
          <focusColor>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+            <RadialGradient centerX="0.49444444444444446" centerY="0.5" radius="0.5">
                <stops>
                   <Stop color="#00d0ff" />
-                  <Stop color="#323232" offset="1.0" />
+                  <Stop color="#2b2b2b" offset="1.0" />
                </stops>
             </RadialGradient>
          </focusColor>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
       </JFXTextField>
-      <JFXPasswordField alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="142.0" prefWidth="200.0" promptText="Wpisz swoje hasło" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="160.0">
+      <JFXPasswordField fx:id="passwordField" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="142.0" prefWidth="200.0" promptText="Wpisz swoje hasło" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="160.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.4">
                <stops>
@@ -55,15 +59,18 @@
             </RadialGradient>
          </unFocusColor>
          <focusColor>
-            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.5046511627906975">
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" focusAngle="8.13" radius="0.5046511627906975">
                <stops>
                   <Stop color="#00d0ff" />
-                  <Stop color="#2c2c2c" offset="1.0" />
+                  <Stop color="#2b2b2b" offset="1.0" />
                </stops>
             </RadialGradient>
          </focusColor>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
       </JFXPasswordField>
-      <JFXButton layoutX="76.0" layoutY="190.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zaloguj" AnchorPane.topAnchor="195.0" />
+      <JFXButton layoutX="76.0" layoutY="190.0" onAction="#login" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zaloguj" AnchorPane.topAnchor="195.0" />
       <JFXTextField alignment="CENTER" editable="false" layoutX="60.0" layoutY="235.0" text="Nie pamiętasz hasła?" AnchorPane.topAnchor="235.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.38372093023255816">

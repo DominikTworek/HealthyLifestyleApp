@@ -4,37 +4,37 @@
     -fx-drugi: #00B1C7;
     -fx-drugi-najechanie: #004359;
     -fx-glownytekst: #BABABA;
-    -fx-tekstniebieski:#00E5FB;
+    -fx-tekstniebieski: #00E5FB;
     -fx-blad: #ba0e1b;
+    -fx-blad-dwa: #ba1300;
 
 }
 
-.root{
+.root {
     -fx-background-color: -fx-glowny;
 }
 
-.text-field{
+.text-field {
     -fx-text-fill: -fx-glownytekst;
     -jfx-focus-color: -fx-drugi;
 }
 
-.button{
+.button {
     -fx-text-fill: -fx-glownytekst;
     -fx-background-color: -fx-glowny;
 }
 
 /* GLOWNE OKNO */
 
-.tab-header-background{
+.tab-header-background {
     -fx-background-color: -fx-glowny;
 }
 
-.jfx-hambueger-icon{
+.jfx-hambueger-icon {
     -fx-spacing: 7;
 }
 
-.jfx-hambueger-icon StackPane
-{
+.jfx-hambueger-icon StackPane {
     -fx-background-color: -fx-drugi;
     -fx-background-radius: 5px;
 }
@@ -44,31 +44,29 @@
 }
 
 .menu-button {
-    -fx-background-color:
-            #090a0c,
-            linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-            linear-gradient(#20262b, #191d22),
-            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-background-radius: 5,4,3,5;
-    -fx-background-insets: 0,1,2,0;
+    -fx-background-color: #090a0c,
+    linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+    linear-gradient(#20262b, #191d22),
+    radial-gradient(center 50% 0%, radius 100%, rgba(114, 131, 148, 0.9), rgba(255, 255, 255, 0));
+    -fx-background-radius: 5, 4, 3, 5;
+    -fx-background-insets: 0, 1, 2, 0;
     -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
     -fx-font-family: "Arial";
     -fx-text-fill: linear-gradient(white, #d0d0d0);
     -fx-font-size: 12px;
     -fx-padding: 10 20 10 20;
 }
 
-.menu-button:hover{
-    -fx-background-color:
-            #2f3032,
-            linear-gradient(#4f5a63 0%, #383d42 20%, #2a2e33 100%),
-            linear-gradient(#3c4449, #282c31),
-            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-background-radius: 5,4,3,5;
-    -fx-background-insets: 0,1,2,0;
+.menu-button:hover {
+    -fx-background-color: #2f3032,
+    linear-gradient(#4f5a63 0%, #383d42 20%, #2a2e33 100%),
+    linear-gradient(#3c4449, #282c31),
+    radial-gradient(center 50% 0%, radius 100%, rgba(114, 131, 148, 0.9), rgba(255, 255, 255, 0));
+    -fx-background-radius: 5, 4, 3, 5;
+    -fx-background-insets: 0, 1, 2, 0;
     -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(23, 23, 23, 0.6), 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow(three-pass-box, rgba(23, 23, 23, 0.6), 5, 0.0, 0, 1);
     -fx-font-family: "Arial";
     -fx-text-fill: linear-gradient(#ffffff, #dddddd);
     -fx-font-size: 12px;
@@ -82,26 +80,34 @@
 }*/
 
 
-.combo-box .cell{
+.combo-box .cell {
     -fx-background-color: -fx-glowny;
     -fx-alignment: center;
     -fx-text-alignment: center;
 }
 
-.combo-box .cell:hover{
+.combo-box .cell:hover {
     -fx-text-fill: -fx-glownytekst;
 }
 
-.combo-box .list-cell
-{
+.combo-box .list-cell {
     -fx-text-fill: -fx-tekstniebieski;
     -fx-alignment: center;
     -fx-text-alignment: center;
 }
 
 
-.combo-box-popup .list-view
-{
+.combo-box-popup .list-view {
     -fx-background-color: -fx-glowny;
+}
+
+.incorrectly {
+    -fx-prompt-text-fill: -fx-blad;
+    -fx-text-fill: -fx-blad;
+    -jfx-unfocus-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 40%, -fx-blad, -fx-glowny);
+}
+
+.correct {
+    -fx-text-fill: -fx-glownytekst;
 }
 

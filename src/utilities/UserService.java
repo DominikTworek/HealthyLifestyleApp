@@ -14,12 +14,14 @@ public interface UserService extends Remote {
 
     void deteleUser(Long IdUser) throws RemoteException;
 
+    String getLogin(String Login) throws RemoteException;
+
+    String getPassword(String Login, String Password) throws RemoteException;
+
     User getUserById(Long IdUser) throws  RemoteException;
 
     User getTrainerById(Long IdUser) throws  RemoteException;
 
     List<User> getAllUser() throws RemoteException;
-
-
 
 }
