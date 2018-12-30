@@ -1,5 +1,6 @@
 package LoginWindow;
 
+<<<<<<< HEAD
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ChangeListener;
@@ -8,6 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+=======
+import RegistryWindow.LoadRegistryWindow;
+import javafx.fxml.FXML;
+>>>>>>> f4f2a1d60249d5da8f68040b708733ad03cfdbc1
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,12 +24,16 @@ import javafx.stage.Stage;
 import server.UserServiceImplements;
 import utilities.UserService;
 
+<<<<<<< HEAD
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+=======
+public class LoginController {
+>>>>>>> f4f2a1d60249d5da8f68040b708733ad03cfdbc1
     @FXML
     ImageView exitImage;
 
@@ -119,8 +128,8 @@ public class LoginController implements Initializable {
     }
     
     @FXML
-    void changeToRegistryWindow(MouseEvent event) throws IOException {
-        Parent RegistryWindowParent = FXMLLoader.load(getClass().getResource("../RegistryWindow/RegistryWindow.fxml"));
+    void changeToRegistryWindow(MouseEvent event) throws Exception {
+        Parent RegistryWindowParent = LoadRegistryWindow.execWindow();
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Rejestracja");
         stage.setScene(new Scene(RegistryWindowParent));

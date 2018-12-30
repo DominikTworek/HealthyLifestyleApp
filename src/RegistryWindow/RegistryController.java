@@ -48,7 +48,7 @@ public class RegistryController {
 
     @FXML
     public void setComboBox() {
-        genderComboBox.getItems().addAll("mężczyzna", "kobieta");
+        genderComboBox.getItems().addAll("mezczyzna", "kobieta");
     }
 
     @FXML
@@ -65,6 +65,7 @@ private void clearField(){
         passwordField.setText("");
         nameField.setText("");
         lastNameField.setText("");
+        genderComboBox.getSelectionModel().clearSelection();
         ageField.setText("");
         }
 
@@ -85,7 +86,7 @@ private boolean isIncorrectAgeLength(JFXTextField field){
         return age< 18||field.getText().trim().isEmpty()||field.getText().trim().length()< 2;
         }
 
-    public void setRegistry(ActionEvent actionEvent)  {
+    public void setRegistry(ActionEvent actionEvent) throws IOException {
         try {
             if (isIncorrectLength(loginField,5)){
                 throw new IllegalArgumentException("Nie podano loginu lub jest za krótki, minimum to 5 znaków!");
@@ -120,18 +121,20 @@ private boolean isIncorrectAgeLength(JFXTextField field){
                 user.setPesel(ageField.getText());
                 user.setRola("consumer");
                 userService.insertUser(user);
+                clearField();
+
+
+                Parent LoginWindowParent = FXMLLoader.load(getClass().getResource("../LoginWindow/LoginWindow.fxml"));
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(LoginWindowParent));
+                stage.show();
             }
         } catch (IllegalArgumentException | RemoteException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
-
-
-        clearField();
     }
 
-    public void setUser(LoadRegistryWindow loadRegistryWindow){
-    this.loadRegistryWindow = loadRegistryWindow;
-    this.userService = loadRegistryWindow.getUserService();
-
+    public void setUser(){
+        userService = LoadRegistryWindow.getUserService();
     }
 }
