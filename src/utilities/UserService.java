@@ -1,5 +1,8 @@
 package utilities;
 
+import com.jfoenix.controls.JFXComboBox;
+
+import java.awt.*;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -16,4 +19,7 @@ public interface UserService extends Remote {
     User getTrainerById(Long IdUser) throws  RemoteException;
 
     List<User> getAllUser() throws RemoteException;
+
+
+
 }

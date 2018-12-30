@@ -3,16 +3,23 @@ package windowFunctions;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
+import com.sun.javafx.tools.packager.Main;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import utilities.UserService;
 
 import java.io.IOException;
 
 public class functions {
+
+
+    private Main main;
+
+    private UserService userService;
 
     public static void loadMainWindow(String source, AnchorPane mainWindow) throws IOException {
         AnchorPane change = FXMLLoader.load(functions.class.getResource(source));
@@ -38,5 +45,6 @@ public class functions {
             }
         });
     }
+
 
 }

@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="217.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RegistryWindow.RegistryController">
+<AnchorPane prefHeight="400.0" prefWidth="217.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RegistryWindow.RegistryController">
    <children>
       <Text layoutX="49.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejestracja" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="30.0">
          <font>
@@ -101,7 +101,7 @@
             </RadialGradient>
          </focusColor>
       </JFXTextField>
-      <JFXComboBox fx:id="genderComboBox" layoutX="10.0" layoutY="10.0" onMouseClicked="#setComboBox" promptText="Wybierz płeć" styleClass="button" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="270.0">
+      <JFXComboBox fx:id="genderComboBox" layoutX="10.0" layoutY="10.0" onMouseClicked="#setComboBox" promptText="Wybierz płeć" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="270.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                <stops>
@@ -140,7 +140,7 @@
             </RadialGradient>
          </focusColor>
       </JFXTextField>
-      <JFXButton layoutX="61.0" layoutY="351.0" onMouseClicked="#registryUser" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zarejestruj się" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="360.0" />
+      <JFXButton layoutX="61.0" layoutY="351.0" onAction="#setRegistry" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zarejestruj się" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="360.0" />
       <ImageView fx:id="exitImage" fitHeight="17.0" fitWidth="17.0" layoutX="218.0" layoutY="16.0" onMouseClicked="#changeToLoginWindow" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="392.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
          <image>
             <Image url="@../media/delete-button.png" />

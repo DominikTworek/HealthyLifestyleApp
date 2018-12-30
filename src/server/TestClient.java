@@ -23,11 +23,11 @@ public class TestClient extends Application{
         p.setPassword("to");
         p.setImie("pizda");
         p.setNazwisko("z farter");
-        p.setPlec("1");
-        p.setPesel("332342342");
-        p.setRola("3");
+        p.setPlec("a");
+        p.setPesel("a");
+        p.setRola("a");
 
-        p = userService.insertUser(p);
+       p = userService.insertUser(p);
 
         System.out.println(p.getIdUser());
         System.out.println(p.getLogin());
@@ -36,6 +36,7 @@ public class TestClient extends Application{
         System.out.println(p.getPlec());
         System.out.println(p.getPesel());
         System.out.println(p.getRola());
+
 
         Platform.exit();
     }

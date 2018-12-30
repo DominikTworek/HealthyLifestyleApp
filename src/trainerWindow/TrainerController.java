@@ -1,18 +1,37 @@
 package trainerWindow;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.sun.javafx.tools.packager.Main;
+
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
+
+import javafx.fxml.Initializable;
+import javafx.scene.control.Cell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
+import utilities.DatabaseConnection;
+import utilities.User;
+import utilities.UserService;
 import windowFunctions.functions;
 
-import java.io.IOException;
 
-public class trainerController extends functions {
+import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.sql.*;
+import java.util.List;
+import java.util.ResourceBundle;
+
+
+public class TrainerController extends functions implements Initializable {
 
 
     @FXML
@@ -31,8 +50,18 @@ public class trainerController extends functions {
     private JFXDrawer drawer;
 
 
-    public void initialize() {
+    @FXML
+    private JFXComboBox<Label> comboBox;
+
+    private LoadTrainerWindow loadTrainerWindow;
+
+    private UserService userService;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
+
+
     }
 
     public void loadEditProfile(ActionEvent actionEvent) throws IOException {
@@ -68,4 +97,32 @@ public class trainerController extends functions {
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         stage.close();
     }
+
+
+    public void setUser(LoadTrainerWindow loadTrainerWindow){
+        this.loadTrainerWindow = loadTrainerWindow;
+        this.userService = loadTrainerWindow.getUserService();
+
+        String sql = "SELECT * FROM user";
+
+
+        comboBox.getItems().add(new Label("elo"));
+        comboBox.setConverter(new StringConverter<Label>() {
+            @Override
+            public String toString(Label object) {
+                return object==null? "" : object.getText();
+            }
+
+            @Override
+            public Label fromString(String string) {
+                return new Label(string);
+            }
+        });
+    }
+
+    void updatecombo(){
+
+
+    }
+
 }

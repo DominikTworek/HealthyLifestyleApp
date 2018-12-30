@@ -1,9 +1,12 @@
 package server;
 
+import com.jfoenix.controls.JFXComboBox;
+import trainerWindow.TrainerController;
 import utilities.DatabaseConnection;
 import utilities.User;
 import utilities.UserService;
 
+import java.awt.*;
 import java.rmi.RemoteException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImplements implements UserService {
+
     @Override
     public User insertUser(User user) throws RemoteException {
         PreparedStatement statement = null;
@@ -127,7 +131,7 @@ public class UserServiceImplements implements UserService {
             if(result.next()){
                 user = new User();
                 user.setIdUser(result.getLong("IdUser"));
-                user.setLogin(result.getString("LoginWindow"));
+                user.setLogin(result.getString("Login"));
                 user.setPassword(result.getString("Password"));
                 user.setImie(result.getString("Imie"));
                 user.setNazwisko(result.getString("Nazwisko"));
@@ -165,7 +169,7 @@ public class UserServiceImplements implements UserService {
             if(result.next()){
                 user = new User();
                 user.setIdUser(result.getLong("IdUser"));
-                user.setLogin(result.getString("LoginWindow"));
+                user.setLogin(result.getString("Login"));
                 user.setPassword(result.getString("Password"));
                 user.setImie(result.getString("Imie"));
                 user.setNazwisko(result.getString("Nazwisko"));
@@ -202,7 +206,7 @@ public class UserServiceImplements implements UserService {
             while(result.next()){
                 User user = new User();
                 user.setIdUser(result.getLong("IdUser"));
-                user.setLogin(result.getString("LoginWindow"));
+                user.setLogin(result.getString("Login"));
                 user.setPassword(result.getString("Password"));
                 user.setImie(result.getString("Imie"));
                 user.setNazwisko(result.getString("Nazwisko"));

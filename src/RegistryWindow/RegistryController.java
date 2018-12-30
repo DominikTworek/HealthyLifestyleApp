@@ -3,6 +3,7 @@ package RegistryWindow;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,8 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utilities.User;
+import utilities.UserService;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 
 public class RegistryController {
@@ -39,6 +42,10 @@ public class RegistryController {
     @FXML
     JFXTextField ageField;
 
+    private LoadRegistryWindow loadRegistryWindow;
+
+    private UserService userService;
+
     @FXML
     public void setComboBox() {
         genderComboBox.getItems().addAll("mężczyzna", "kobieta");
@@ -47,81 +54,130 @@ public class RegistryController {
     @FXML
     void changeToLoginWindow(MouseEvent event) throws IOException {
         Parent LoginWindowParent = FXMLLoader.load(getClass().getResource("../LoginWindow/LoginWindow.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(LoginWindowParent));
         stage.show();
     }
+    /*
+        @FXML
+        void registryUser() {
 
-    @FXML
-    void registryUser() {
-        User user = new User();
-        try {
+            try {
 
-            if (isIncorrectLength(loginField,5)){
-                throw new IllegalArgumentException("Nie podano loginu lub jest za krótki, minimum to 5 znaków!");
-            }
+                if (isIncorrectLength(loginField,5)){
+                    throw new IllegalArgumentException("Nie podano loginu lub jest za krótki, minimum to 5 znaków!");
+                }
 
-            if (isIncorrectLength(passwordField)){
-                throw new IllegalArgumentException("Nie podano hasła lub jest za krótkie, minimum to 6 znaków!");
-            }
+                else if (isIncorrectLength(passwordField)){
+                    throw new IllegalArgumentException("Nie podano hasła lub jest za krótkie, minimum to 6 znaków!");
+                }
 
-            if (isIncorrectLength(nameField, 4)) {
-                throw new IllegalArgumentException("Nie podano imienia lub jest za krótkie!");
-            }
+                else if (isIncorrectLength(nameField, 3)) {
+                    throw new IllegalArgumentException("Nie podano imienia lub jest za krótkie!");
+                }
 
-            if (isIncorrectLength(lastNameField, 3)) {
-                throw new IllegalArgumentException("Nie podano nazwiska lub jest za krótkie!");
-            }
+                else if (isIncorrectLength(lastNameField, 3)) {
+                    throw new IllegalArgumentException("Nie podano nazwiska lub jest za krótkie!");
+                }
 
-            if (isIncorrectLength(genderComboBox)) {
-                throw new IllegalArgumentException("Nie wybrano płci!");
-            }
+                else if (isIncorrectLength(genderComboBox)) {
+                    throw new IllegalArgumentException("Nie wybrano płci!");
+                }
 
-            if (isIncorrectAgeLength(ageField)) {
-                throw new IllegalArgumentException("Nie podano wieku lub jesteś za młody/młoda!");
-            }
-
+                else if (isIncorrectAgeLength(ageField)) {
+                    throw new IllegalArgumentException("Nie podano wieku lub jesteś za młody/młoda!");
+                }
+                else {
+            User user = new User();
             user.setLogin(loginField.getText().trim());
             user.setPassword(passwordField.getText().trim());
             user.setImie(nameField.getText().trim());
             user.setNazwisko(lastNameField.getText().trim());
             user.setPlec(genderComboBox.getValue().toString().trim());
             user.setPesel(ageField.getText().trim());
+            user.setRola("consumer");
+            userService.insertUser(user);
 
-        } catch (IllegalArgumentException e) {
+            clearField();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+*/
+private void clearField(){
+        loginField.setText("");
+        passwordField.setText("");
+        nameField.setText("");
+        lastNameField.setText("");
+        ageField.setText("");
+        }
+
+private boolean isIncorrectLength(JFXTextField field,int minLength){
+        return field.getText().trim().isEmpty()||field.getText().trim().length()<minLength;
+    }
+
+private boolean isIncorrectLength(JFXPasswordField field){
+        return field.getText().trim().isEmpty()||field.getText().trim().length()< 6;
+        }
+
+private boolean isIncorrectLength(JFXComboBox field){
+        return field.getValue()==null||field.getValue().toString().trim().length()< 7;
+        }
+
+private boolean isIncorrectAgeLength(JFXTextField field){
+        int age=Integer.parseInt(field.getText());
+        return age< 18||field.getText().trim().isEmpty()||field.getText().trim().length()< 2;
+        }
+
+    public void setRegistry(ActionEvent actionEvent)  {
+        try {
+            if (isIncorrectLength(loginField,5)){
+                throw new IllegalArgumentException("Nie podano loginu lub jest za krótki, minimum to 5 znaków!");
+            }
+
+            else if (isIncorrectLength(passwordField)){
+                throw new IllegalArgumentException("Nie podano hasła lub jest za krótkie, minimum to 6 znaków!");
+            }
+
+            else if (isIncorrectLength(nameField, 3)) {
+                throw new IllegalArgumentException("Nie podano imienia lub jest za krótkie!");
+            }
+
+            else if (isIncorrectLength(lastNameField, 3)) {
+                throw new IllegalArgumentException("Nie podano nazwiska lub jest za krótkie!");
+            }
+
+            else if (isIncorrectLength(genderComboBox)) {
+                throw new IllegalArgumentException("Nie wybrano płci!");
+            }
+
+            else if (isIncorrectAgeLength(ageField)) {
+                throw new IllegalArgumentException("Nie podano wieku lub jesteś za młody/młoda!");
+            }
+            else {
+                User user = new User();
+                user.setLogin(loginField.getText());
+                user.setPassword(passwordField.getText());
+                user.setImie(nameField.getText());
+                user.setNazwisko(lastNameField.getText());
+                user.setPlec(genderComboBox.getValue().toString());
+                user.setPesel(ageField.getText());
+                user.setRola("consumer");
+                userService.insertUser(user);
+            }
+        } catch (IllegalArgumentException | RemoteException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
 
-        /*
-        * Przesłanie usera do serwera, który utworzy go w bazie danych.
-        * Możliwe że trzeba utworzyc klase Connect z metoda request która połączy sie za pomocą socketu i wyśle co trzeba.
-        * */
 
-        //Sprawdzenie czy dobrze zczytuje
-        if (user.getLogin() != null || user.getPassword() != null || user.getImie() != null || user.getNazwisko()!= null || user.getPlec()!= null || user.getPesel()!= null){
-            System.out.println(user.getLogin());
-            System.out.println(user.getPassword());
-            System.out.println(user.getImie());
-            System.out.println(user.getNazwisko());
-            System.out.println(user.getPlec());
-            System.out.println(user.getPesel());
-        }
+        clearField();
     }
 
-    private boolean isIncorrectLength(JFXTextField field, int minLength) {
-        return field.getText().trim().isEmpty() || field.getText().trim().length() < minLength;
-    }
+    public void setUser(LoadRegistryWindow loadRegistryWindow){
+    this.loadRegistryWindow = loadRegistryWindow;
+    this.userService = loadRegistryWindow.getUserService();
 
-    private boolean isIncorrectLength(JFXPasswordField field) {
-        return field.getText().trim().isEmpty() || field.getText().trim().length() < 6;
-    }
-
-    private boolean isIncorrectLength(JFXComboBox field) {
-        return field.getValue() == null || field.getValue().toString().trim().length() < 7;
-    }
-
-    private boolean isIncorrectAgeLength(JFXTextField field) {
-        int age = Integer.parseInt(field.getText());
-        return age < 18 || field.getText().trim().isEmpty() || field.getText().trim().length() < 2;
     }
 }
