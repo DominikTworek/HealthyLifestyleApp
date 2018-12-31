@@ -71,7 +71,7 @@
          </effect>
       </JFXPasswordField>
       <JFXButton layoutX="76.0" layoutY="190.0" onAction="#login" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zaloguj" AnchorPane.topAnchor="195.0" />
-      <JFXTextField alignment="CENTER" editable="false" layoutX="60.0" layoutY="235.0" text="Nie pamiętasz hasła?" AnchorPane.topAnchor="235.0">
+      <JFXTextField alignment="CENTER" editable="false" layoutX="60.0" layoutY="235.0" onMouseClicked="#changeToResetPasswordWindow" text="Nie pamiętasz hasła?" AnchorPane.topAnchor="235.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.38372093023255816">
                <stops>

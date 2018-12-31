@@ -4,11 +4,11 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import RegistryWindow.LoadRegistryWindow;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,7 +33,6 @@ public class LoginController implements Initializable {
 
     private UserService userService;
 
-    private LoadLoginWindow loadLoginWindow;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -122,7 +121,18 @@ public class LoginController implements Initializable {
         stage.show();
     }
 
+
     public void setUser() {
         userService = LoadLoginWindow.getUserService();
+    }
+
+    @FXML
+    void changeToResetPasswordWindow(MouseEvent event) throws Exception {
+        Parent ResetPasswordWindowParent = FXMLLoader.load(getClass()
+                .getResource("../ResetPasswordWindow/ResetPasswordWindow.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Resetuj hasło");
+        stage.setScene(new Scene(ResetPasswordWindowParent));
+        stage.show();
     }
 }
