@@ -2,6 +2,7 @@ package LoginWindow;
 
 import RegistryWindow.LoadRegistryWindow;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,6 +27,16 @@ public class LoginController {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Rejestracja");
         stage.setScene(new Scene(RegistryWindowParent));
+        stage.show();
+    }
+
+    @FXML
+    void changeToResetPasswordWindow(MouseEvent event) throws Exception {
+        Parent ResetPasswordWindowParent = FXMLLoader.load(getClass()
+                .getResource("../ResetPasswordWindow/ResetPasswordWindow.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Resetuj hasło");
+        stage.setScene(new Scene(ResetPasswordWindowParent));
         stage.show();
     }
 }
