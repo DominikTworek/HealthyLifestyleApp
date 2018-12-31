@@ -1,39 +1,27 @@
 package LoginWindow;
 
-<<<<<<< HEAD
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-=======
 import RegistryWindow.LoadRegistryWindow;
-import javafx.fxml.FXML;
->>>>>>> f4f2a1d60249d5da8f68040b708733ad03cfdbc1
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import server.UserServiceImplements;
 import utilities.UserService;
-
-<<<<<<< HEAD
-import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-=======
-public class LoginController {
->>>>>>> f4f2a1d60249d5da8f68040b708733ad03cfdbc1
     @FXML
     ImageView exitImage;
 
@@ -47,8 +35,6 @@ public class LoginController {
 
     private LoadLoginWindow loadLoginWindow;
 
-    private UserServiceImplements userServiceImplements;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colors();
@@ -61,7 +47,7 @@ public class LoginController {
     }
 
     @FXML
-    void login(ActionEvent event) throws RemoteException {
+    void login() throws RemoteException {
         loginField.getStyleClass().remove("incorrectly");
         passwordField.getStyleClass().remove("incorrectly");
         loginField.getStyleClass().remove("correct");
@@ -91,7 +77,7 @@ public class LoginController {
 
     }
 
-    void colors(){
+    private void colors(){
         loginField.focusedProperty().addListener(new ChangeListener<Boolean>(){
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
@@ -128,7 +114,7 @@ public class LoginController {
     }
     
     @FXML
-    void changeToRegistryWindow(MouseEvent event) throws Exception {
+    void changeToRegistryWindow(Event event) throws Exception {
         Parent RegistryWindowParent = LoadRegistryWindow.execWindow();
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Rejestracja");
@@ -136,11 +122,7 @@ public class LoginController {
         stage.show();
     }
 
-    public void setUser(LoadLoginWindow loadLoginWindow){
-        this.loadLoginWindow = loadLoginWindow;
-        this.userService = loadLoginWindow.getUserService();
-
+    public void setUser() {
+        userService = LoadLoginWindow.getUserService();
     }
-
-
 }
