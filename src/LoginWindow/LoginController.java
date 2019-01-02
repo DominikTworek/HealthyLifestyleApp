@@ -32,7 +32,7 @@ public class LoginController implements Initializable {
     @FXML
     private JFXPasswordField passwordField;
 
-    private UserService userService;
+    private UserService userService = LoadLoginWindow.getUserService();
 
 
     @Override
@@ -112,10 +112,12 @@ public class LoginController implements Initializable {
     void loginAction(KeyEvent event) {
 
     }
-    
+
     @FXML
     void changeToRegistryWindow(Event event) throws Exception {
-        Parent RegistryWindowParent = LoadRegistryWindow.execWindow();
+        //Parent RegistryWindowParent = LoadRegistryWindow.execWindow();
+        Parent RegistryWindowParent = FXMLLoader.load(getClass()
+                .getResource("../RegistryWindow/RegistryWindow.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Rejestracja");
         stage.setScene(new Scene(RegistryWindowParent));
@@ -123,9 +125,9 @@ public class LoginController implements Initializable {
     }
 
 
-    public void setUser() {
+    /*public void setUser() {
         userService = LoadLoginWindow.getUserService();
-    }
+    }*/
 
     @FXML
     void changeToResetPasswordWindow(Event event) throws Exception {

@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -43,9 +44,7 @@ public class RegistryController {
     @FXML
     JFXTextField ageField;
 
-    private LoadRegistryWindow loadRegistryWindow;
-
-    private UserService userService;
+    private UserService userService = LoadLoginWindow.getUserService();;
 
     @FXML
     public void setComboBox() {
@@ -53,8 +52,9 @@ public class RegistryController {
     }
 
     @FXML
-    void changeToLoginWindow(MouseEvent event) throws Exception {
-        Parent LoginWindowParent = LoadLoginWindow.execWindow();
+    void changeToLoginWindow(Event event) throws Exception {
+        //Parent LoginWindowParent = LoadLoginWindow.execWindow();
+        Parent LoginWindowParent = FXMLLoader.load(getClass().getResource("../LoginWindow/LoginWindow.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(LoginWindowParent));
         stage.show();
@@ -86,7 +86,7 @@ private boolean isIncorrectAgeLength(JFXTextField field){
         return age< 18||field.getText().trim().isEmpty()||field.getText().trim().length()< 2;
         }
 
-    public void setRegistry(ActionEvent actionEvent) throws Exception {
+    public void setRegistry(Event actionEvent) throws Exception {
         try {
             if (isIncorrectLength(loginField,5)){
                 throw new IllegalArgumentException("Nie podano loginu lub jest za krótki, minimum to 5 znaków!");
@@ -123,18 +123,18 @@ private boolean isIncorrectAgeLength(JFXTextField field){
                 userService.insertUser(user);
                 clearField();
 
-
-                Parent LoginWindowParent = LoadLoginWindow.execWindow();
+                changeToLoginWindow(actionEvent);
+                /*Parent LoginWindowParent = LoadLoginWindow.execWindow();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(LoginWindowParent));
-                stage.show();
+                stage.show();*/
             }
         } catch (IllegalArgumentException | RemoteException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
     }
 
-    public void setUser(){
+    /*public void setUser(){
         userService = LoadRegistryWindow.getUserService();
-    }
+    }*/
 }

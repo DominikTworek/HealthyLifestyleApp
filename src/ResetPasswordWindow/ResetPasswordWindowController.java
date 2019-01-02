@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -103,7 +104,9 @@ public class ResetPasswordWindowController implements Initializable {
 
     @FXML
     void changeToLoginWindow(Event event) throws Exception {
-        Parent LoginWindowParent = LoadLoginWindow.execWindow();
+        //Parent LoginWindowParent = LoadLoginWindow.execWindow();
+        Parent LoginWindowParent = FXMLLoader.load(getClass()
+                .getResource("../LoginWindow/LoginWindow.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(LoginWindowParent));
         stage.show();
