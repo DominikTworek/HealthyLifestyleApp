@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" styleClass="root" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowAdmin.UserAController">
    <children>
-      <Text layoutX="64.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Użytkownicy" wrappingWidth="523.0">
+      <TableView fx:id="tableView" fixedCellSize="0.0" layoutY="214.0" prefHeight="347.0" prefWidth="650.0" stylesheets="@../layout/Dark.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="colId" text="Id" />
+          <TableColumn fx:id="colLogin" text="Login" />
+            <TableColumn fx:id="colPassword" text="Hasło" />
+            <TableColumn fx:id="colName" text="Imie" />
+            <TableColumn fx:id="colLastName" text="Nazwisko" />
+            <TableColumn fx:id="colGender" text="Plec" />
+            <TableColumn fx:id="colPesel" text="Pesel" />
+            <TableColumn fx:id="colRole" prefWidth="90.0" text="Rola" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <JFXButton layoutX="567.0" layoutY="167.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Usuń" AnchorPane.rightAnchor="15.0" />
+      <JFXButton layoutX="14.0" layoutY="167.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Dodaj" AnchorPane.leftAnchor="15.0" />
+      <JFXButton layoutX="399.0" layoutY="167.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Odśwież" AnchorPane.rightAnchor="150.0" />
+      <JFXButton layoutX="191.0" layoutY="167.0" onAction="#editAction" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Edytuj" AnchorPane.leftAnchor="150.0" />
+      <Text fx:id="mainText" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-field" text="Zarządzanie użytkownikami" textAlignment="CENTER" wrappingWidth="650.0">
          <font>
-            <Font size="92.0" />
+            <Font size="30.0" />
          </font>
+         <effect>
+            <Glow />
+         </effect>
       </Text>
+      <JFXTextField fx:id="haslo" alignment="CENTER" labelFloat="true" layoutX="171.0" layoutY="27.0" prefHeight="25.0" prefWidth="115.0" promptText="Hasło">
+         <unFocusColor>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.4">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#2c2c2c" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </unFocusColor>
+      </JFXTextField>
+      <JFXComboBox fx:id="plec" labelFloat="true" layoutX="94.0" layoutY="79.0" prefHeight="25.0" prefWidth="115.0" promptText="Plec" AnchorPane.leftAnchor="115.0" />
+      <JFXTextField fx:id="login" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="27.0" prefHeight="25.0" prefWidth="115.0" promptText="Login" AnchorPane.leftAnchor="25.0">
+         <unFocusColor>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.4">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#2c2c2c" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </unFocusColor>
+      </JFXTextField>
+      <JFXComboBox fx:id="rola" labelFloat="true" layoutX="419.0" layoutY="79.0" prefHeight="25.0" prefWidth="115.0" promptText="Rola" AnchorPane.rightAnchor="115.0" />
+      <JFXTextField fx:id="imie" alignment="CENTER" labelFloat="true" layoutX="325.0" layoutY="27.0" prefHeight="25.0" prefWidth="115.0" promptText="Imie" />
+      <JFXTextField fx:id="nazwisko" alignment="CENTER" labelFloat="true" layoutX="486.0" layoutY="27.0" prefHeight="25.0" prefWidth="115.0" promptText="Nazwisko" AnchorPane.rightAnchor="25.0" />
+      <JFXTextField fx:id="pesel" alignment="CENTER" labelFloat="true" layoutX="268.0" layoutY="79.0" prefHeight="25.0" prefWidth="115.0" promptText="Pesek" />
+      <JFXButton fx:id="addButton" layoutX="271.0" layoutY="131.0" prefHeight="35.0" prefWidth="96.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Potwierdź" />
+      <ImageView fx:id="exitEdit" fitHeight="16.0" fitWidth="16.0" layoutX="375.0" layoutY="131.0" onMouseClicked="#exitEdit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../media/delete-button.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

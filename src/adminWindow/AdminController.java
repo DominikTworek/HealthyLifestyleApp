@@ -5,14 +5,27 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import windowFunctions.functions;
+import mainWindowAdmin.UserAController;
+import utilities.User;
+import utilities.UserService;
+import windowFunctions.Functions;
 
-import java.io.IOException ;
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
-public class adminController extends functions {
+public class AdminController extends Functions {
+
 
     @FXML
     private JFXButton logoutButton;
@@ -29,24 +42,54 @@ public class adminController extends functions {
     @FXML
     private VBox drawerVbox;
 
+    @FXML
+    private TableView<User> tableView;
+
+    @FXML
+    private TableColumn<User, String> login;
+
+    private LoadAdminWindow loadAdminWindow;
+
+    private static UserService userService;
+
     public void initialize() {
-        functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
+        Functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
     }
 
     public void loadUser(ActionEvent actionEvent) throws IOException {
-        functions.loadMainWindow("../mainWindowAdmin/UserA.fxml", mainWindow);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../mainWindowAdmin/UserA.fxml"));
+        AnchorPane change = loader.load();
+
+        UserAController userAController = loader.getController();
+
+        userAController.setUser(loadAdminWindow);
+        mainWindow.getChildren().setAll(change);
+    }
+
+    public static UserService setUser() {
+        return userService;
     }
 
     public void loadTrainers(ActionEvent actionEvent) throws IOException {
-        functions.loadMainWindow("../mainWindowAdmin/TrainerA.fxml", mainWindow);
+        Functions.loadMainWindow("../mainWindowAdmin/TrainerA.fxml", mainWindow);
     }
 
     public void other(ActionEvent actionEvent) throws IOException {
-        functions.loadMainWindow("../mainWindowAdmin/OtherA.fxml", mainWindow);
+        Functions.loadMainWindow("../mainWindowAdmin/OtherA.fxml", mainWindow);
     }
 
     public void logout(ActionEvent actionEvent) {
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void setUser(LoadAdminWindow loadAdminWindow) {
+        this.loadAdminWindow = loadAdminWindow;
+        this.userService = loadAdminWindow.getUserService();
+       /*try {
+            UserAController.tableView.getItems().setAll(userService.getTest());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }*/
     }
 }

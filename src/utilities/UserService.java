@@ -24,4 +24,6 @@ public interface UserService extends Remote {
 
     List<User> getAllUser() throws RemoteException;
 
+    List<User> getTest() throws RemoteException;
+
 }

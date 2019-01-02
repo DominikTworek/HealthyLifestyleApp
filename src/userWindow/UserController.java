@@ -11,9 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import windowFunctions.functions;
+import windowFunctions.Functions;
 
-public class UserController extends functions {
+public class UserController extends Functions {
 
     @FXML
     private JFXButton logoutButton;
@@ -31,36 +31,36 @@ public class UserController extends functions {
     private VBox drawerVbox;
 
     public void initialize() {
-        functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
+        Functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
     }
 
     public void loadEditProfile(ActionEvent actionEvent) throws IOException {
-        functions.loadMainWindow("../mainWindowUser/ProfileU.fxml", mainWindow);
+        Functions.loadMainWindow("../mainWindowUser/ProfileU.fxml", mainWindow);
     }
 
     public void loadChooseTrainer(ActionEvent actionEvent) throws IOException {
-        functions.loadMainWindow("../mainWindowUser/TrainerU.fxml", mainWindow);
+        Functions.loadMainWindow("../mainWindowUser/TrainerU.fxml", mainWindow);
     }
 
     public void loadNutritionPlan(ActionEvent actionEvent) throws IOException {
-        functions.loadMainWindow("../mainWindowUser/NutritionPlanU.fxml", mainWindow);
+        Functions.loadMainWindow("../mainWindowUser/NutritionPlanU.fxml", mainWindow);
     }
 
     public void loadTrainingPlan(ActionEvent actionEvent) throws IOException {
-        functions.loadMainWindow("../mainWindowUser/TrainingPlanU.fxml", mainWindow);
+        Functions.loadMainWindow("../mainWindowUser/TrainingPlanU.fxml", mainWindow);
     }
 
     public void loadUpdateProgress(ActionEvent actionEvent) throws IOException {
-        functions.loadMainWindow("../mainWindowUser/UpdateProgressU.fxml", mainWindow);
+        Functions.loadMainWindow("../mainWindowUser/UpdateProgressU.fxml", mainWindow);
     }
 
     public void loadCalendar(ActionEvent actionEvent) throws IOException {
-        functions.loadMainWindow("../mainWindowUser/CalendarU.fxml", mainWindow);
+        Functions.loadMainWindow("../mainWindowUser/CalendarU.fxml", mainWindow);
     }
 
 
     public void loadMessage(ActionEvent actionEvent) throws IOException {
-        functions.loadMainWindow("../mainWindowUser/MessageU.fxml", mainWindow);
+        Functions.loadMainWindow("../mainWindowUser/MessageU.fxml", mainWindow);
     }
 
     public void logout(ActionEvent actionEvent) {

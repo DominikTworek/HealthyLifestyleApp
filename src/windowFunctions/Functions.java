@@ -14,7 +14,7 @@ import utilities.UserService;
 
 import java.io.IOException;
 
-public class functions {
+public class Functions {
 
 
     private Main main;
@@ -22,7 +22,8 @@ public class functions {
     private UserService userService;
 
     public static void loadMainWindow(String source, AnchorPane mainWindow) throws IOException {
-        AnchorPane change = FXMLLoader.load(functions.class.getResource(source));
+        FXMLLoader loader = new FXMLLoader(Functions.class.getResource(source));
+        AnchorPane change = loader.load();
         mainWindow.getChildren().setAll(change);
     }
 
@@ -41,7 +42,7 @@ public class functions {
                 drawer.close();
                 drawer.setPrefWidth(0);
                 drawerVbox.setVisible(false);
-                mainWindow.setLayoutX(150);
+                mainWindow.setLayoutX(75);
             }
         });
     }

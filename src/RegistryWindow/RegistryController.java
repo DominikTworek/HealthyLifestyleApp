@@ -60,58 +60,58 @@ public class RegistryController {
     }
 
 
-private void clearField(){
+    private void clearField() {
         loginField.setText("");
         passwordField.setText("");
         nameField.setText("");
         lastNameField.setText("");
         genderComboBox.getSelectionModel().clearSelection();
         ageField.setText("");
-        }
-
-private boolean isIncorrectLength(JFXTextField field,int minLength){
-        return field.getText().trim().isEmpty()||field.getText().trim().length()<minLength;
     }
 
-private boolean isIncorrectLength(JFXPasswordField field){
-        return field.getText().trim().isEmpty()||field.getText().trim().length()< 6;
-        }
+    private boolean isIncorrectLength(JFXTextField field, int minLength) {
+        return field.getText().trim().isEmpty() || field.getText().trim().length() < minLength;
+    }
 
-private boolean isIncorrectLength(JFXComboBox field){
-        return field.getValue()==null||field.getValue().toString().trim().length()< 7;
-        }
+    private boolean isIncorrectLength(JFXPasswordField field) {
+        return field.getText().trim().isEmpty() || field.getText().trim().length() < 6;
+    }
 
-private boolean isIncorrectAgeLength(JFXTextField field){
-        int age=Integer.parseInt(field.getText());
-        return age< 18||field.getText().trim().isEmpty()||field.getText().trim().length()< 2;
-        }
+    private boolean isIncorrectLength(JFXComboBox field) {
+        return field.getValue() == null || field.getValue().toString().trim().length() < 7;
+    }
+
+    private boolean isIncorrectAgeLength(JFXTextField field) {
+        int age = Integer.parseInt(field.getText());
+        return age < 18 || field.getText().trim().isEmpty() || field.getText().trim().length() < 2;
+    }
+
+    private boolean isExistLogin(JFXTextField field) throws RemoteException {
+        String login = field.getText();
+        String logindb = userService.getLogin(login);
+
+        if (login.equals(logindb)) {
+            return true;
+        } else return false;
+    }
 
     public void setRegistry(ActionEvent actionEvent) throws IOException {
         try {
-            if (isIncorrectLength(loginField,5)){
+            if (isIncorrectLength(loginField, 5)) {
                 throw new IllegalArgumentException("Nie podano loginu lub jest za krótki, minimum to 5 znaków!");
-            }
-
-            else if (isIncorrectLength(passwordField)){
+            } else if (isExistLogin(loginField)) {
+                throw new IllegalArgumentException("Taki Login już istnieje!");
+            } else if (isIncorrectLength(passwordField)) {
                 throw new IllegalArgumentException("Nie podano hasła lub jest za krótkie, minimum to 6 znaków!");
-            }
-
-            else if (isIncorrectLength(nameField, 3)) {
+            } else if (isIncorrectLength(nameField, 3)) {
                 throw new IllegalArgumentException("Nie podano imienia lub jest za krótkie!");
-            }
-
-            else if (isIncorrectLength(lastNameField, 3)) {
+            } else if (isIncorrectLength(lastNameField, 3)) {
                 throw new IllegalArgumentException("Nie podano nazwiska lub jest za krótkie!");
-            }
-
-            else if (isIncorrectLength(genderComboBox)) {
+            } else if (isIncorrectLength(genderComboBox)) {
                 throw new IllegalArgumentException("Nie wybrano płci!");
-            }
-
-            else if (isIncorrectAgeLength(ageField)) {
+            } else if (isIncorrectAgeLength(ageField)) {
                 throw new IllegalArgumentException("Nie podano wieku lub jesteś za młody/młoda!");
-            }
-            else {
+            } else {
                 User user = new User();
                 user.setLogin(loginField.getText());
                 user.setPassword(passwordField.getText());
@@ -134,7 +134,8 @@ private boolean isIncorrectAgeLength(JFXTextField field){
         }
     }
 
-    public void setUser(){
-        userService = LoadRegistryWindow.getUserService();
+    public void setUser() {
+        this.loadRegistryWindow = loadRegistryWindow;
+        this.userService = loadRegistryWindow.getUserService();
     }
 }

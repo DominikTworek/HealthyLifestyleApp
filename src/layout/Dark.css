@@ -19,11 +19,6 @@
     -jfx-focus-color: -fx-drugi;
 }
 
-.button {
-    -fx-text-fill: -fx-glownytekst;
-    -fx-background-color: -fx-glowny;
-}
-
 /* GLOWNE OKNO */
 
 .tab-header-background {
@@ -111,3 +106,69 @@
     -fx-text-fill: -fx-glownytekst;
 }
 
+.text-field {
+    -jfx-unfocus-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 40%, -fx-drugi, -fx-glowny);
+}
+
+.table-view{
+    -fx-background-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#131313 0%, #424141 100%);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-glownytekst;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, -fx-glowny;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #424242;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -fx-drugi;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+.progress-bar:indeterminate .dot_1 {
+    -fx-background-color: ACCENT_COLOR;
+}
+
+.progress-bar:indeterminate .dot_2 {
+    -fx-background-color: derive(ACCENT_COLOR, -15%);
+}
+
+.progress-bar:indeterminate .dot_3 {
+    -fx-background-color: derive(ACCENT_COLOR, -30%);
+}
+
+.progress-bar:indeterminate .dot_4 {
+    -fx-background-color: derive(ACCENT_COLOR, -45%);
+}
+
+.progress-bar:indeterminate .dot_5 {
+    -fx-background-color: derive(ACCENT_COLOR, -60%);
+}

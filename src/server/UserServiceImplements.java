@@ -237,7 +237,7 @@ public class UserServiceImplements implements UserService {
     public List<User> getAllUser() throws RemoteException {
         Statement statement = null;
 
-        String sql = "select * from user";
+        String sql = "select * from user where rola = 'consumer'";
 
         try {
             statement = DatabaseConnection.getConnection().createStatement();
@@ -255,6 +255,43 @@ public class UserServiceImplements implements UserService {
                 user.setNazwisko(result.getString("Nazwisko"));
                 user.setPlec(result.getString("Plec"));
                 user.setPesel(result.getString("Pesel"));
+                user.setRola(result.getString("Rola"));
+                list.add(user);
+            }
+
+            result.close();
+
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    public List<User> getTest() throws RemoteException {
+        Statement statement = null;
+
+        String sql = "select * from user";
+
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery(sql);
+
+            List<User> list = new ArrayList<User>();
+
+            while(result.next()){
+                User user = new User();
+                user.setLogin(result.getString("Login"));
                 list.add(user);
             }
 
