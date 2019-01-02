@@ -1,5 +1,6 @@
 package RegistryWindow;
 
+import LoginWindow.LoadLoginWindow;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -52,15 +53,16 @@ public class RegistryController {
     }
 
     @FXML
-    void changeToLoginWindow(MouseEvent event) throws IOException {
-        Parent LoginWindowParent = FXMLLoader.load(getClass().getResource("../LoginWindow/LoginWindow.fxml"));
+    void changeToLoginWindow(MouseEvent event) throws Exception {
+        Parent LoginWindowParent = LoadLoginWindow.execWindow();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(LoginWindowParent));
         stage.show();
     }
 
 
-    private void clearField() {
+private void clearField(){
+
         loginField.setText("");
         passwordField.setText("");
         nameField.setText("");
@@ -95,7 +97,7 @@ public class RegistryController {
         } else return false;
     }
 
-    public void setRegistry(ActionEvent actionEvent) throws IOException {
+    public void setRegistry(ActionEvent actionEvent) throws Exception {
         try {
             if (isIncorrectLength(loginField, 5)) {
                 throw new IllegalArgumentException("Nie podano loginu lub jest za krótki, minimum to 5 znaków!");
@@ -124,7 +126,7 @@ public class RegistryController {
                 clearField();
 
 
-                Parent LoginWindowParent = FXMLLoader.load(getClass().getResource("../LoginWindow/LoginWindow.fxml"));
+                Parent LoginWindowParent = LoadLoginWindow.execWindow();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(LoginWindowParent));
                 stage.show();
