@@ -73,7 +73,7 @@ private boolean isIncorrectLength(JFXTextField field,int minLength){
         return field.getText().trim().isEmpty()||field.getText().trim().length()<minLength;
     }
 
-private boolean isIncorrectLength(JFXPasswordField field){
+public static boolean isIncorrectLength(JFXPasswordField field){
         return field.getText().trim().isEmpty()||field.getText().trim().length()< 6;
         }
 

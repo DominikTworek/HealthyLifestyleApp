@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -127,7 +128,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    void changeToResetPasswordWindow(MouseEvent event) throws Exception {
+    void changeToResetPasswordWindow(Event event) throws Exception {
         Parent ResetPasswordWindowParent = FXMLLoader.load(getClass()
                 .getResource("../ResetPasswordWindow/ResetPasswordWindow.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();

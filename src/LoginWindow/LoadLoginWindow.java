@@ -45,7 +45,7 @@ public class LoadLoginWindow extends Application {
         return root;
     }
 
-    static UserService getUserService() {
+    public static UserService getUserService() {
         return userService;
     }
 
