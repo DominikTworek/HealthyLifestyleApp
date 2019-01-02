@@ -18,12 +18,13 @@ public class LoadLoginWindow extends Application {
         Registry registry = LocateRegistry.getRegistry("localhost", 6789);
 
         userService = (UserService) registry.lookup("service");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginWindow.fxml"));
-        Parent root = loader.load();
 
-        LoginController loginController  = loader.getController();
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginWindow.fxml"));
+        //Parent root = loader.load();
 
-        loginController.setUser();
+        Parent root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+        //LoginController loginController  = loader.getController();
+        //loginController.setUser();
 
         primaryStage.setTitle("Login Window");
         primaryStage.setScene(new Scene(root));
@@ -31,21 +32,20 @@ public class LoadLoginWindow extends Application {
         primaryStage.show();
     }
 
-    public static Parent execWindow() throws Exception {
+    /*public static Parent execWindow() throws Exception {
         Registry registry = LocateRegistry.getRegistry("localhost", 6789);
 
         userService = (UserService) registry.lookup("service");
         FXMLLoader loader = new FXMLLoader(LoadLoginWindow.class.getResource("LoginWindow.fxml"));
         Parent root = loader.load();
 
-        LoginController loginController = loader.getController();
-
-        loginController.setUser();
+        //LoginController loginController = loader.getController();
+        //loginController.setUser();
 
         return root;
-    }
+    }*/
 
-    static UserService getUserService() {
+    public static UserService getUserService() {
         return userService;
     }
 
