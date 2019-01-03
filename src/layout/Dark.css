@@ -172,3 +172,7 @@
 .progress-bar:indeterminate .dot_5 {
     -fx-background-color: derive(ACCENT_COLOR, -60%);
 }
+
+.error{
+    -fx-text-fill: -fx-blad;
+}

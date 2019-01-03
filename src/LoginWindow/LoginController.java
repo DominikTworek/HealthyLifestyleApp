@@ -54,7 +54,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    void login() throws RemoteException {
+    void login(Event event) throws RemoteException {
         loginField.getStyleClass().remove("incorrectly");
         passwordField.getStyleClass().remove("incorrectly");
         loginField.getStyleClass().remove("correct");
@@ -79,6 +79,15 @@ public class LoginController implements Initializable {
         }
         else if(!password.equals(getPassword)){
             passwordField.getStyleClass().add("incorrectly");
+        }else if(login.equals(getLogin) && password.equals(getPassword)){
+            String rola = userService.getRola(getLogin, getPassword);
+            if(rola.equals("admin")) {
+                try {
+                    changeToAdminWindow(event);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
@@ -116,13 +125,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    void loginAction(KeyEvent event) {
-
-    }
-
-    @FXML
     void changeToRegistryWindow(Event event) throws Exception {
-        //Parent RegistryWindowParent = LoadRegistryWindow.execWindow();
         Parent RegistryWindowParent = FXMLLoader.load(getClass()
                 .getResource("../RegistryWindow/RegistryWindow.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -132,10 +135,6 @@ public class LoginController implements Initializable {
     }
 
 
-    /*public void setUser() {
-        userService = LoadLoginWindow.getUserService();
-    }*/
-
     @FXML
     void changeToResetPasswordWindow(Event event) throws Exception {
         Parent ResetPasswordWindowParent = FXMLLoader.load(getClass()
@@ -143,6 +142,15 @@ public class LoginController implements Initializable {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Resetuj hasło");
         stage.setScene(new Scene(ResetPasswordWindowParent));
+        stage.show();
+    }
+
+    void changeToAdminWindow(Event event) throws Exception {
+        Parent AdminWindowWindowParent = FXMLLoader.load(getClass()
+                .getResource("../adminWindow/adminWindow.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Okno Administratora");
+        stage.setScene(new Scene(AdminWindowWindowParent));
         stage.show();
     }
 }

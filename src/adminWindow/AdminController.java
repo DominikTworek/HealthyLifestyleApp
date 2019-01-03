@@ -1,5 +1,6 @@
 package adminWindow;
 
+import LoginWindow.LoadLoginWindow;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -42,9 +43,7 @@ public class AdminController extends Functions {
     @FXML
     private VBox drawerVbox;
 
-    private LoadAdminWindow loadAdminWindow;
-
-    private  UserService userService;
+    private  UserService userService = LoadLoginWindow.getUserService();
 
     public void initialize() {
         Functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
@@ -54,9 +53,6 @@ public class AdminController extends Functions {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../mainWindowAdmin/UserA.fxml"));
         AnchorPane change = loader.load();
 
-        UserAController userAController = loader.getController();
-
-        userAController.setUser(loadAdminWindow);
         mainWindow.getChildren().setAll(change);
     }
 
@@ -75,8 +71,4 @@ public class AdminController extends Functions {
         stage.close();
     }
 
-    public void setUser(LoadAdminWindow loadAdminWindow) {
-        this.loadAdminWindow = loadAdminWindow;
-        this.userService = loadAdminWindow.getUserService();
-    }
 }

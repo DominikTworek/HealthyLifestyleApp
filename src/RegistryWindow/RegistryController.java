@@ -42,7 +42,7 @@ public class RegistryController implements Initializable {
     JFXTextField lastNameField;
 
     @FXML
-    JFXComboBox genderComboBox;
+    JFXComboBox<String> genderComboBox;
 
     @FXML
     JFXTextField ageField;
@@ -61,7 +61,6 @@ public class RegistryController implements Initializable {
 
     @FXML
     void changeToLoginWindow(Event event) throws Exception {
-        //Parent LoginWindowParent = LoadLoginWindow.execWindow();
         Parent LoginWindowParent = FXMLLoader.load(getClass().getResource("../LoginWindow/LoginWindow.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(LoginWindowParent));

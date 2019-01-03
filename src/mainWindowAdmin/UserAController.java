@@ -1,5 +1,6 @@
 package mainWindowAdmin;
 
+import LoginWindow.LoadLoginWindow;
 import RegistryWindow.LoadRegistryWindow;
 import RegistryWindow.RegistryController;
 import adminWindow.AdminController;
@@ -95,9 +96,9 @@ public class UserAController implements Initializable {
     @FXML
     private TableColumn<User, String> colRole;
 
-    private UserService userService;
-    private LoadAdminWindow loadAdminWindow;
-    private LoadRegistryWindow loadRegistryWindow;
+    private UserService userService = LoadLoginWindow.getUserService();
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -114,17 +115,13 @@ public class UserAController implements Initializable {
         rola.getItems().addAll("costumer", "trainer", "admin");
     }
 
-    public void setUser(LoadAdminWindow loadAdminWindow){
-        this.loadAdminWindow = loadAdminWindow;
-        this.userService = loadAdminWindow.getUserService();
-       try {
+
+    void setCollvalue() {
+        try {
             tableView.getItems().setAll(userService.getAllUser());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-    }
-
-    void setCollvalue() {
         colId.setCellValueFactory(new PropertyValueFactory<User, Long>("IdUser"));
         colLogin.setCellValueFactory(new PropertyValueFactory<User, String>("Login"));
         colPassword.setCellValueFactory(new PropertyValueFactory<User, String>("Password"));
@@ -179,37 +176,28 @@ public class UserAController implements Initializable {
 
     @FXML
     void addAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../mainWindowAdmin/UserA.fxml"));
-        AnchorPane change = loader.load();
-
-        RegistryController registryController = loader.getController();
-
-        registryController.setUser(loadRegistryWindow);
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(change));
-        stage.show();
     }
 
 
 
     @FXML
     void editAction(ActionEvent event) {
-        User user = null;
-        if(tableView.getSelectionModel().isSelected((int) user.getIdUser())) {
+        if(!tableView.getSelectionModel().isEmpty()) {
             mainText.setVisible(false);
             changeButton.setVisible(true);
             setDisable(false);
             setVisible(true);
         }
         else{
-
+            mainText.getStyleClass().add("error");
+            mainText.setText("Wybierz Najpierw Użytkownika");
         }
 
     }
 
     @FXML
     void exitEdit(MouseEvent event) {
+        mainText.setText("Panel Użytkownika");
         mainText.setVisible(true);
         changeButton.setVisible(false);
         addButton.setVisible(false);

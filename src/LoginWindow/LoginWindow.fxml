@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="217.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginWindow.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="217.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginWindow.LoginController">
    <children>
       <Text layoutX="27.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Panel Logowania" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
          <font>
@@ -28,7 +28,7 @@
             </RadialGradient>
          </fill>
       </Text>
-      <JFXTextField fx:id="loginField" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="98.0" onKeyPressed="#loginAction" prefWidth="200.0" promptText="Wpisz swój login" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="115.0">
+      <JFXTextField fx:id="loginField" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="98.0" prefWidth="200.0" promptText="Wpisz swój login" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="115.0">
          <unFocusColor>
             <RadialGradient centerX="0.5055555555555555" centerY="0.5" radius="0.3953488372093023">
                <stops>
