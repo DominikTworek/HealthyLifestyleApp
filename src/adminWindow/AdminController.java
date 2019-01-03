@@ -42,15 +42,9 @@ public class AdminController extends Functions {
     @FXML
     private VBox drawerVbox;
 
-    @FXML
-    private TableView<User> tableView;
-
-    @FXML
-    private TableColumn<User, String> login;
-
     private LoadAdminWindow loadAdminWindow;
 
-    private static UserService userService;
+    private  UserService userService;
 
     public void initialize() {
         Functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
@@ -66,9 +60,7 @@ public class AdminController extends Functions {
         mainWindow.getChildren().setAll(change);
     }
 
-    public static UserService setUser() {
-        return userService;
-    }
+
 
     public void loadTrainers(ActionEvent actionEvent) throws IOException {
         Functions.loadMainWindow("../mainWindowAdmin/TrainerA.fxml", mainWindow);
@@ -86,10 +78,5 @@ public class AdminController extends Functions {
     public void setUser(LoadAdminWindow loadAdminWindow) {
         this.loadAdminWindow = loadAdminWindow;
         this.userService = loadAdminWindow.getUserService();
-       /*try {
-            UserAController.tableView.getItems().setAll(userService.getTest());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }*/
     }
 }

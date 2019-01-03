@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,10 +19,12 @@ import utilities.User;
 import utilities.UserService;
 
 import java.io.IOException;
+import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.ResourceBundle;
 
 
-public class RegistryController {
+public class RegistryController implements Initializable {
     @FXML
     ImageView exitImage;
 
@@ -47,7 +50,12 @@ public class RegistryController {
 
     private UserService userService;
 
-    @FXML
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setComboBox();
+    }
+
     public void setComboBox() {
         genderComboBox.getItems().addAll("mezczyzna", "kobieta");
     }
@@ -140,4 +148,6 @@ private void clearField(){
         this.loadRegistryWindow = loadRegistryWindow;
         this.userService = loadRegistryWindow.getUserService();
     }
+
+
 }

@@ -101,7 +101,7 @@
             </RadialGradient>
          </focusColor>
       </JFXTextField>
-      <JFXComboBox fx:id="genderComboBox" layoutX="10.0" layoutY="10.0" onMouseClicked="#setComboBox" promptText="Wybierz płeć" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="270.0">
+      <JFXComboBox fx:id="genderComboBox" layoutX="10.0" layoutY="10.0" promptText="Wybierz płeć" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="270.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                <stops>

@@ -32,7 +32,7 @@
          </columnResizePolicy>
       </TableView>
       <JFXButton layoutX="567.0" layoutY="167.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Usuń" AnchorPane.rightAnchor="15.0" />
-      <JFXButton layoutX="14.0" layoutY="167.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Dodaj" AnchorPane.leftAnchor="15.0" />
+      <JFXButton layoutX="14.0" layoutY="167.0" onAction="#addAction" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Dodaj" AnchorPane.leftAnchor="15.0" />
       <JFXButton layoutX="399.0" layoutY="167.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Odśwież" AnchorPane.rightAnchor="150.0" />
       <JFXButton layoutX="191.0" layoutY="167.0" onAction="#editAction" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Edytuj" AnchorPane.leftAnchor="150.0" />
       <Text fx:id="mainText" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-field" text="Zarządzanie użytkownikami" textAlignment="CENTER" wrappingWidth="650.0">
@@ -74,5 +74,6 @@
             <Image url="@../media/delete-button.png" />
          </image>
       </ImageView>
+      <JFXButton fx:id="changeButton" layoutX="271.0" layoutY="131.0" prefHeight="35.0" prefWidth="96.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Potwierdź" />
    </children>
 </AnchorPane>
