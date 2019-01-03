@@ -159,6 +159,28 @@ public class UserServiceImplements implements UserService {
     }
 
     @Override
+    public String getPesel(String Login, String Pesel) throws RemoteException {
+        PreparedStatement statement = null;
+        String sql = "select * from user where Login = ? and Pesel = ?";
+        String age = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, Login);
+            statement.setString(2, Pesel);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                age = result.getString("Pesel");
+            }
+            return age;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return age;
+        }
+    }
+
+    @Override
     public User getUserById(Long IdUser) throws RemoteException {
         PreparedStatement statement = null;
 
@@ -172,6 +194,45 @@ public class UserServiceImplements implements UserService {
 
             User user = null;
             if(result.next()){
+                user = new User();
+                user.setIdUser(result.getLong("IdUser"));
+                user.setLogin(result.getString("Login"));
+                user.setPassword(result.getString("Password"));
+                user.setImie(result.getString("Imie"));
+                user.setNazwisko(result.getString("Nazwisko"));
+                user.setPlec(result.getString("Plec"));
+                user.setPesel(result.getString("Pesel"));
+                user.setRola(result.getString("rola"));
+            }
+            result.close();
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public User getUser(String Login, String Pesel) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "select * from user where Login= ? and Pesel = ?";
+
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, Login);
+            statement.setString(2, Pesel);
+
+            ResultSet result = statement.executeQuery();
+
+            User user = null;
+            if(result.next()) {
                 user = new User();
                 user.setIdUser(result.getLong("IdUser"));
                 user.setLogin(result.getString("Login"));
