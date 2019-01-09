@@ -16,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import utilities.User;
 import utilities.UserService;
 
@@ -28,7 +27,7 @@ import java.util.ResourceBundle;
 public class UserAController implements Initializable {
 
     @FXML
-    private Text mainText;
+    private JFXTextField mainText;
 
     @FXML
     private AnchorPane mainWindow;
@@ -96,6 +95,8 @@ public class UserAController implements Initializable {
 
     private UserService userService = LoadLoginWindow.getUserService();
 
+    public static Boolean checkUser = false;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -104,6 +105,7 @@ public class UserAController implements Initializable {
         mainText.setVisible(true);
         setCollvalue();
         setComboBox();
+        setEditValue();
     }
 
     public void setComboBox() {
@@ -128,6 +130,15 @@ public class UserAController implements Initializable {
         }
     }
 
+    @FXML
+    void refreshAction(ActionEvent event) {
+        try {
+            tableView.getItems().setAll(userService.getAllUser());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
     void setEditValue() {
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
             @Override
@@ -145,7 +156,7 @@ public class UserAController implements Initializable {
                 //
                 pesel.setText(newValue.getPesel());
                 //Rola
-                if (newValue.getRola().equals("costumer"))
+                if (newValue.getRola().equals("customer"))
                     rola.getSelectionModel().select(0);
                 else if (newValue.getRola().equals("trainer"))
                     rola.getSelectionModel().select(1);
@@ -222,16 +233,29 @@ public class UserAController implements Initializable {
 
     @FXML
     void addAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../RegistryWindow/RegistryWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../mainWindowAdmin/AddUser.fxml"));
         AnchorPane change = loader.load();
-
+        checkUser = true;
         mainWindow.getChildren().setAll(change);
     }
 
 
     @FXML
+    void deleteAction(ActionEvent event) {
+        try {
+            User user = tableView.getSelectionModel().getSelectedItem();
+            if (user == null) {
+                return;
+            }
+            userService.deteleUser(user.getIdUser());
+            tableView.getItems().remove(user);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void editAction(ActionEvent event) {
-        setEditValue();
         if (!tableView.getSelectionModel().isEmpty()) {
             mainText.setVisible(false);
             changeButton.setVisible(true);
@@ -246,6 +270,7 @@ public class UserAController implements Initializable {
 
     @FXML
     void exitEdit(MouseEvent event) {
+        mainText.getStyleClass().remove("error");
         mainText.setText("Panel Użytkownika");
         mainText.setVisible(true);
         changeButton.setVisible(false);

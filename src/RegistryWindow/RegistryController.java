@@ -132,11 +132,8 @@ private void clearField(){
                 userService.insertUser(user);
                 clearField();
 
-                //changeToLoginWindow(actionEvent);
-                /*Parent LoginWindowParent = LoadLoginWindow.execWindow();
-                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(LoginWindowParent));
-                stage.show();*/
+                changeToLoginWindow(actionEvent);
+
             }
         } catch (IllegalArgumentException | RemoteException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
