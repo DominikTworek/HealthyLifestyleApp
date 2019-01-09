@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" styleClass="root" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowAdmin.UserAController">
+<AnchorPane fx:id="mainWindow" focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" styleClass="root" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowAdmin.UserAController">
    <children>
       <TableView fx:id="tableView" fixedCellSize="0.0" layoutY="214.0" prefHeight="347.0" prefWidth="650.0" stylesheets="@../layout/Dark.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columns>
@@ -35,7 +35,7 @@
       <JFXButton layoutX="14.0" layoutY="167.0" onAction="#addAction" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Dodaj" AnchorPane.leftAnchor="15.0" />
       <JFXButton layoutX="399.0" layoutY="167.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Odśwież" AnchorPane.rightAnchor="150.0" />
       <JFXButton layoutX="191.0" layoutY="167.0" onAction="#editAction" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Edytuj" AnchorPane.leftAnchor="150.0" />
-      <Text fx:id="mainText" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-field" text="Zarządzanie użytkownikami" textAlignment="CENTER" wrappingWidth="650.0">
+      <Text fx:id="mainText" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zarządzanie użytkownikami" textAlignment="CENTER" wrappingWidth="650.0">
          <font>
             <Font size="30.0" />
          </font>
@@ -74,6 +74,16 @@
             <Image url="@../media/delete-button.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="changeButton" layoutX="271.0" layoutY="131.0" prefHeight="35.0" prefWidth="96.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Potwierdź" />
+      <JFXButton fx:id="changeButton" layoutX="271.0" layoutY="131.0" onAction="#editConfirm" prefHeight="35.0" prefWidth="96.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Potwierdź" />
+      <JFXTextField fx:id="id" alignment="CENTER" disable="true" editable="false" labelFloat="true" layoutX="262.0" layoutY="104.0" prefHeight="25.0" prefWidth="115.0" promptText="Login" visible="false">
+         <unFocusColor>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.4">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#2c2c2c" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </unFocusColor>
+      </JFXTextField>
    </children>
 </AnchorPane>

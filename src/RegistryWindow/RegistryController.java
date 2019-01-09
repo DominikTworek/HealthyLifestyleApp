@@ -128,11 +128,11 @@ private void clearField(){
                 user.setNazwisko(lastNameField.getText());
                 user.setPlec(genderComboBox.getValue().toString());
                 user.setPesel(ageField.getText());
-                user.setRola("consumer");
+                user.setRola("customer");
                 userService.insertUser(user);
                 clearField();
 
-                changeToLoginWindow(actionEvent);
+                //changeToLoginWindow(actionEvent);
                 /*Parent LoginWindowParent = LoadLoginWindow.execWindow();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(LoginWindowParent));

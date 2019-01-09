@@ -1,22 +1,15 @@
 package mainWindowAdmin;
 
 import LoginWindow.LoadLoginWindow;
-import RegistryWindow.LoadRegistryWindow;
-import RegistryWindow.RegistryController;
-import adminWindow.AdminController;
-import adminWindow.LoadAdminWindow;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,8 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import server.UserServiceImplements;
 import utilities.User;
 import utilities.UserService;
 
@@ -38,6 +29,13 @@ public class UserAController implements Initializable {
 
     @FXML
     private Text mainText;
+
+    @FXML
+    private AnchorPane mainWindow;
+
+    @FXML
+    private JFXTextField id;
+
 
     @FXML
     private JFXTextField haslo;
@@ -99,7 +97,6 @@ public class UserAController implements Initializable {
     private UserService userService = LoadLoginWindow.getUserService();
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setDisable(true);
@@ -107,7 +104,6 @@ public class UserAController implements Initializable {
         mainText.setVisible(true);
         setCollvalue();
         setComboBox();
-        setEditValue();
     }
 
     public void setComboBox() {
@@ -117,11 +113,6 @@ public class UserAController implements Initializable {
 
 
     void setCollvalue() {
-        try {
-            tableView.getItems().setAll(userService.getAllUser());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
         colId.setCellValueFactory(new PropertyValueFactory<User, Long>("IdUser"));
         colLogin.setCellValueFactory(new PropertyValueFactory<User, String>("Login"));
         colPassword.setCellValueFactory(new PropertyValueFactory<User, String>("Password"));
@@ -130,21 +121,76 @@ public class UserAController implements Initializable {
         colGender.setCellValueFactory(new PropertyValueFactory<User, String>("Plec"));
         colPesel.setCellValueFactory(new PropertyValueFactory<User, String>("Pesel"));
         colRole.setCellValueFactory(new PropertyValueFactory<User, String>("Rola"));
+        try {
+            tableView.getItems().setAll(userService.getAllUser());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
-    void setEditValue(){
+    void setEditValue() {
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
             @Override
             public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
+                id.setText(String.valueOf(newValue.getIdUser()));
                 login.setText(newValue.getLogin());
                 haslo.setText(newValue.getPassword());
                 imie.setText(newValue.getImie());
                 nazwisko.setText(newValue.getPlec());
                 plec.setValue(newValue.getPlec());
+                //plec
+                if (newValue.getPlec().equals("kobieta"))
+                    plec.getSelectionModel().select(1);
+                else plec.getSelectionModel().select(0);
+                //
                 pesel.setText(newValue.getPesel());
-                rola.setValue(newValue.getRola());
+                //Rola
+                if (newValue.getRola().equals("costumer"))
+                    rola.getSelectionModel().select(0);
+                else if (newValue.getRola().equals("trainer"))
+                    rola.getSelectionModel().select(1);
+                else rola.getSelectionModel().select(2);
             }
         });
+    }
+
+    Boolean checkData() {
+        if (login.getText().isEmpty() || haslo.getText().isEmpty() || imie.getText().isEmpty() || nazwisko.getText().isEmpty() || plec.getValue().isEmpty() || pesel.getText().isEmpty() || rola.getValue().isEmpty())
+            return false;
+        else
+            return true;
+    }
+
+    @FXML
+    void editConfirm(ActionEvent event) {
+        int index = tableView.getSelectionModel().getSelectedIndex();
+        if (index == -1) {
+            mainText.getStyleClass().add("error");
+            mainText.setText("Wybierz Najpierw Użytkownika");
+            return;
+        }
+        if (checkData()) {
+            try {
+                User user = new User();
+                user.setIdUser(Long.valueOf(id.getText()));
+                user.setLogin(login.getText());
+                user.setPassword(haslo.getText());
+                user.setImie(imie.getText());
+                user.setNazwisko(nazwisko.getText());
+                user.setPlec(plec.getValue().toString());
+                user.setPesel(pesel.getText());
+                user.setRola(rola.getValue().toString());
+                userService.updateUser(user);
+                tableView.getItems().set(index, user);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        } else {
+            setVisible(false);
+            mainText.setVisible(true);
+            mainText.getStyleClass().add("error");
+            mainText.setText("Sprawdź dane, wpisałeś coś źle");
+        }
     }
 
     void setDisable(Boolean disable) {
@@ -176,19 +222,22 @@ public class UserAController implements Initializable {
 
     @FXML
     void addAction(ActionEvent event) throws IOException {
-    }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../RegistryWindow/RegistryWindow.fxml"));
+        AnchorPane change = loader.load();
 
+        mainWindow.getChildren().setAll(change);
+    }
 
 
     @FXML
     void editAction(ActionEvent event) {
-        if(!tableView.getSelectionModel().isEmpty()) {
+        setEditValue();
+        if (!tableView.getSelectionModel().isEmpty()) {
             mainText.setVisible(false);
             changeButton.setVisible(true);
             setDisable(false);
             setVisible(true);
-        }
-        else{
+        } else {
             mainText.getStyleClass().add("error");
             mainText.setText("Wybierz Najpierw Użytkownika");
         }

@@ -320,7 +320,7 @@ public class UserServiceImplements implements UserService {
     public List<User> getAllUser() throws RemoteException {
         Statement statement = null;
 
-        String sql = "select * from user where rola = 'consumer'";
+        String sql = "select * from user where rola = 'customer'";
 
         try {
             statement = DatabaseConnection.getConnection().createStatement();
