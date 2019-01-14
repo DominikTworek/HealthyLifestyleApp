@@ -3,13 +3,11 @@ package server;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import utilities.DatabaseConnection;
 import utilities.User;
 import utilities.UserService;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.List;
 
 public class TestClient extends Application{
     @Override
@@ -20,12 +18,12 @@ public class TestClient extends Application{
 
         User p = new User();
         p.setLogin("trzcina");
-        p.setPassword("to");
-        p.setImie("pizda");
+        p.setPassword("daw");
+        p.setImie("ddaa");
         p.setNazwisko("z farter");
         p.setPlec("a");
         p.setPesel("a");
-        p.setRola("admin");
+        p.setRola("trainer");
 
        p = userService.insertUser(p);
 

@@ -1,12 +1,15 @@
 package mainWindowAdmin;
 
 import LoginWindow.LoadLoginWindow;
+import adminWindow.AdminController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.animation.ScaleTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import utilities.User;
 import utilities.UserService;
 
@@ -106,6 +110,10 @@ public class UserAController implements Initializable {
         setCollvalue();
         setComboBox();
         setEditValue();
+        if (AdminController.userWindow)
+            mainText.setText("Zarządzanie Użytkownikami");
+        if (AdminController.trainerWindow)
+            mainText.setText("Zarządzanie Trenerami");
     }
 
     public void setComboBox() {
@@ -123,17 +131,21 @@ public class UserAController implements Initializable {
         colGender.setCellValueFactory(new PropertyValueFactory<User, String>("Plec"));
         colPesel.setCellValueFactory(new PropertyValueFactory<User, String>("Pesel"));
         colRole.setCellValueFactory(new PropertyValueFactory<User, String>("Rola"));
-        try {
-            tableView.getItems().setAll(userService.getAllUser());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        dataBaseGetUser();
     }
 
     @FXML
     void refreshAction(ActionEvent event) {
+        dataBaseGetUser();
+    }
+
+    void dataBaseGetUser()
+    {
         try {
-            tableView.getItems().setAll(userService.getAllUser());
+            if (AdminController.userWindow)
+                tableView.getItems().setAll(userService.getAllUser());
+            if (AdminController.trainerWindow)
+                tableView.getItems().setAll(userService.getAllTrainer());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -235,7 +247,6 @@ public class UserAController implements Initializable {
     void addAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../mainWindowAdmin/AddUser.fxml"));
         AnchorPane change = loader.load();
-        checkUser = true;
         mainWindow.getChildren().setAll(change);
     }
 
@@ -271,11 +282,15 @@ public class UserAController implements Initializable {
     @FXML
     void exitEdit(MouseEvent event) {
         mainText.getStyleClass().remove("error");
-        mainText.setText("Panel Użytkownika");
+        if (AdminController.userWindow)
+            mainText.setText("Zarządzanie Użytkownikami");
+        if (AdminController.trainerWindow)
+            mainText.setText("Zarządzanie Trenerami");
         mainText.setVisible(true);
         changeButton.setVisible(false);
         addButton.setVisible(false);
         setDisable(true);
         setVisible(false);
     }
+
 }

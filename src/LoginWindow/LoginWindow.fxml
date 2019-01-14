@@ -4,7 +4,6 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -45,9 +44,6 @@
                </stops>
             </RadialGradient>
          </focusColor>
-         <effect>
-            <Glow level="0.5" />
-         </effect>
       </JFXTextField>
       <JFXPasswordField fx:id="passwordField" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="142.0" prefWidth="200.0" promptText="Wpisz swoje hasło" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="160.0">
          <unFocusColor>
@@ -66,9 +62,6 @@
                </stops>
             </RadialGradient>
          </focusColor>
-         <effect>
-            <Glow level="0.5" />
-         </effect>
       </JFXPasswordField>
       <JFXButton layoutX="76.0" layoutY="190.0" onAction="#login" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zaloguj" AnchorPane.topAnchor="195.0" />
       <JFXTextField alignment="CENTER" editable="false" layoutX="60.0" layoutY="235.0" onAction="#changeToResetPasswordWindow" onMouseClicked="#changeToResetPasswordWindow" text="Nie pamiętasz hasła?" AnchorPane.topAnchor="235.0">

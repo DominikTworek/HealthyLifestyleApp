@@ -1,6 +1,7 @@
 package mainWindowAdmin;
 
 import LoginWindow.LoadLoginWindow;
+import adminWindow.AdminController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -125,7 +126,8 @@ public class AddUserController implements Initializable {
                 user.setNazwisko(lastNameField.getText());
                 user.setPlec(genderComboBox.getValue().toString());
                 user.setPesel(ageField.getText());
-                if (UserAController.checkUser) user.setRola("customer");
+                if (AdminController.userWindow) user.setRola("customer");
+                if (AdminController.trainerWindow) user.setRola("trainer");
                 userService.insertUser(user);
                 clearField();
 

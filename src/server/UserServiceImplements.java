@@ -359,6 +359,49 @@ public class UserServiceImplements implements UserService {
         }
     }
 
+    @Override
+    public List<User> getAllTrainer() throws RemoteException {
+        Statement statement = null;
+
+        String sql = "select * from user where rola = 'trainer'";
+
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery(sql);
+
+            List<User> list = new ArrayList<User>();
+
+            while(result.next()){
+                User user = new User();
+                user.setIdUser(result.getLong("IdUser"));
+                user.setLogin(result.getString("Login"));
+                user.setPassword(result.getString("Password"));
+                user.setImie(result.getString("Imie"));
+                user.setNazwisko(result.getString("Nazwisko"));
+                user.setPlec(result.getString("Plec"));
+                user.setPesel(result.getString("Pesel"));
+                user.setRola(result.getString("Rola"));
+                list.add(user);
+            }
+
+            result.close();
+
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
     public List<User> getTest() throws RemoteException {
         Statement statement = null;

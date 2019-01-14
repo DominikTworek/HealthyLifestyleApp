@@ -1,17 +1,15 @@
 package adminWindow;
 
-import LoginWindow.LoginController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import mainWindowAdmin.UserAController;
+
 import utilities.UserService;
 
-import java.awt.*;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+
 
 public class LoadAdminWindow extends Application {
     private static UserService userService;
