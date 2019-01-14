@@ -54,13 +54,13 @@ public class AdminController extends Functions {
         AnchorPane change = loader.load();
 
         mainWindow.getChildren().setAll(change);
-        animation();
+        animation(mainWindow);
     }
 
-    void animation(){
+    void animation(AnchorPane anchorPane){
         ScaleTransition fadeTransition = new ScaleTransition();
-        fadeTransition.setDuration(Duration.millis(500));
-        fadeTransition.setNode(mainWindow);
+        fadeTransition.setDuration(Duration.millis(300));
+        fadeTransition.setNode(anchorPane);
         fadeTransition.setFromX(1);
         fadeTransition.setToX(0);
         fadeTransition.setFromZ(1);
@@ -71,7 +71,7 @@ public class AdminController extends Functions {
             public void handle(ActionEvent event) {
                 ScaleTransition fadeTransition2 = new ScaleTransition();
                 fadeTransition2.setDuration(Duration.millis(500));
-                fadeTransition2.setNode(mainWindow);
+                fadeTransition2.setNode(anchorPane);
                 fadeTransition2.setFromX(0);
                 fadeTransition2.setToX(1);
                 fadeTransition2.setFromZ(0);

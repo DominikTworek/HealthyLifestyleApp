@@ -60,7 +60,7 @@
                                  </image>
                               </ImageView>
                            </graphic></JFXButton>
-                                <JFXButton onAction="#other" prefHeight="85.0" prefWidth="150.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Inne">
+                                <JFXButton disable="true" onAction="#other" prefHeight="85.0" prefWidth="150.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Inne">
                                     <VBox.margin>
                                         <Insets bottom="5.0" top="5.0" />
                                     </VBox.margin></JFXButton>
