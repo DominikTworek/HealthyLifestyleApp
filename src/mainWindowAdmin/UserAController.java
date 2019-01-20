@@ -1,6 +1,7 @@
 package mainWindowAdmin;
 
 import LoginWindow.LoadLoginWindow;
+import LoginWindow.LoginController;
 import adminWindow.AdminController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -98,8 +99,6 @@ public class UserAController implements Initializable {
     private TableColumn<User, String> colRole;
 
     private UserService userService = LoadLoginWindow.getUserService();
-
-    public static Boolean checkUser = false;
 
 
     @Override

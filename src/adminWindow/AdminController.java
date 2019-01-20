@@ -1,6 +1,7 @@
 package adminWindow;
 
 import LoginWindow.LoadLoginWindow;
+import LoginWindow.LoginController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -9,8 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javafx.util.Duration;
@@ -18,13 +21,19 @@ import utilities.UserService;
 import windowFunctions.Functions;
 
 import java.io.IOException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ResourceBundle;
 
 
-public class AdminController extends Functions {
+public class AdminController extends Functions implements Initializable {
 
 
     @FXML
     private JFXButton logoutButton;
+
+    @FXML
+    private Text textNick;
 
     @FXML
     public AnchorPane mainWindow;
@@ -41,10 +50,19 @@ public class AdminController extends Functions {
     public static Boolean userWindow;
     public static Boolean trainerWindow;
 
+    private Long IDuser = LoginController.getIDuser();
+
+
     private  UserService userService = LoadLoginWindow.getUserService();
 
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         Functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
+        try {
+            textNick.setText(userService.setLogin(IDuser));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     void loadWindow(Boolean userCheck, Boolean trainerCheck) throws IOException {
@@ -99,5 +117,6 @@ public class AdminController extends Functions {
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         stage.close();
     }
+
 
 }

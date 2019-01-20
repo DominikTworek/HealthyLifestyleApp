@@ -4,19 +4,21 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminWindow.AdminController">
     <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0">
             <center>
-                <AnchorPane prefHeight="555.0" prefWidth="800.0" stylesheets="@../layout/Dark.css" BorderPane.alignment="CENTER">
+                <AnchorPane prefHeight="555.0" prefWidth="799.0" stylesheets="@../layout/Dark.css" BorderPane.alignment="CENTER">
                     <children>
                         <AnchorPane fx:id="mainWindow" prefHeight="550.0" prefWidth="650.0" />
                         <JFXHamburger fx:id="hamburger" layoutX="737.0" layoutY="13.0" prefHeight="35.0" prefWidth="40.0" styleClass="jfx-hambueger-icon" stylesheets="@../layout/Dark.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="13.0" />
@@ -25,8 +27,13 @@
             <top>
                 <AnchorPane prefHeight="34.0" prefWidth="800.0" stylesheets="@../layout/Dark.css" BorderPane.alignment="CENTER">
                     <children>
-                        <JFXButton fx:id="logoutButton" layoutX="653.0" layoutY="5.0" onAction="#logout" prefHeight="35.0" prefWidth="85.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Wyloguj" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="5.0" />
-                        <Text layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UserNick" wrappingWidth="104.13671875" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="10.0" />
+                  <Line endX="800.0" fill="BLACK" layoutY="43.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" styleClass="line">
+                     <effect>
+                        <DropShadow height="10.63" radius="9.6325" spread="0.5" width="29.9" />
+                     </effect>
+                  </Line>
+                        <JFXButton fx:id="logoutButton" layoutX="712.0" layoutY="3.0" onAction="#logout" prefHeight="35.0" prefWidth="85.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Wyloguj" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="3.0" />
+                        <Text fx:id="textNick" layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="UserNick" wrappingWidth="104.13671875" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="10.0" />
                     </children>
                <BorderPane.margin>
                   <Insets left="10.0" right="10.0" />

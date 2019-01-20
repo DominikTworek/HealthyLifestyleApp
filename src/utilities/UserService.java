@@ -16,7 +16,11 @@ public interface UserService extends Remote {
 
     String getLogin(String Login) throws RemoteException;
 
+    String setLogin(Long IdUser) throws RemoteException;
+
     String getPassword(String Login, String Password) throws RemoteException;
+
+    Long getID(String Login, String Password) throws RemoteException;
 
     String getPesel(String Login, String Pesel) throws RemoteException;
 

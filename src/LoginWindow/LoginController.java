@@ -39,6 +39,8 @@ public class LoginController implements Initializable {
     @FXML
     private JFXPasswordField passwordField;
 
+    private static Long IDuser;
+
     private UserService userService = LoadLoginWindow.getUserService();
 
 
@@ -46,6 +48,7 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         colors();
     }
+
 
     @FXML
     void closeApp() {
@@ -81,6 +84,7 @@ public class LoginController implements Initializable {
             passwordField.getStyleClass().add("incorrectly");
         }else if(login.equals(getLogin) && password.equals(getPassword)){
             String rola = userService.getRola(getLogin, getPassword);
+            IDuser = userService.getID(getLogin, getPassword);
             if(rola.equals("admin")) {
                 try {
                     changeToAdminWindow(event);
@@ -152,5 +156,9 @@ public class LoginController implements Initializable {
         stage.setTitle("Okno Administratora");
         stage.setScene(new Scene(AdminWindowWindowParent));
         stage.show();
+    }
+
+    public static Long getIDuser(){
+        return IDuser;
     }
 }

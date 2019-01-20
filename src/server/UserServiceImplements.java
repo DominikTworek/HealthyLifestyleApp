@@ -137,6 +137,27 @@ public class UserServiceImplements implements UserService {
     }
 
     @Override
+    public String setLogin(Long IdUser) throws RemoteException {
+        PreparedStatement statement = null;
+        String sql = "select * from user where IdUser = ?";
+        String login = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setLong(1, IdUser);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                login = result.getString("Login");
+            }
+            return login;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return login;
+        }
+    }
+
+    @Override
     public String getPassword(String Login, String Password) throws RemoteException {
         PreparedStatement statement = null;
         String sql = "select * from user where Login = ? and Password = ?";
@@ -155,6 +176,28 @@ public class UserServiceImplements implements UserService {
         } catch (SQLException e) {
             e.printStackTrace();
             return password;
+        }
+    }
+
+    @Override
+    public Long getID(String Login, String Password) throws RemoteException {
+        PreparedStatement statement = null;
+        String sql = "select * from user where Login = ? and Password = ?";
+        long id = 0;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, Login);
+            statement.setString(2, Password);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                id = result.getLong("IdUser");
+            }
+            return id;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return id;
         }
     }
 
@@ -283,7 +326,7 @@ public class UserServiceImplements implements UserService {
     public User getTrainerById(Long IdUser) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "select * from user where IdUser= ? and rola = 2";
+        String sql = "select * from user where IdUser= ? and rola = 'trainer'";
 
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
