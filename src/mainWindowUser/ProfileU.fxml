@@ -29,6 +29,14 @@
             </RadialGradient>
          </fill>
       </Text>
+      <ImageView fx:id="exitImage" fitHeight="17.0" fitWidth="17.0" layoutX="218.0" layoutY="16.0" onMouseClicked="#closeApp" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../media/delete-button.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </ImageView>
       <JFXTextField fx:id="heightField" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="98.0" prefWidth="200.0" promptText="Wpisz wzrost" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="90.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.3953488372093023">
@@ -86,7 +94,6 @@
             </RadialGradient>
          </focusColor>
       </JFXComboBox>
-      <JFXButton layoutX="61.0" layoutY="351.0" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zatwierdź" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="380.0" />
       <JFXComboBox fx:id="goalComboBox" layoutX="43.0" layoutY="222.0" promptText="Określ swój cel" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="225.0">
          <unFocusColor>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
@@ -109,13 +116,6 @@
          </focusColor>
       </JFXComboBox>
       <JFXTextArea fx:id="otherTextArea" prefHeight="90.0" prefWidth="172.0" promptText="Preferencje odnośnie diety, urazy, schorzenia, uwagi" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="270.0" />
-      <ImageView fx:id="exitImage" fitHeight="17.0" fitWidth="17.0" layoutX="218.0" layoutY="16.0" onMouseClicked="#closeApp" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../media/delete-button.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-      </ImageView>
+      <JFXButton layoutX="61.0" layoutY="351.0" onAction="#setProfile" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zatwierdź" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="380.0" />
    </children>
 </AnchorPane>

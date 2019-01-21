@@ -52,7 +52,6 @@ public class AdminController extends Functions implements Initializable {
 
     private Long IDuser = LoginController.getIDuser();
 
-
     private UserService userService = LoadLoginWindow.getUserService();
 
     @Override
