@@ -92,6 +92,20 @@ public class LoginController implements Initializable {
                     e.printStackTrace();
                 }
             }
+            if(rola.equals("customer")) {
+                try {
+                    changeToUserWindow(event);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if(rola.equals("trainer")) {
+                try {
+                    changeToTrainerWindow(event);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
@@ -154,6 +168,24 @@ public class LoginController implements Initializable {
                 .getResource("../adminWindow/adminWindow.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Okno Administratora");
+        stage.setScene(new Scene(AdminWindowWindowParent));
+        stage.show();
+    }
+
+    void changeToUserWindow(Event event) throws Exception {
+        Parent AdminWindowWindowParent = FXMLLoader.load(getClass()
+                .getResource("../userWindow/userWindow.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Okno uzytkownika");
+        stage.setScene(new Scene(AdminWindowWindowParent));
+        stage.show();
+    }
+
+    void changeToTrainerWindow(Event event) throws Exception {
+        Parent AdminWindowWindowParent = FXMLLoader.load(getClass()
+                .getResource("../trainerWindow/TrainerWindow.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Okno trenera");
         stage.setScene(new Scene(AdminWindowWindowParent));
         stage.show();
     }

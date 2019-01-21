@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="134.0" prefWidth="225.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowUser.changeProfileUController">
+   <children>
+      <Text layoutX="75.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zmień" textAlignment="CENTER" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.4072265625" AnchorPane.topAnchor="22.8642578125">
+         <font>
+            <Font size="27.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <JFXButton layoutX="150.0" layoutY="76.0" onAction="#changeToProfileView" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Profil" AnchorPane.topAnchor="76.0" />
+      <JFXButton fx:id="changeRegisterButton" layoutX="12.0" layoutY="76.0" onAction="#changeToRegisterView" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Dane logowania" />
+   </children>
+</AnchorPane>

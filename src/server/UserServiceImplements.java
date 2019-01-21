@@ -249,7 +249,7 @@ public class UserServiceImplements implements UserService {
     public User getUserById(Long IdUser) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "select * from user where IdUser= ? and rola = 3";
+        String sql = "select * from user where IdUser= ?";
 
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
