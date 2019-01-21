@@ -10,6 +10,17 @@
 
 }
 
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: -fx-drugi;
+}
+
 .smalltext{
     -fx-fill: -fx-tekstniebieski;
 }
