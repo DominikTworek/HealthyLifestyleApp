@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXHamburger;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.time.YearMonth;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,11 +17,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import utilities.UserService;
+import mainWindowUser.CalendarUController;
+import utilities.Calendar.FullCalendarView;
 import windowFunctions.Functions;
 
 public class UserController extends Functions {
@@ -84,7 +88,12 @@ public class UserController extends Functions {
     }
 
     public void loadCalendar(ActionEvent actionEvent) throws IOException {
-        Functions.loadMainWindow("../mainWindowUser/CalendarU.fxml", mainWindow);
+        //Functions.loadMainWindow("../mainWindowUser/CalendarU.fxml", mainWindow);
+        FXMLLoader loader = new FXMLLoader(Functions.class.getResource("../mainWindowUser/CalendarU.fxml"));
+        AnchorPane change = loader.load();
+        CalendarUController controller = loader.getController();
+        controller.calendarPane.getChildren().add(new FullCalendarView(YearMonth.now()).getView());
+        mainWindow.getChildren().setAll(change);
     }
 
 
