@@ -82,7 +82,8 @@ public class LoginController implements Initializable {
         }
         else if(!password.equals(getPassword)){
             passwordField.getStyleClass().add("incorrectly");
-        }else if(login.equals(getLogin) && password.equals(getPassword)){
+        }
+        else if(login.equals(getLogin) && password.equals(getPassword)){
             String rola = userService.getRola(getLogin, getPassword);
             IDuser = userService.getID(getLogin, getPassword);
             if(rola.equals("admin")) {
@@ -107,8 +108,6 @@ public class LoginController implements Initializable {
                 }
             }
         }
-
-
     }
 
     private void colors(){
@@ -172,20 +171,21 @@ public class LoginController implements Initializable {
         stage.show();
     }
 
+
+    void changeToTrainerWindow(Event event) throws Exception {
+        Parent AdminWindowWindowParent = FXMLLoader.load(getClass()
+                .getResource("../trainerWindow/TrainerWindow.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("Okno Trenera");
+        stage.setScene(new Scene(AdminWindowWindowParent));
+        stage.show();
+    }
+
     void changeToUserWindow(Event event) throws Exception {
         Parent AdminWindowWindowParent = FXMLLoader.load(getClass()
                 .getResource("../userWindow/userWindow.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Okno uzytkownika");
-        stage.setScene(new Scene(AdminWindowWindowParent));
-        stage.show();
-    }
-
-    void changeToTrainerWindow(Event event) throws Exception {
-        Parent AdminWindowWindowParent = FXMLLoader.load(getClass()
-                .getResource("../trainerWindow/TrainerWindow.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Okno trenera");
         stage.setScene(new Scene(AdminWindowWindowParent));
         stage.show();
     }
