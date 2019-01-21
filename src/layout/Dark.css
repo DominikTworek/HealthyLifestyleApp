@@ -21,8 +21,13 @@
     -fx-text-fill: -fx-drugi;
 }
 
+.jfx-tab-pane .tab-selected-line {
+    -fx-background-color: -fx-tekstniebieski;
+    -fx-pref-height: 2px; }
+
 .text-area{
     -fx-text-fill: -fx-glownytekst;
+    -fx-background-color:  #3E3E3E;
 }
 
 .smalltext{

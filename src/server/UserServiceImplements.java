@@ -159,6 +159,27 @@ public class UserServiceImplements implements UserService {
     }
 
     @Override
+    public String getFieldFromUser(Long IdUser, String Field) throws RemoteException {
+        PreparedStatement statement = null;
+        String sql = "select * from user where IdUser = ?";
+        String field = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setLong(1, IdUser);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                field = result.getString(Field);
+            }
+            return field;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return field;
+        }
+    }
+
+    @Override
     public String getPassword(String Login, String Password) throws RemoteException {
         PreparedStatement statement = null;
         String sql = "select * from user where Login = ? and Password = ?";
