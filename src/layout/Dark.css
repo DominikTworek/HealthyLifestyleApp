@@ -21,6 +21,10 @@
     -fx-text-fill: -fx-drugi;
 }
 
+.text-area{
+    -fx-text-fill: -fx-glownytekst;
+}
+
 .smalltext{
     -fx-fill: -fx-tekstniebieski;
 }
