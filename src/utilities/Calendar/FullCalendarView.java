@@ -80,14 +80,7 @@ public class FullCalendarView {
         }
         // Populate the calendar with day numbers
         for (CalendarDayNode ap : allCalendarDays) {
-            if (ap.getChildren().size() != 0) {
-                ap.getChildren().remove(0);
-            }
-            Text txt = new Text(String.valueOf(calendarDate.getDayOfMonth()));
-            ap.setDate(calendarDate);
-            ap.setTopAnchor(txt, 5.0);
-            ap.setLeftAnchor(txt, 5.0);
-            ap.getChildren().add(txt);
+            ap.fill(calendarDate);
             calendarDate = calendarDate.plusDays(1);
         }
         // Change the title of the calendar

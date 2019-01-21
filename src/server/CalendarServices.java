@@ -39,6 +39,10 @@ public class CalendarServices {
         return emptyEvent;
     }
 
+    public static String abbreviateToSize(String s, int limit){
+        return s.substring(0, Math.min(s.length(), limit))+"...";
+    }
+
     public static ObservableList<Integer> getHours() {
         if (hours == null) {
             List<Integer> hourList = new ArrayList<>(Arrays.asList(10, 11, 12, 13, 14, 15, 16, 17, 18, 19));
@@ -58,7 +62,7 @@ public class CalendarServices {
             statement.setInt(3, date.getMonthValue());
             statement.setInt(4, date.getYear());
 
-            ResultSet result = statement.executeQuery(sql);
+            ResultSet result = statement.executeQuery();
             List<CalendarEvent> events = new ArrayList<>();
             while (result.next()) {
                 CalendarEvent e = new CalendarEvent();
