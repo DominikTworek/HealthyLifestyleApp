@@ -38,4 +38,6 @@ public interface UserService extends Remote {
 
     List<User> getTest() throws RemoteException;
 
+    UserProfile insertUserProfile(UserProfile userProfile) throws RemoteException;
+
 }

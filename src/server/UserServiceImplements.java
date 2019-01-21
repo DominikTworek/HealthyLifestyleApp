@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import trainerWindow.TrainerController;
 import utilities.DatabaseConnection;
 import utilities.User;
+import utilities.UserProfile;
 import utilities.UserService;
 
 import java.awt.*;
@@ -249,7 +250,7 @@ public class UserServiceImplements implements UserService {
     public User getUserById(Long IdUser) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "select * from user where IdUser= ? and rola = 3";
+        String sql = "select * from user where IdUser= ?";
 
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -472,6 +473,43 @@ public class UserServiceImplements implements UserService {
             return null;
         }finally {
             if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public UserProfile insertUserProfile(UserProfile userProfile) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "insert into user_profile(ID, USER_ID, height, weight, neat, goal, other) values (NULL, ?, ?, ?, ?, ?, ?)";
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setLong(1, userProfile.getUSER_ID());
+            statement.setString(2, userProfile.getHeight());
+            statement.setString(3, userProfile.getWeight());
+            statement.setString(4, userProfile.getNeat());
+            statement.setString(5, userProfile.getGoal());
+            statement.setString(6, userProfile.getOther());
+
+            statement.executeUpdate();
+
+            ResultSet result = statement.getGeneratedKeys();
+            if (result.next()) {
+                userProfile.setID(result.getLong(1));
+            }
+            result.close();
+            return userProfile;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException e) {

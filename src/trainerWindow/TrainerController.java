@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import utilities.UserService;
@@ -23,6 +24,7 @@ import windowFunctions.Functions;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
 
@@ -44,19 +46,24 @@ public class TrainerController extends Functions implements Initializable {
     @FXML
     private JFXDrawer drawer;
 
-
     @FXML
     private JFXComboBox<Label> comboBox;
 
+    @FXML
+    private Text textNick;
+
     private UserService userService = LoadLoginWindow.getUserService();
 
-    private long IDuser = LoginController.getIDuser();
+    private Long IDuser = LoginController.getIDuser();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
-
-
+        try {
+            textNick.setText(userService.setLogin(IDuser));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadEditProfile(ActionEvent actionEvent) throws IOException {

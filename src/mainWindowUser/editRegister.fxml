@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="217.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowUser.editRegisterController">
+    <children>
+        <Text layoutX="49.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zmień dane" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="30.0">
+            <font>
+                <Font size="27.0" />
+            </font>
+            <fill>
+                <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#004cff" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </fill>
+        </Text>
+        <JFXTextField fx:id="loginField" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="98.0" prefWidth="200.0" promptText="Wpisz login" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="90.0">
+            <unFocusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.3953488372093023">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#2c2c2c" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </unFocusColor>
+            <focusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#323232" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </focusColor>
+        </JFXTextField>
+        <JFXPasswordField fx:id="passwordField" alignment="CENTER" labelFloat="true" layoutX="27.0" layoutY="142.0" prefWidth="200.0" promptText="Wpisz hasło" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="135.0">
+            <unFocusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.4">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#2c2c2c" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </unFocusColor>
+            <focusColor>
+                <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.5046511627906975">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#2c2c2c" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </focusColor>
+        </JFXPasswordField>
+        <JFXTextField fx:id="nameField" alignment="CENTER" labelFloat="true" layoutX="25.0" layoutY="100.0" prefWidth="200.0" promptText="Wpisz swoje imię" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="180.0">
+            <unFocusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.3953488372093023">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#2c2c2c" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </unFocusColor>
+            <focusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#323232" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </focusColor>
+        </JFXTextField>
+        <JFXTextField fx:id="lastNameField" alignment="CENTER" labelFloat="true" layoutX="25.0" layoutY="100.0" prefWidth="200.0" promptText="Wpisz swoje nazwisko" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="225.0">
+            <unFocusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.3953488372093023">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#2c2c2c" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </unFocusColor>
+            <focusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#323232" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </focusColor>
+        </JFXTextField>
+        <JFXComboBox fx:id="genderComboBox" layoutX="10.0" layoutY="10.0" promptText="Wybierz płeć" stylesheets="@../layout/Dark.css" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="270.0">
+            <unFocusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#4d4d4d" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </unFocusColor>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <focusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#323232" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </focusColor>
+        </JFXComboBox>
+        <JFXTextField fx:id="ageField" alignment="CENTER" labelFloat="true" layoutX="25.0" layoutY="100.0" prefWidth="200.0" promptText="Wpisz swój wiek" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="315.0">
+            <unFocusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.3953488372093023">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#2c2c2c" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </unFocusColor>
+            <focusColor>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                    <stops>
+                        <Stop color="#00d0ff" />
+                        <Stop color="#323232" offset="1.0" />
+                    </stops>
+                </RadialGradient>
+            </focusColor>
+        </JFXTextField>
+        <JFXButton layoutX="61.0" layoutY="351.0" onAction="#setRegistry" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zmień" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="360.0" />
+    </children>
+</AnchorPane>
