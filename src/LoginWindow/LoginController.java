@@ -92,6 +92,13 @@ public class LoginController implements Initializable {
                     e.printStackTrace();
                 }
             }
+            if (rola.equals("user")){
+                try {
+                    changeToUserWindow(event);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
         }
 
 
@@ -155,6 +162,15 @@ public class LoginController implements Initializable {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Okno Administratora");
         stage.setScene(new Scene(AdminWindowWindowParent));
+        stage.show();
+    }
+
+    void changeToUserWindow(Event event) throws Exception {
+        Parent UserWindowWindowParent = FXMLLoader.load(getClass()
+                .getResource("../userWindow/userWindow.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Okno Użytkownika");
+        stage.setScene(new Scene(UserWindowWindowParent));
         stage.show();
     }
 
