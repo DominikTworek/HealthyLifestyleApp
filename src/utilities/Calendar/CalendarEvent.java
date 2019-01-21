@@ -163,6 +163,6 @@ public class CalendarEvent implements Externalizable {
     public String toString() {
         if (getIdEvent() == -1L){
             return title.get();
-        } else return hour+":00 "+title.get();
+        } else return hour.get()+":00 "+title.get();
     }
 }

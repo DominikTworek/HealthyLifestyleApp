@@ -40,7 +40,9 @@ public class CalendarServices {
     }
 
     public static String abbreviateToSize(String s, int limit){
-        return s.substring(0, Math.min(s.length(), limit))+"...";
+        if (s.length()>limit){
+            return s.substring(0, Math.min(s.length(), limit))+"...";
+        }else return s;
     }
 
     public static ObservableList<Integer> getHours() {
@@ -143,7 +145,7 @@ public class CalendarServices {
         }
     }
 
-    public static void insertEvent(Long userID, LocalDate date, int hour, String title, String desc) {
+    public static void insertEvent(Long userID, LocalDate date, int hour, String title, String description) {
         PreparedStatement statement = null;
 
         String sql = "insert into calendarevent(IdEvent, IdUser, day, month, year, hour, title, description) values (NULL,?,?,?,?,?,?,?);";
@@ -155,7 +157,7 @@ public class CalendarServices {
             statement.setInt(4, date.getYear());
             statement.setInt(5, hour);
             statement.setString(6, title);
-            statement.setString(7, title);
+            statement.setString(7, description);
 
             System.out.println(statement.executeUpdate());
 

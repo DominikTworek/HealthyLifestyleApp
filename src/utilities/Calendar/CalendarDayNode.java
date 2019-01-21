@@ -1,13 +1,23 @@
 package utilities.Calendar;
 
+import LoginWindow.LoginController;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import server.CalendarServices;
+import utilities.Calendar.EditWindow.EditWindowController;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 
@@ -21,7 +31,21 @@ public class CalendarDayNode extends AnchorPane {
     private ObservableList<CalendarEvent> events;
 
     private void actionHandle(MouseEvent e){
-        System.out.println("This pane's date is: " + date);
+        FXMLLoader loader = new FXMLLoader(EditWindowController.class.getResource("EditWindow.fxml"));
+        Stage stage = new Stage();
+        try {
+            GridPane pane = loader.load();
+            stage.setScene(new Scene(pane));
+            stage.initOwner(((Node)e.getSource()).getScene().getWindow());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setTitle(date.toString());
+            EditWindowController controller = loader.<EditWindowController>getController();
+            controller.initData(date, events);
+            stage.showAndWait();
+            fill(date);
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 
     private void addDescriptionText(){
@@ -41,7 +65,7 @@ public class CalendarDayNode extends AnchorPane {
         if (displayedEvents > CalendarServices.MAX_DISPLAYED_EVENTS)
             displayedEvents = CalendarServices.MAX_DISPLAYED_EVENTS;
         for (int i = 0; i < displayedEvents; i++) {
-            Text tmp = new Text(CalendarServices.abbreviateToSize(events.get(i).getTitle(), CalendarServices.MAX_DISPLAYED_LEN));
+            Text tmp = new Text(CalendarServices.abbreviateToSize(events.get(i).toString(), CalendarServices.MAX_DISPLAYED_LEN));
             setTopAnchor(tmp, 20.0+i*20.0);
             setLeftAnchor(tmp, 5.0);
             getChildren().add(tmp);
@@ -61,7 +85,7 @@ public class CalendarDayNode extends AnchorPane {
             getChildren().clear();
         }
         try {
-            events = CalendarServices.getEventsForUserDate(1L, date);
+            events = CalendarServices.getEventsForUserDate(LoginController.getIDuser(), date);
             if (events == null){
                 System.out.println("Pusta lista!");
             }

@@ -92,7 +92,7 @@ public class LoginController implements Initializable {
                     e.printStackTrace();
                 }
             }
-            if (rola.equals("user")){
+            if (rola.equals("customer")){
                 try {
                     changeToUserWindow(event);
                 } catch (Exception e){
