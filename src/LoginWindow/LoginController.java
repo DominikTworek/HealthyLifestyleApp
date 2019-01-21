@@ -82,12 +82,20 @@ public class LoginController implements Initializable {
         }
         else if(!password.equals(getPassword)){
             passwordField.getStyleClass().add("incorrectly");
-        }else if(login.equals(getLogin) && password.equals(getPassword)){
+        }
+        else if(login.equals(getLogin) && password.equals(getPassword)){
             String rola = userService.getRola(getLogin, getPassword);
             IDuser = userService.getID(getLogin, getPassword);
             if(rola.equals("admin")) {
                 try {
                     changeToAdminWindow(event);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if(rola.equals("trainer")){
+                try {
+                    changeToTrainerWindow(event);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -154,6 +162,14 @@ public class LoginController implements Initializable {
                 .getResource("../adminWindow/adminWindow.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Okno Administratora");
+        stage.setScene(new Scene(AdminWindowWindowParent));
+        stage.show();
+    }
+
+    void changeToTrainerWindow(Event event) throws Exception {
+        Parent AdminWindowWindowParent = FXMLLoader.load(getClass().getResource("../trainerWindow/TrainerWindow.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Okno Trenera");
         stage.setScene(new Scene(AdminWindowWindowParent));
         stage.show();
     }
