@@ -68,6 +68,7 @@ public class CalendarDayNode extends AnchorPane {
             Text tmp = new Text(CalendarServices.abbreviateToSize(events.get(i).toString(), CalendarServices.MAX_DISPLAYED_LEN));
             setTopAnchor(tmp, 20.0+i*20.0);
             setLeftAnchor(tmp, 5.0);
+            tmp.setFill(Color.valueOf("#BABABA"));
             getChildren().add(tmp);
         }
     }

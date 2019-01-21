@@ -174,5 +174,7 @@
     -fx-background-radius: 1;
 }
 
-
+#title{
+    -fx-text-fill:  -fx-glowny;
+}
 

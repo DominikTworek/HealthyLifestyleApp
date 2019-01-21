@@ -98,7 +98,7 @@ public class CalendarServices {
     public static void deleteEvent(Long eventID) {
         PreparedStatement statement = null;
 
-        String sql = "delete * from calendarevent where IdEvent=?;";
+        String sql = "delete from calendarevent where IdEvent=?;";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
             statement.setLong(1, eventID);

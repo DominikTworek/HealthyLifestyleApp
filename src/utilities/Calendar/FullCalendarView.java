@@ -6,6 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.time.LocalDate;
@@ -40,13 +41,14 @@ public class FullCalendarView {
             }
         }
         // Days of the week labels
-        Text[] dayNames = new Text[]{ new Text("Sunday"), new Text("Monday"), new Text("Tuesday"),
-                new Text("Wednesday"), new Text("Thursday"), new Text("Friday"),
-                new Text("Saturday") };
+        Text[] dayNames = new Text[]{ new Text("Niedziela"), new Text("Poniedziałek"), new Text("Wtorek"),
+                new Text("Środa"), new Text("Czwartek"), new Text("Piątek"),
+                new Text("Sobota") };
         GridPane dayLabels = new GridPane();
         dayLabels.setPrefWidth(600);
         Integer col = 0;
         for (Text txt : dayNames) {
+            txt.setFill(Color.valueOf("#BABABA"));
             AnchorPane ap = new AnchorPane();
             ap.setPrefSize(200, 10);
             ap.setBottomAnchor(txt, 5.0);
@@ -55,9 +57,34 @@ public class FullCalendarView {
         }
         // Create calendarTitle and buttons to change current month
         calendarTitle = new Text();
+        calendarTitle.setFill(Color.valueOf("#BABABA"));
         Button previousMonth = new Button("<<");
+        previousMonth.setStyle("-fx-background-color: #090a0c,\n" +
+                "    linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n" +
+                "    linear-gradient(#20262b, #191d22),\n" +
+                "    radial-gradient(center 50% 0%, radius 100%, rgba(114, 131, 148, 0.9), rgba(255, 255, 255, 0));\n" +
+                "    -fx-background-radius: 5, 4, 3, 5;\n" +
+                "    -fx-background-insets: 0, 1, 2, 0;\n" +
+                "    -fx-text-fill: white;\n" +
+                "    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);\n" +
+                "    -fx-font-family: \"Arial\";\n" +
+                "    -fx-text-fill: linear-gradient(white, #d0d0d0);\n" +
+                "    -fx-font-size: 12px;\n" +
+                "    -fx-padding: 10 20 10 20;");
         previousMonth.setOnAction(e -> previousMonth());
         Button nextMonth = new Button(">>");
+        nextMonth.setStyle("-fx-background-color: #090a0c,\n" +
+                "    linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n" +
+                "    linear-gradient(#20262b, #191d22),\n" +
+                "    radial-gradient(center 50% 0%, radius 100%, rgba(114, 131, 148, 0.9), rgba(255, 255, 255, 0));\n" +
+                "    -fx-background-radius: 5, 4, 3, 5;\n" +
+                "    -fx-background-insets: 0, 1, 2, 0;\n" +
+                "    -fx-text-fill: white;\n" +
+                "    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);\n" +
+                "    -fx-font-family: \"Arial\";\n" +
+                "    -fx-text-fill: linear-gradient(white, #d0d0d0);\n" +
+                "    -fx-font-size: 12px;\n" +
+                "    -fx-padding: 10 20 10 20;");
         nextMonth.setOnAction(e -> nextMonth());
         HBox titleBar = new HBox(previousMonth, calendarTitle, nextMonth);
         titleBar.setAlignment(Pos.BASELINE_CENTER);
@@ -84,7 +111,7 @@ public class FullCalendarView {
             calendarDate = calendarDate.plusDays(1);
         }
         // Change the title of the calendar
-        calendarTitle.setText(yearMonth.getMonth().toString() + " " + String.valueOf(yearMonth.getYear()));
+        calendarTitle.setText("\t"+yearMonth.getMonthValue() + "." + String.valueOf(yearMonth.getYear())+"\t");
     }
 
     /**
