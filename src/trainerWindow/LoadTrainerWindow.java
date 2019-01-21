@@ -24,10 +24,6 @@ public class LoadTrainerWindow extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TrainerWindow.fxml"));
 
         Parent root = loader.load();
-
-        TrainerController trainerController = loader.getController();
-        
-        trainerController.setUser(this);
         
         primaryStage.setTitle("Trainer");
         primaryStage.setScene(new Scene(root));
