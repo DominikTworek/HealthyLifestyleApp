@@ -173,9 +173,12 @@ public class LoginController implements Initializable {
 
 
     void changeToTrainerWindow(Event event) throws Exception {
-        Parent AdminWindowWindowParent = FXMLLoader.load(getClass().getResource("../trainerWindow/TrainerWindow.fxml"));
+        Parent AdminWindowWindowParent = FXMLLoader.load(getClass()
+                .getResource("../trainerWindow/TrainerWindow.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle("Okno Trenera");
+        stage.setScene(new Scene(AdminWindowWindowParent));
+        stage.show();
     }
 
     void changeToUserWindow(Event event) throws Exception {
