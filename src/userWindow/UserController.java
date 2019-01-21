@@ -1,5 +1,7 @@
 package userWindow;
 
+import LoginWindow.LoadLoginWindow;
+import LoginWindow.LoginController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -11,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import utilities.UserService;
 import windowFunctions.Functions;
 
 public class UserController extends Functions {
@@ -29,6 +32,10 @@ public class UserController extends Functions {
 
     @FXML
     private VBox drawerVbox;
+
+    private UserService userService = LoadLoginWindow.getUserService();
+
+    private long IDuser = LoginController.getIDuser();
 
     public void initialize() {
         Functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);

@@ -1,5 +1,7 @@
 package trainerWindow;
 
+import LoginWindow.LoadLoginWindow;
+import LoginWindow.LoginController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
@@ -46,9 +48,9 @@ public class TrainerController extends Functions implements Initializable {
     @FXML
     private JFXComboBox<Label> comboBox;
 
-    private LoadTrainerWindow loadTrainerWindow;
+    private UserService userService = LoadLoginWindow.getUserService();
 
-    private UserService userService;
+    private long IDuser = LoginController.getIDuser();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,33 +91,6 @@ public class TrainerController extends Functions implements Initializable {
     public void logout(ActionEvent actionEvent) {
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         stage.close();
-    }
-
-
-    public void setUser(LoadTrainerWindow loadTrainerWindow){
-        this.loadTrainerWindow = loadTrainerWindow;
-        this.userService = loadTrainerWindow.getUserService();
-
-        String sql = "SELECT * FROM user";
-
-
-        comboBox.getItems().add(new Label("elo"));
-        comboBox.setConverter(new StringConverter<Label>() {
-            @Override
-            public String toString(Label object) {
-                return object==null? "" : object.getText();
-            }
-
-            @Override
-            public Label fromString(String string) {
-                return new Label(string);
-            }
-        });
-    }
-
-    void updatecombo(){
-
-
     }
 
 }
