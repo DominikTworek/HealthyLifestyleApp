@@ -12,6 +12,8 @@ public interface UserService extends Remote {
 
     void updateUser(User user) throws RemoteException;
 
+    void updateTrainerProfile(TrainerProfile trainerProfile) throws RemoteException;
+
     void deteleUser(Long IdUser) throws RemoteException;
 
     String getLogin(String Login) throws RemoteException;
@@ -19,6 +21,10 @@ public interface UserService extends Remote {
     String setLogin(Long IdUser) throws RemoteException;
 
     String getFieldFromUser(Long IdUser, String Field) throws RemoteException;
+
+    String getTrainerFieldFromUser(String Field) throws RemoteException;
+
+    String getFieldFromTrainerProfile(Long IdUser, String Field) throws RemoteException;
 
     String getPassword(String Login, String Password) throws RemoteException;
 

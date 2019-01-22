@@ -94,6 +94,32 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     }
 
     @Override
+    public void updateTrainerProfile(TrainerProfile trainerProfile) throws RemoteException {
+        PreparedStatement statement = null;
+        String sql = "update trainer_profile set specjalizacja = ?"
+                +", informacje= ?"
+                +"where id_trainer= ?";
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, trainerProfile.getSpecjalizacja());
+            statement.setString(2, trainerProfile.getInformacje());
+            statement.setLong(3, trainerProfile.getId_trainer());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
     public void deteleUser(Long IdUser) throws RemoteException {
         PreparedStatement statement = null;
 
@@ -163,6 +189,47 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public String getFieldFromUser(Long IdUser, String Field) throws RemoteException {
         PreparedStatement statement = null;
         String sql = "select * from user where IdUser = ?";
+        String field = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setLong(1, IdUser);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                field = result.getString(Field);
+            }
+            return field;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return field;
+        }
+    }
+
+    @Override
+    public String getTrainerFieldFromUser(String Field) throws RemoteException {
+        PreparedStatement statement = null;
+        String sql = "select * from user where Rola = 'trainer' ";
+        String field = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                field = result.getString(Field);
+            }
+            return field;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return field;
+        }
+    }
+
+    @Override
+    public String getFieldFromTrainerProfile(Long IdUser, String Field) throws RemoteException {
+        PreparedStatement statement = null;
+        String sql = "select * from trainer_profile where id_trainer = ?";
         String field = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -545,7 +612,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public TrainerProfile insertTrainerProfile(TrainerProfile trainerProfile) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "insert into user_profile(id_trainer_profile, id_trainer, specjalizacja, informacje) values (NULL, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into trainer_profile(id_trainer_profile, id_trainer, specjalizacja, informacje) values (NULL, ?, ?, ?)";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setLong(1, trainerProfile.getId_trainer());

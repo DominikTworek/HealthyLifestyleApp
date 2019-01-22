@@ -33,7 +33,7 @@
                               <Image url="@../media/zdjecie.png" />
                            </image>
                         </ImageView>
-                        <JFXTextArea layoutX="82.0" layoutY="132.0" text="Informacje o sobie: BRAK" />
+                        <JFXTextArea fx:id="informacje" editable="false" layoutX="82.0" layoutY="132.0" text="Informacje o sobie: BRAK" />
                      </children></AnchorPane>
               </content>
             </Tab>

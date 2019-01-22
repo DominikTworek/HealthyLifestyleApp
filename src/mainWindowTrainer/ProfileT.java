@@ -58,6 +58,9 @@ public class ProfileT implements Initializable {
     private JFXTextField wiekEdit;
 
     @FXML
+    private JFXTextArea informacje;
+
+    @FXML
     private JFXTextArea informacjeEdit;
 
     @FXML
@@ -99,7 +102,28 @@ public class ProfileT implements Initializable {
             imieEdit.setText(userService.getFieldFromUser(IDuser, "Imie"));
             nazwiskoEdit.setText(userService.getFieldFromUser(IDuser, "Nazwisko"));
             wiekEdit.setText(userService.getFieldFromUser(IDuser, "Pesel"));
-            specjalizacjaEdit.getSelectionModel().select(2);
+            String spr_specjalizacji;
+            spr_specjalizacji = userService.getFieldFromTrainerProfile(IDuser, "specjalizacja");
+            if (spr_specjalizacji != null) {
+                if (spr_specjalizacji.equals("Spalanie")) {
+                    specjalizacja.setText("Specjalizacja: " + spr_specjalizacji);
+                    specjalizacjaEdit.getSelectionModel().select(0);
+                } else if (spr_specjalizacji.equals("Budowa")) {
+                    specjalizacja.setText("Specjalizacja: " + spr_specjalizacji);
+                    specjalizacjaEdit.getSelectionModel().select(1);
+                } else {
+                    specjalizacja.setText("Specjalizacja: Brak");
+                    specjalizacjaEdit.getSelectionModel().select(2);
+                }
+                informacje.setText(userService.getFieldFromTrainerProfile(IDuser, "informacje"));
+            }
+            else{
+                specjalizacja.setText("Specjalizacja: Brak");
+                specjalizacjaEdit.getSelectionModel().select(2);
+                informacje.setText("Informacje: brak");
+                informacjeEdit.setText("Informacje: Brak");
+
+            }
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -156,8 +180,13 @@ public class ProfileT implements Initializable {
 
     void loadImage() throws IOException {
         String nazwaZdjecia = userService.getFieldFromUser(IDuser, "Login");
-        Image image1 = new Image(new FileInputStream("src/TrainerImages/" + nazwaZdjecia + ".jpg"));
-        image.setImage(image1);
+        if (Files.exists(Paths.get("src/TrainerImages/" + nazwaZdjecia + ".jpg"))) {
+            Image image1 = new Image(new FileInputStream("src/TrainerImages/" + nazwaZdjecia + ".jpg"));
+            image.setImage(image1);
+        } else {
+            Image image2 = new Image(new FileInputStream("src/TrainerImages/zdjecie.png"));
+            image.setImage(image2);
+        }
     }
 
 
@@ -186,17 +215,21 @@ public class ProfileT implements Initializable {
 
             userService.updateUser(user);
 
+
             TrainerProfile trainerProfile = new TrainerProfile();
 
-            trainerProfile.setId_trainer(Long.valueOf(IDuser));
+            trainerProfile.setId_trainer(IDuser);
             trainerProfile.setSpecjalizacja(specjalizacjaEdit.getValue().toString());
             trainerProfile.setInformacje(informacjeEdit.getText());
-
-            userService.insertTrainerProfile(trainerProfile);
-
+            Long spr = Long.valueOf(userService.getFieldFromTrainerProfile(IDuser, "id_trainer"));
+            if (!spr.equals(IDuser)) {
+                userService.insertTrainerProfile(trainerProfile);
+            } else {
+                userService.updateTrainerProfile(trainerProfile);
+            }
+            System.out.println(trainerProfile);
             setInformation();
-        }
-        else {
+        } else {
             textImage.getStyleClass().add("smalltext_bad");
             textImage.setText("Błąd w edycji. Sprawdź wszystkie pola");
         }
