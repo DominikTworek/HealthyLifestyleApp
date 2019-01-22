@@ -11,12 +11,16 @@ import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import mainWindowTrainer.CalendarTController;
+import mainWindowUser.CalendarUController;
+import utilities.Calendar.FullCalendarView;
 import utilities.UserService;
 import windowFunctions.Functions;
 
@@ -25,6 +29,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.time.YearMonth;
 import java.util.ResourceBundle;
 
 
@@ -84,7 +89,12 @@ public class TrainerController extends Functions implements Initializable {
     }
 
     public void loadCalendar(ActionEvent actionEvent) throws IOException {
-        Functions.loadMainWindow("../mainWindowTrainer/CalendarT.fxml", mainWindow);
+        //Functions.loadMainWindow("../mainWindowTrainer/CalendarT.fxml", mainWindow);
+        FXMLLoader loader = new FXMLLoader(Functions.class.getResource("../mainWindowTrainer/CalendarT.fxml"));
+        AnchorPane change = loader.load();
+        CalendarTController controller = loader.getController();
+        controller.calendarPane.getChildren().add(new FullCalendarView(YearMonth.now()).getView());
+        mainWindow.getChildren().setAll(change);
     }
 
     public void loadMessages(ActionEvent actionEvent) throws IOException {

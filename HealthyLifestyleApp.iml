@@ -10,7 +10,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="fontawesomefx-8.9" level="project" />
-    <orderEntry type="library" exported="" name="jfoenix-9.0.4" level="project" />
     <orderEntry type="library" exported="" name="mysql-connector-java-5.1.47-bin" level="project" />
+    <orderEntry type="library" name="jfoenix-9.0.4" level="project" />
+    <orderEntry type="library" name="javax.mail" level="project" />
   </component>
 </module>
