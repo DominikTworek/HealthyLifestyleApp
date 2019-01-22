@@ -22,9 +22,9 @@ public class CapitalizeServer extends Application {
 
         UserServiceImplements userServiceImplements = new UserServiceImplements();
 
-        UserService userService = (UserService) UnicastRemoteObject.exportObject(userServiceImplements, 0);
+        //UserService userService = (UserService) UnicastRemoteObject.exportObject(userServiceImplements, 0);
 
-        registry.rebind("service", userService);
+        registry.rebind("service", userServiceImplements);
 
         System.out.println("server is running");
 

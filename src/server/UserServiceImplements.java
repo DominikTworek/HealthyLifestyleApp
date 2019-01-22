@@ -6,6 +6,7 @@ import utilities.*;
 
 import java.awt.*;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserServiceImplements implements UserService {
+public class UserServiceImplements extends UnicastRemoteObject implements UserService {
+
+    public UserServiceImplements() throws RemoteException {
+    }
 
     @Override
     public User insertUser(User user) throws RemoteException {
