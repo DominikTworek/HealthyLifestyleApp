@@ -42,4 +42,6 @@ public interface UserService extends Remote {
 
     UserProfile insertUserProfile(UserProfile userProfile) throws RemoteException;
 
+    TrainerProfile insertTrainerProfile(TrainerProfile trainerProfile) throws RemoteException;
+
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -8,6 +9,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="560.0" prefWidth="650.0" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowTrainer.ProfileT">
@@ -37,8 +41,32 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <JFXButton fx:id="addImage" layoutX="260.0" layoutY="374.0" onAction="#addImage" styleClass="menu-button" text="Dodaj Zdjęcie" />
-                        <Text fx:id="textImage" layoutX="306.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <JFXTextField fx:id="imieEdit" alignment="CENTER" layoutX="75.0" layoutY="76.0" prefHeight="25.0" prefWidth="156.0" text="Brak" />
+                        <JFXTextArea layoutX="23.0" layoutY="270.0" text="Informacje o sobie: Brak" wrapText="true" />
+                        <JFXTextField fx:id="nazwiskoEdit" alignment="CENTER" layoutX="75.0" layoutY="126.0" prefHeight="25.0" prefWidth="156.0" text="Brak" />
+                        <JFXTextField fx:id="wiekEdit" alignment="CENTER" layoutX="75.0" layoutY="176.0" prefHeight="25.0" prefWidth="156.0" text="Brak" />
+                        <JFXButton fx:id="addImage" layoutX="113.0" layoutY="466.0" onAction="#addImage" styleClass="menu-button" text="Dodaj Zdjęcie" />
+                        <Text fx:id="textImage" layoutX="238.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="51.0" />
+                        <Text layoutX="245.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDYCJA">
+                           <fill>
+                              <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                 <stops>
+                                    <Stop color="#00d0ff" />
+                                    <Stop color="#004cff" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Text>
+                        <JFXButton layoutX="23.0" layoutY="466.0" onAction="#editButton" styleClass="menu-button" text="Edytuj" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text layoutX="23.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Imie:" />
+                        <Text layoutX="22.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Nazwisko:" />
+                        <Text layoutX="22.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Wiek:" />
+                        <Text layoutX="23.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Specjalizacja:" />
+                        <JFXComboBox fx:id="specjalizacjaEdit" layoutX="97.0" layoutY="233.0" prefHeight="25.0" prefWidth="117.0" stylesheets="@../layout/Dark.css" />
                      </children></AnchorPane>
               </content>
             </Tab>

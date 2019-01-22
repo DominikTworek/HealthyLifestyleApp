@@ -3,6 +3,7 @@ package mainWindowTrainer;
 import LoginWindow.LoadLoginWindow;
 import LoginWindow.LoginController;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,6 +47,18 @@ public class ProfileT implements Initializable {
     private JFXTextField inne;
 
     @FXML
+    private JFXTextField imieEdit;
+
+    @FXML
+    private JFXTextField nazwiskoEdit;
+
+    @FXML
+    private JFXTextField wiekEdit;
+
+    @FXML
+    private JFXComboBox<String> specjalizacjaEdit;
+
+    @FXML
     private JFXButton addImage;
 
     private String tmp = "";
@@ -59,15 +72,24 @@ public class ProfileT implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setComboBox();
         setInformation();
+    }
+
+    void setComboBox(){
+        specjalizacjaEdit.getItems().addAll("Spalanie", "Budowa", "Brak");
     }
 
     void setInformation() {
         try {
-            imie.setText(userService.getFieldFromUser(IDuser, "Imie"));
-            nazwisko.setText(userService.getFieldFromUser(IDuser, "Nazwisko"));
-            wiek.setText(userService.getFieldFromUser(IDuser, "Pesel"));
-            plec.setText(userService.getFieldFromUser(IDuser, "Plec"));
+            imie.setText("Imie: "+userService.getFieldFromUser(IDuser, "Imie"));
+            nazwisko.setText("Nazwisko: "+userService.getFieldFromUser(IDuser, "Nazwisko"));
+            wiek.setText("Wiek: "+userService.getFieldFromUser(IDuser, "Pesel"));
+            plec.setText("Plec: "+userService.getFieldFromUser(IDuser, "Plec"));
+            imieEdit.setText(userService.getFieldFromUser(IDuser, "Imie"));
+            nazwiskoEdit.setText(userService.getFieldFromUser(IDuser, "Nazwisko"));
+            wiekEdit.setText(userService.getFieldFromUser(IDuser, "Pesel"));
+            specjalizacjaEdit.getSelectionModel().select(2);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -126,7 +148,13 @@ public class ProfileT implements Initializable {
         image.setImage(image1);
     }
 
-    void reloadImage(){
-        image.setImage(null);
+    void reloadImage() throws FileNotFoundException {
+        Image image1 = new Image(new FileInputStream("src/TrainerImages/zdjecie.png"));
+        image.setImage(image1);
+    }
+
+    @FXML
+    void editButton(ActionEvent event) {
+
     }
 }

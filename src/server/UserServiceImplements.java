@@ -2,10 +2,7 @@ package server;
 
 import com.jfoenix.controls.JFXComboBox;
 import trainerWindow.TrainerController;
-import utilities.DatabaseConnection;
-import utilities.User;
-import utilities.UserProfile;
-import utilities.UserService;
+import utilities.*;
 
 import java.awt.*;
 import java.rmi.RemoteException;
@@ -525,6 +522,40 @@ public class UserServiceImplements implements UserService {
             }
             result.close();
             return userProfile;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public TrainerProfile insertTrainerProfile(TrainerProfile trainerProfile) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "insert into user_profile(id_trainer_profile, id_trainer, specjalizacja, informacje) values (NULL, ?, ?, ?, ?, ?, ?)";
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setLong(1, trainerProfile.getId_trainer());
+            statement.setString(2, trainerProfile.getSpecjalizacja());
+            statement.setString(3, trainerProfile.getInformacje());
+
+            statement.executeUpdate();
+
+            ResultSet result = statement.getGeneratedKeys();
+            if (result.next()) {
+                trainerProfile.setId_trainer(result.getLong(1));
+            }
+            result.close();
+            return trainerProfile;
 
         } catch (SQLException e) {
             e.printStackTrace();
