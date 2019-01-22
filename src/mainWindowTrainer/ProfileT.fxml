@@ -42,11 +42,10 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <JFXTextField fx:id="imieEdit" alignment="CENTER" layoutX="75.0" layoutY="76.0" prefHeight="25.0" prefWidth="156.0" text="Brak" />
-                        <JFXTextArea layoutX="23.0" layoutY="270.0" text="Informacje o sobie: Brak" wrapText="true" />
+                        <JFXTextArea fx:id="informacjeEdit" layoutX="23.0" layoutY="270.0" text="Informacje o sobie: Brak" wrapText="true" />
                         <JFXTextField fx:id="nazwiskoEdit" alignment="CENTER" layoutX="75.0" layoutY="126.0" prefHeight="25.0" prefWidth="156.0" text="Brak" />
                         <JFXTextField fx:id="wiekEdit" alignment="CENTER" layoutX="75.0" layoutY="176.0" prefHeight="25.0" prefWidth="156.0" text="Brak" />
                         <JFXButton fx:id="addImage" layoutX="113.0" layoutY="466.0" onAction="#addImage" styleClass="menu-button" text="Dodaj Zdjęcie" />
-                        <Text fx:id="textImage" layoutX="238.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="51.0" />
                         <Text layoutX="245.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDYCJA">
                            <fill>
                               <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
@@ -67,6 +66,7 @@
                         <Text layoutX="22.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Wiek:" />
                         <Text layoutX="23.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Specjalizacja:" />
                         <JFXComboBox fx:id="specjalizacjaEdit" layoutX="97.0" layoutY="233.0" prefHeight="25.0" prefWidth="117.0" stylesheets="@../layout/Dark.css" />
+                        <Text fx:id="textImage" layoutX="245.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" wrappingWidth="359.0" />
                      </children></AnchorPane>
               </content>
             </Tab>

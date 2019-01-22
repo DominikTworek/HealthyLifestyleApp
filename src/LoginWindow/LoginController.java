@@ -84,6 +84,8 @@ public class LoginController implements Initializable {
             passwordField.getStyleClass().add("incorrectly");
         }
         else if(login.equals(getLogin) && password.equals(getPassword)){
+            loginField.getStyleClass().remove("incorrectly");
+            passwordField.getStyleClass().remove("incorrectly");
             String rola = userService.getRola(getLogin, getPassword);
             IDuser = userService.getID(getLogin, getPassword);
             if(rola.equals("admin")) {

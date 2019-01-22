@@ -4,6 +4,7 @@ import LoginWindow.LoadLoginWindow;
 import LoginWindow.LoginController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,11 +13,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import utilities.TrainerProfile;
+import utilities.User;
 import utilities.UserService;
 
 import java.io.*;
 import java.net.URL;
-import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -56,6 +58,9 @@ public class ProfileT implements Initializable {
     private JFXTextField wiekEdit;
 
     @FXML
+    private JFXTextArea informacjeEdit;
+
+    @FXML
     private JFXComboBox<String> specjalizacjaEdit;
 
     @FXML
@@ -74,18 +79,23 @@ public class ProfileT implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setComboBox();
         setInformation();
+        try {
+            loadImage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    void setComboBox(){
+    void setComboBox() {
         specjalizacjaEdit.getItems().addAll("Spalanie", "Budowa", "Brak");
     }
 
     void setInformation() {
         try {
-            imie.setText("Imie: "+userService.getFieldFromUser(IDuser, "Imie"));
-            nazwisko.setText("Nazwisko: "+userService.getFieldFromUser(IDuser, "Nazwisko"));
-            wiek.setText("Wiek: "+userService.getFieldFromUser(IDuser, "Pesel"));
-            plec.setText("Plec: "+userService.getFieldFromUser(IDuser, "Plec"));
+            imie.setText("Imie: " + userService.getFieldFromUser(IDuser, "Imie"));
+            nazwisko.setText("Nazwisko: " + userService.getFieldFromUser(IDuser, "Nazwisko"));
+            wiek.setText("Wiek: " + userService.getFieldFromUser(IDuser, "Pesel"));
+            plec.setText("Plec: " + userService.getFieldFromUser(IDuser, "Plec"));
             imieEdit.setText(userService.getFieldFromUser(IDuser, "Imie"));
             nazwiskoEdit.setText(userService.getFieldFromUser(IDuser, "Nazwisko"));
             wiekEdit.setText(userService.getFieldFromUser(IDuser, "Pesel"));
@@ -111,7 +121,6 @@ public class ProfileT implements Initializable {
                 zawiera2 = tmp.contains(jpg);
                 if (zawiera) {
                     try {
-                        reloadImage();
                         Files.copy(Paths.get(tmp), Paths.get("src/TrainerImages/" + nazwaZdjecia + ".png"), StandardCopyOption.REPLACE_EXISTING);
                         textImage.setText("Zdjęcie Dodane");
                         loadImage();
@@ -119,21 +128,24 @@ public class ProfileT implements Initializable {
                         e.printStackTrace();
                     }
                 } else {
+                    textImage.getStyleClass().add("smalltext_bad");
                     textImage.setText("Format akceptowalny zdjęcia to PNG/JPG.");
                 }
                 if (zawiera2) {
                     try {
-                        reloadImage();
-                        Files.copy(Paths.get(tmp), Paths.get("src/TrainerImages/"+nazwaZdjecia + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
+                        textImage.getStyleClass().remove("smalltext_bad");
+                        Files.copy(Paths.get(tmp), Paths.get("src/TrainerImages/" + nazwaZdjecia + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
                         textImage.setText("Zdjęcie Dodane");
                         loadImage();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } else {
+                    textImage.getStyleClass().add("smalltext_bad");
                     textImage.setText("Format akceptowalny zdjęcia to PNG/JPG.");
                 }
             } else {
+                textImage.getStyleClass().add("smalltext_bad");
                 textImage.setText("Błąd w dodawaniu zdjęcia. Dodaj Jeszcze raz.");
             }
         } catch (IOException e1) {
@@ -144,17 +156,50 @@ public class ProfileT implements Initializable {
 
     void loadImage() throws IOException {
         String nazwaZdjecia = userService.getFieldFromUser(IDuser, "Login");
-        Image image1 = new Image(new FileInputStream("src/TrainerImages/"+nazwaZdjecia + ".jpg"));
+        Image image1 = new Image(new FileInputStream("src/TrainerImages/" + nazwaZdjecia + ".jpg"));
         image.setImage(image1);
     }
 
-    void reloadImage() throws FileNotFoundException {
-        Image image1 = new Image(new FileInputStream("src/TrainerImages/zdjecie.png"));
-        image.setImage(image1);
+
+    Boolean checkData() {
+        if (imieEdit.getText().isEmpty() || nazwiskoEdit.getText().isEmpty() || wiekEdit.getText().isEmpty())
+            return false;
+
+        else
+            return true;
     }
 
     @FXML
-    void editButton(ActionEvent event) {
+    void editButton(ActionEvent event) throws RemoteException {
+        if (checkData()) {
+            textImage.getStyleClass().remove("smalltext_bad");
+            textImage.setText("Pomyślnie edytowano dane");
+            User user = new User();
+            user.setIdUser(Long.valueOf(IDuser));
+            user.setLogin(userService.getFieldFromUser(IDuser, "Login"));
+            user.setPassword(userService.getFieldFromUser(IDuser, "Password"));
+            user.setImie(imieEdit.getText());
+            user.setNazwisko(nazwiskoEdit.getText());
+            user.setPlec(userService.getFieldFromUser(IDuser, "Plec"));
+            user.setPesel(wiekEdit.getText());
+            user.setRola(userService.getFieldFromUser(IDuser, "Rola"));
+
+            userService.updateUser(user);
+
+            TrainerProfile trainerProfile = new TrainerProfile();
+
+            trainerProfile.setId_trainer(Long.valueOf(IDuser));
+            trainerProfile.setSpecjalizacja(specjalizacjaEdit.getValue().toString());
+            trainerProfile.setInformacje(informacjeEdit.getText());
+
+            userService.insertTrainerProfile(trainerProfile);
+
+            setInformation();
+        }
+        else {
+            textImage.getStyleClass().add("smalltext_bad");
+            textImage.setText("Błąd w edycji. Sprawdź wszystkie pola");
+        }
 
     }
 }

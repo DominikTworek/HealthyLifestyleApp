@@ -35,6 +35,10 @@
     -fx-fill: -fx-tekstniebieski;
 }
 
+.smalltext_bad{
+    -fx-fill: -fx-blad;
+}
+
 .line{
     -fx-fill: -fx-tekstniebieski;
     -fx-stroke: -fx-tekstniebieski;
