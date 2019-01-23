@@ -641,4 +641,63 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
             }
         }
     }
+
+    @Override
+    public Training insertTraining(Training training) throws  RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "insert into training(ID_training, chest, shoulders, biceps, triceps, back, abs, legs, " +
+                "chest_s, shoulders_s, biceps_s, triceps_s, back_s, abs_s, legs_s," +
+                "chest_p, shoulders_p, biceps_p, triceps_p, back_p, abs_p, legs_p, ID_user) " +
+                "values (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, training.getChest());
+            statement.setString(2, training.getShoulders());
+            statement.setString(3, training.getBiceps());
+            statement.setString(4, training.getTriceps());
+            statement.setString(5, training.getBack());
+            statement.setString(6, training.getAbs());
+            statement.setString(7, training.getLegs());
+
+            statement.setInt(8, training.getChest_s());
+            statement.setInt(9, training.getShoulders_s());
+            statement.setInt(10, training.getBiceps_s());
+            statement.setInt(11, training.getTriceps_s());
+            statement.setInt(12, training.getBack_s());
+            statement.setInt(13, training.getAbs_s());
+            statement.setInt(14, training.getLegs_s());
+
+            statement.setInt(15, training.getChest_p());
+            statement.setInt(16, training.getShoulders_p());
+            statement.setInt(17, training.getBiceps_p());
+            statement.setInt(18, training.getTriceps_p());
+            statement.setInt(19, training.getBack_p());
+            statement.setInt(20, training.getAbs_p());
+            statement.setInt(21, training.getLegs_p());
+
+            statement.setLong(22, training.getID_user());
+
+            statement.executeUpdate();
+
+            ResultSet result = statement.getGeneratedKeys();
+            if (result.next()) {
+                training.setID_training(result.getLong(1));
+            }
+            result.close();
+            return training;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
