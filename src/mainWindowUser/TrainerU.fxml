@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowUser.TrainerUController">
    <children>
-      <Text layoutX="39.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Wybierz Trenera" textAlignment="CENTER" wrappingWidth="573.0">
+      <Text layoutX="39.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wybierz Trenera" textAlignment="CENTER" wrappingWidth="573.0">
          <font>
             <Font size="29.0" />
          </font>
+         <fill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#00d0ff" offset="0.007662835249042145" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
       </Text>
-      <JFXComboBox fx:id="trainer" layoutX="298.0" layoutY="126.0" />
-      <JFXButton layoutX="279.0" layoutY="181.0" onAction="#trainerConfirm" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zatwierdź" />
+      <TableView fx:id="tableBody" layoutX="71.0" layoutY="91.0" prefHeight="200.0" prefWidth="77.0">
+        <columns>
+          <TableColumn fx:id="colTrenerBody" prefWidth="75.0" text="Trener" />
+            <TableColumn fx:id="colTrenerBody1" prefWidth="75.0" text="Trener" />
+            <TableColumn fx:id="colTrenerBody11" prefWidth="75.0" text="Trener" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableMental" layoutX="504.0" layoutY="91.0" prefHeight="200.0" prefWidth="77.0">
+         <columns>
+            <TableColumn fx:id="colTrenerMental" prefWidth="75.0" text="Trener" />
+            <TableColumn fx:id="colTrenerMental1" prefWidth="75.0" text="Trener" />
+            <TableColumn fx:id="colTrenerMental11" prefWidth="75.0" text="Trener" />
+         </columns>
+      </TableView>
+      <ImageView fx:id="zdjecie" fitHeight="150.0" fitWidth="200.0" layoutX="226.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXTextField fx:id="imieNazwisko" layoutX="259.0" layoutY="255.0" />
+      <JFXTextArea fx:id="informacje" layoutX="94.0" layoutY="300.0" />
+      <Text layoutX="69.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Budowa Mięśni" />
+      <Text layoutX="496.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Spalanie Tłuszczu" />
+      <JFXButton layoutX="280.0" layoutY="493.0" styleClass="menu-button" text="Zatwierdź" />
+      <Text fx:id="trenerWybrany" layoutX="249.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Masz już wybranego Trenera" visible="false" />
    </children>
    <padding>
       <Insets top="35.0" />

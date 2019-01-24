@@ -44,6 +44,8 @@ public interface UserService extends Remote {
 
     List<User> getAllTrainer() throws RemoteException;
 
+    List<User> getAllTrainerSpecjalist(String Specjalizacja) throws RemoteException;
+
     List<User> getTest() throws RemoteException;
 
     UserProfile insertUserProfile(UserProfile userProfile) throws RemoteException;

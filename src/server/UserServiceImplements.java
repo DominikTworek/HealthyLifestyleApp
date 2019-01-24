@@ -535,6 +535,45 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
         }
     }
 
+    @Override
+    public List<User> getAllTrainerSpecjalist(String Specjalizacja) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "select user.*, trainer_profile.* from user, trainer_profile where rola = 'trainer' and specjalizacja = ? and IdUser=id_trainer";
+
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, Specjalizacja);
+
+            ResultSet result = statement.executeQuery();
+
+            List<User> list = new ArrayList<User>();
+
+            while(result.next()){
+                User user = new User();
+                user.setLogin(result.getString("Login"));
+                user.setImie(result.getString("Imie"));
+                user.setNazwisko(result.getString("Nazwisko"));
+                list.add(user);
+            }
+
+            result.close();
+
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
     public List<User> getTest() throws RemoteException {
         Statement statement = null;
