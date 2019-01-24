@@ -1,19 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" styleClass="root" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowTrainer.TrainingPlanTController">
    <children>
-      <Text layoutX="59.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plan Treningowy" wrappingWidth="533.0">
+      <Text layoutX="155.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konfigurator doboru ćwiczeń">
          <font>
-            <Font size="92.0" />
+            <Font size="27.0" />
          </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
       </Text>
+      <JFXComboBox fx:id="chestComboBox" layoutX="30.0" layoutY="141.0" maxWidth="-Infinity" prefHeight="25.0" prefWidth="135.0" promptText="Wybierz ćwiczenie" />
+      <JFXComboBox fx:id="shouldersComboBox" layoutX="175.0" layoutY="141.0" maxWidth="-Infinity" prefHeight="25.0" prefWidth="135.0" promptText="Wybierz ćwiczenie" />
+      <JFXComboBox fx:id="bicepsComboBox" layoutX="325.0" layoutY="141.0" maxWidth="-Infinity" prefHeight="25.0" prefWidth="135.0" promptText="Wybierz ćwiczenie" />
+      <JFXComboBox fx:id="tricepsComboBox" layoutX="477.0" layoutY="140.0" maxWidth="-Infinity" prefWidth="135.0" promptText="Wybierz ćwiczenie" />
+      <JFXComboBox fx:id="backComboBox" layoutX="78.0" layoutY="340.0" maxWidth="-Infinity" prefHeight="25.0" prefWidth="135.0" promptText="Wybierz ćwiczenie" />
+      <JFXComboBox fx:id="legsComboBox" layoutX="257.0" layoutY="340.0" maxWidth="-Infinity" prefHeight="25.0" prefWidth="135.0" promptText="Wybierz ćwiczenie" />
+      <JFXComboBox fx:id="absComboBox" layoutX="419.0" layoutY="340.0" maxWidth="-Infinity" prefHeight="25.0" prefWidth="135.0" promptText="Wybierz ćwiczenie" />
+      <Text layoutX="225.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Barki" AnchorPane.bottomAnchor="440.482421875">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="35.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klatka piersiowa" AnchorPane.bottomAnchor="439.482421875">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="359.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Biceps" AnchorPane.bottomAnchor="440.482421875">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="510.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Triceps" AnchorPane.bottomAnchor="440.482421875">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <JFXTextField fx:id="chest_pField" alignment="CENTER" layoutX="32.0" layoutY="233.0" promptText="Liczba powtórzeń" />
+      <JFXTextField fx:id="chest_sField" alignment="CENTER" layoutX="32.0" layoutY="183.0" promptText="Liczba serii" />
+      <JFXTextField fx:id="shoulders_sField" alignment="CENTER" layoutX="177.0" layoutY="183.0" promptText="Liczba serii" />
+      <JFXTextField fx:id="shoulders_pField" alignment="CENTER" layoutX="177.0" layoutY="233.0" promptText="Liczba powtórzeń" />
+      <Text layoutX="122.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plecy">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="306.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nogi">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="462.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brzuch">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <JFXTextField fx:id="biceps_sField" alignment="CENTER" layoutX="327.0" layoutY="183.0" promptText="Liczba serii" />
+      <JFXTextField fx:id="biceps_pField" alignment="CENTER" layoutX="327.0" layoutY="233.0" promptText="Liczba powtórzeń" />
+      <JFXTextField fx:id="triceps_sField" alignment="CENTER" layoutX="479.0" layoutY="183.0" promptText="Liczba serii" />
+      <JFXTextField fx:id="triceps_pField" alignment="CENTER" layoutX="479.0" layoutY="233.0" promptText="Liczba powtórzeń" />
+      <JFXTextField fx:id="back_sField" alignment="CENTER" layoutX="75.0" layoutY="376.0" promptText="Liczba serii" />
+      <JFXTextField fx:id="back_pField" alignment="CENTER" layoutX="75.0" layoutY="420.0" promptText="Liczba powtórzeń" />
+      <JFXTextField fx:id="legs_sField" alignment="CENTER" layoutX="258.0" layoutY="376.0" promptText="Liczba serii" />
+      <JFXTextField fx:id="legs_pField" alignment="CENTER" layoutX="258.0" layoutY="420.0" promptText="Liczba powtórzeń" />
+      <JFXTextField fx:id="abs_sField" alignment="CENTER" layoutX="429.0" layoutY="376.0" promptText="Liczba serii" />
+      <JFXTextField fx:id="abs_pField" alignment="CENTER" layoutX="429.0" layoutY="420.0" promptText="Liczba powtórzeń" />
+      <JFXButton fx:id="confirmButton" layoutX="510.0" layoutY="497.0" onAction="#confirmExercises" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zatwierdź" />
    </children>
-   <padding>
-      <Insets top="35.0" />
-   </padding>
 </AnchorPane>
