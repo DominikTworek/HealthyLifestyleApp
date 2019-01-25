@@ -700,4 +700,61 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
             }
         }
     }
+
+    @Override
+    public Training getTrainingByUserId(Long IdUser) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "select * from training where ID_user = ?";
+
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setLong(1, IdUser);
+
+            ResultSet result = statement.executeQuery();
+
+            Training training = null;
+            while(result.next()){
+                training = new Training.Builder()
+                        .Chest(result.getString("chest"))
+                        .Chest_s(result.getInt("chest_s"))
+                        .Chest_p(result.getInt("chest_p"))
+                        .Shoulders(result.getString("shoulders"))
+                        .Shoulders_s(result.getInt("shoulders_s"))
+                        .Shoulders_p(result.getInt("shoulders_p"))
+                        .Biceps(result.getString("biceps"))
+                        .Biceps_s(result.getInt("biceps_s"))
+                        .Biceps_p(result.getInt("biceps_p"))
+                        .Triceps(result.getString("triceps"))
+                        .Triceps_s(result.getInt("triceps_s"))
+                        .Triceps_p(result.getInt("triceps_p"))
+                        .Back(result.getString("back"))
+                        .Back_s(result.getInt("back_s"))
+                        .Back_p(result.getInt("back_p"))
+                        .Abs(result.getString("abs"))
+                        .Abs_s(result.getInt("abs_s"))
+                        .Abs_p(result.getInt("abs_p"))
+                        .Legs(result.getString("legs"))
+                        .Legs_s(result.getInt("legs_s"))
+                        .Legs_p(result.getInt("legs_p"))
+                        .build();
+            }
+
+            result.close();
+
+            if(training!=null) System.out.println(training.getChest());
+            return training;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

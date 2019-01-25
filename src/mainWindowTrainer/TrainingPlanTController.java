@@ -153,14 +153,14 @@ public class TrainingPlanTController implements Initializable {
         chestComboBox.getItems().addAll("Wyciskanie na lawce plaskiej");
         chestComboBox.getItems().addAll("Wyciskanie na lawce skosnej");
         chestComboBox.getItems().addAll("Wyciskanie na lawce plaskiej hantlami");
-        chestComboBox.getItems().addAll("Wyciskanie na lawce skośnej hantlami");
+        chestComboBox.getItems().addAll("Wyciskanie na lawce skosnej hantlami");
         chestComboBox.getItems().addAll("Krzyzowanie linek wyciagu gornego");
         chestComboBox.getItems().addAll("Rozpietki w lezeniu na lawce plaskiej");
 
         shouldersComboBox.getItems().addAll("Wyciskanie sztangi nad glowę");
-        shouldersComboBox.getItems().addAll("Wyciskanie hantli nad glowę");
-        shouldersComboBox.getItems().addAll("Wyciskanie hantli nad glowę siedzac");
-        shouldersComboBox.getItems().addAll("Unoszenie hantli bokiem stojąc");
+        shouldersComboBox.getItems().addAll("Wyciskanie hantli nad glowe");
+        shouldersComboBox.getItems().addAll("Wyciskanie hantli nad glowe siedzac");
+        shouldersComboBox.getItems().addAll("Unoszenie hantli bokiem stojac");
         shouldersComboBox.getItems().addAll("Unoszenie ramion w bok na wyciagu");
         shouldersComboBox.getItems().addAll("Facepull");
         shouldersComboBox.getItems().addAll("Unoszenie bokiem w opadzie tulowia");
@@ -171,7 +171,7 @@ public class TrainingPlanTController implements Initializable {
         absComboBox.getItems().addAll("Allahy");
         absComboBox.getItems().addAll("Hollow body");
 
-        bicepsComboBox.getItems().addAll("Uginanie hantli z supinacją");
+        bicepsComboBox.getItems().addAll("Uginanie hantli z supinacja");
         bicepsComboBox.getItems().addAll("Uginanie hantli mlotkowe");
         bicepsComboBox.getItems().addAll("Uginanie hantli na modlitewniku");
         bicepsComboBox.getItems().addAll("Uginanie hantli sztangi prostej stojac");
