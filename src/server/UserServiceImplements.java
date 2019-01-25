@@ -739,4 +739,143 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
             }
         }
     }
+
+    @Override
+    public Training getTrainingByUserId(Long IdUser) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "select * from training where ID_user = ?";
+
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setLong(1, IdUser);
+
+            ResultSet result = statement.executeQuery();
+
+            Training training = null;
+            while(result.next()){
+                training = new Training.Builder()
+                        .Chest(result.getString("chest"))
+                        .Chest_s(result.getInt("chest_s"))
+                        .Chest_p(result.getInt("chest_p"))
+                        .Shoulders(result.getString("shoulders"))
+                        .Shoulders_s(result.getInt("shoulders_s"))
+                        .Shoulders_p(result.getInt("shoulders_p"))
+                        .Biceps(result.getString("biceps"))
+                        .Biceps_s(result.getInt("biceps_s"))
+                        .Biceps_p(result.getInt("biceps_p"))
+                        .Triceps(result.getString("triceps"))
+                        .Triceps_s(result.getInt("triceps_s"))
+                        .Triceps_p(result.getInt("triceps_p"))
+                        .Back(result.getString("back"))
+                        .Back_s(result.getInt("back_s"))
+                        .Back_p(result.getInt("back_p"))
+                        .Abs(result.getString("abs"))
+                        .Abs_s(result.getInt("abs_s"))
+                        .Abs_p(result.getInt("abs_p"))
+                        .Legs(result.getString("legs"))
+                        .Legs_s(result.getInt("legs_s"))
+                        .Legs_p(result.getInt("legs_p"))
+                        .build();
+            }
+
+            result.close();
+
+            return training;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public Nutrition insertNutrition(Nutrition nutrition) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "insert into nutrition(ID_nutrition, calories, protein, carbs, fat, sugars, saturedfat, unsaturedfat, ID_user) values (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, nutrition.getCalories());
+            statement.setInt(2, nutrition.getProtein());
+            statement.setInt(3, nutrition.getCarbs());
+            statement.setInt(4, nutrition.getFat());
+            statement.setInt(5, nutrition.getSugars());
+            statement.setInt(6, nutrition.getSaturedfat());
+            statement.setInt(7, nutrition.getUnsaturedfat());
+            statement.setLong(8, nutrition.getID_user());
+
+            statement.executeUpdate();
+
+            ResultSet result = statement.getGeneratedKeys();
+            if (result.next())
+                nutrition.setID_user(result.getLong(1));
+
+            result.close();
+            return nutrition;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public Nutrition getNutritionByUserId(Long IdUser) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "select * from nutrition where ID_user = ?";
+
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setLong(1, IdUser);
+
+            ResultSet result = statement.executeQuery();
+
+            Nutrition nutrition = null;
+            while(result.next()){
+               nutrition = new Nutrition();
+               nutrition.setID_nutrition(result.getLong("ID_nutrition"));
+               nutrition.setCalories(result.getInt("calories"));
+               nutrition.setProtein(result.getInt("protein"));
+               nutrition.setCarbs(result.getInt("carbs"));
+               nutrition.setFat(result.getInt("fat"));
+               nutrition.setSugars(result.getInt("sugars"));
+               nutrition.setSaturedfat(result.getInt("saturedfat"));
+               nutrition.setUnsaturedfat(result.getInt("unsaturedfat"));
+               nutrition.setID_user(result.getLong("ID_user"));
+            }
+
+            result.close();
+
+            return nutrition;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
 }

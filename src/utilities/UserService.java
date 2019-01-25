@@ -53,4 +53,10 @@ public interface UserService extends Remote {
     TrainerProfile insertTrainerProfile(TrainerProfile trainerProfile) throws RemoteException;
 
     Training insertTraining(Training training) throws RemoteException;
+
+    Training getTrainingByUserId(Long IdUser) throws RemoteException;
+
+    Nutrition insertNutrition(Nutrition nutrition) throws RemoteException;
+
+    Nutrition getNutritionByUserId(Long IdUser) throws RemoteException;
 }

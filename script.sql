@@ -87,3 +87,16 @@ create table calendarevent
 )
   collate = utf8_polish_ci;
 
+create table nutrition
+(
+  ID_nutrition int auto_increment
+    primary key,
+  calories     int not null,
+  protein      int not null,
+  carbs        int not null,
+  fat          int not null,
+  sugars       int not null,
+  saturedfat   int not null,
+  unsaturedfat int not null,
+  ID_user      int not null
+);
