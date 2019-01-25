@@ -1,5 +1,7 @@
 package mainWindowTrainer;
 
+import LoginWindow.LoadLoginWindow;
+import LoginWindow.LoginController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -7,8 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import utilities.Nutrition;
+import utilities.UserService;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -61,6 +66,8 @@ public class NutrionPlanTController implements Initializable {
 
         @FXML
         private JFXButton calculateButton;
+
+        UserService userService = LoadLoginWindow.getUserService();
 
         Nutrient calculateCalories() {
                 Integer caloriesValue = Integer.parseInt(weightField.getText())*(multipierComboBox.getValue());
@@ -153,5 +160,20 @@ public class NutrionPlanTController implements Initializable {
             }
 
             return true;
+    }
+
+    @FXML
+    void sendToClient() throws RemoteException {
+        Nutrition nutrition = new Nutrition();
+        nutrition.setCalories(Integer.parseInt(caloriesField.getText()));
+        nutrition.setProtein(Integer.parseInt(proteidField.getText()));
+        nutrition.setCarbs(Integer.parseInt(carbohydratesField.getText()));
+        nutrition.setFat(Integer.parseInt(fatField.getText()));
+        nutrition.setSugars(Integer.parseInt(sugarsField.getText()));
+        nutrition.setSaturedfat(Integer.parseInt(saturedField.getText()));
+        nutrition.setUnsaturedfat(Integer.parseInt(unsaturedField.getText()));
+        nutrition.setID_user(6);
+
+        userService.insertNutrition(nutrition);
     }
 }

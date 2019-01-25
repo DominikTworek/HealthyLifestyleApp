@@ -2,8 +2,12 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -12,126 +16,162 @@
 
 <AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" styleClass="root" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowTrainer.NutrionPlanTController">
    <children>
-      <Text layoutX="155.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zapotrzebowanie kaloryczne">
-         <font>
-            <Font size="27.0" />
-         </font>
-         <fill>
-            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
-               <stops>
-                  <Stop color="#00d0ff" />
-                  <Stop color="#004cff" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Text>
-      <JFXTextField fx:id="weightField" alignment="CENTER" layoutX="198.0" layoutY="88.0" prefHeight="25.0" prefWidth="92.0" promptText="Waga klienta" />
-      <JFXComboBox fx:id="multipierComboBox" layoutX="345.0" layoutY="88.0" promptText="Wybierz mnożnik" />
-      <JFXComboBox fx:id="proteinComboBox" layoutX="109.0" layoutY="140.0" prefHeight="25.0" prefWidth="101.0" promptText="Ilość białka [%]" />
-      <JFXComboBox fx:id="carbohydratesComboBox" layoutX="233.0" layoutY="140.0" prefHeight="25.0" prefWidth="155.0" promptText="Ilość węglowodanów [%]" />
-      <JFXComboBox fx:id="fatComboBox" layoutX="412.0" layoutY="140.0" prefHeight="25.0" prefWidth="114.0" promptText="Ilość tłuszczy [%]" />
-      <JFXComboBox fx:id="sugarsComboBox" layoutX="243.0" layoutY="180.0" prefHeight="25.0" prefWidth="114.0" promptText="Ilość cukrów [%]" />
-      <JFXComboBox fx:id="saturedComboBox" layoutX="412.0" layoutY="180.0" prefHeight="25.0" prefWidth="142.0" promptText="Tłuszcze nasycone [%]" />
-      <JFXComboBox fx:id="unsaturedComboBox" layoutX="412.0" layoutY="219.0" prefHeight="25.0" prefWidth="155.0" promptText="Tłuszcze nienasycone [%]" />
-      <Separator layoutX="225.0" layoutY="279.0" opacity="0.15" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-      <Text layoutX="224.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kalorie" AnchorPane.bottomAnchor="242.482421875">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <fill>
-            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
-               <stops>
-                  <Stop color="#00d0ff" />
-                  <Stop color="#004cff" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Text>
-      <Text layoutX="58.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Białko" AnchorPane.bottomAnchor="171.482421875">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <fill>
-            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
-               <stops>
-                  <Stop color="#00d0ff" />
-                  <Stop color="#004cff" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Text>
-      <Text layoutX="28.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Węglowodany" AnchorPane.bottomAnchor="126.482421875">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <fill>
-            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
-               <stops>
-                  <Stop color="#00d0ff" />
-                  <Stop color="#004cff" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Text>
-      <Text layoutX="49.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tłuszcze" AnchorPane.bottomAnchor="81.482421875">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <fill>
-            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
-               <stops>
-                  <Stop color="#00d0ff" />
-                  <Stop color="#004cff" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Text>
-      <JFXTextField fx:id="caloriesField" alignment="CENTER" editable="false" layoutX="293.0" layoutY="293.0" />
-      <JFXTextField fx:id="proteidField" alignment="CENTER" editable="false" layoutX="165.0" layoutY="364.0" />
-      <JFXTextField fx:id="carbohydratesField" alignment="CENTER" editable="false" layoutX="165.0" layoutY="409.0" />
-      <JFXTextField fx:id="fatField" alignment="CENTER" editable="false" layoutX="165.0" layoutY="454.0" />
-      <Text layoutX="325.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cukry">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <fill>
-            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
-               <stops>
-                  <Stop color="#00d0ff" />
-                  <Stop color="#004cff" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Text>
-      <Text layoutX="324.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tłuszcze nasycone">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <fill>
-            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
-               <stops>
-                  <Stop color="#00d0ff" />
-                  <Stop color="#004cff" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Text>
-      <Text layoutX="325.0" layoutY="473.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tłuszcze nienasycone">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <fill>
-            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
-               <stops>
-                  <Stop color="#00d0ff" />
-                  <Stop color="#004cff" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Text>
-      <JFXTextField fx:id="sugarsField" alignment="CENTER" editable="false" layoutX="467.0" layoutY="365.0" />
-      <JFXTextField fx:id="saturedField" alignment="CENTER" editable="false" layoutX="467.0" layoutY="410.0" />
-      <JFXTextField fx:id="unsaturedField" alignment="CENTER" editable="false" layoutX="467.0" layoutY="454.0" />
-      <JFXButton fx:id="calculateButton" layoutX="58.0" layoutY="214.0" onAction="#setTextField" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Oblicz" />
+      <JFXTabPane layoutX="10.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="560.0" prefWidth="627.0">
+         <tabs>
+            <Tab text="Kalkulator">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="134.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zapotrzebowanie kaloryczne">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                           <fill>
+                              <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+                                 <stops>
+                                    <Stop color="#00d0ff" />
+                                    <Stop color="#004cff" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                        </Text>
+                        <JFXTextField fx:id="weightField" alignment="CENTER" layoutX="193.0" layoutY="61.0" prefHeight="25.0" prefWidth="92.0" promptText="Waga klienta" />
+                        <JFXComboBox fx:id="multipierComboBox" layoutX="294.0" layoutY="60.0" promptText="Wybierz mnożnik" />
+                        <JFXComboBox fx:id="proteinComboBox" layoutX="99.0" layoutY="105.0" prefHeight="25.0" prefWidth="101.0" promptText="Ilość białka [%]" />
+                        <JFXComboBox fx:id="carbohydratesComboBox" layoutX="217.0" layoutY="105.0" prefHeight="25.0" prefWidth="155.0" promptText="Ilość węglowodanów [%]" />
+                        <JFXComboBox fx:id="fatComboBox" layoutX="400.0" layoutY="105.0" prefHeight="25.0" prefWidth="114.0" promptText="Ilość tłuszczy [%]" />
+                        <JFXComboBox fx:id="saturedComboBox" layoutX="386.0" layoutY="143.0" prefHeight="25.0" prefWidth="142.0" promptText="Tłuszcze nasycone [%]" />
+                        <JFXComboBox fx:id="unsaturedComboBox" layoutX="382.0" layoutY="184.0" prefHeight="25.0" prefWidth="155.0" promptText="Tłuszcze nienasycone [%]" />
+                        <JFXComboBox fx:id="sugarsComboBox" layoutX="231.0" layoutY="143.0" prefHeight="25.0" prefWidth="114.0" promptText="Ilość cukrów [%]" />
+                        <JFXButton fx:id="calculateButton" layoutX="64.0" layoutY="174.0" onAction="#setTextField" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Oblicz" />
+                        <Text layoutX="204.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kalorie" AnchorPane.bottomAnchor="241.482421875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <fill>
+                              <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+                                 <stops>
+                                    <Stop color="#00d0ff" />
+                                    <Stop color="#004cff" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                        </Text>
+                        <JFXTextField fx:id="caloriesField" alignment="CENTER" editable="false" layoutX="278.0" layoutY="265.0" />
+                        <Separator layoutX="15.0" layoutY="240.0" opacity="0.15" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                        <Text layoutX="50.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Białko" AnchorPane.bottomAnchor="178.482421875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <fill>
+                              <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+                                 <stops>
+                                    <Stop color="#00d0ff" />
+                                    <Stop color="#004cff" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                        </Text>
+                        <JFXTextField fx:id="proteidField" alignment="CENTER" editable="false" layoutX="137.0" layoutY="328.0" />
+                        <JFXTextField fx:id="carbohydratesField" alignment="CENTER" editable="false" layoutX="142.0" layoutY="373.0" />
+                        <JFXTextField fx:id="fatField" alignment="CENTER" editable="false" layoutX="133.0" layoutY="414.0" />
+                        <Text layoutX="24.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Węglowodany" AnchorPane.bottomAnchor="134.482421875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <fill>
+                              <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+                                 <stops>
+                                    <Stop color="#00d0ff" />
+                                    <Stop color="#004cff" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                        </Text>
+                        <Text layoutX="47.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tłuszcze" AnchorPane.bottomAnchor="92.482421875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <fill>
+                              <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+                                 <stops>
+                                    <Stop color="#00d0ff" />
+                                    <Stop color="#004cff" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                        </Text>
+                        <Text layoutX="344.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cukry">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <fill>
+                              <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+                                 <stops>
+                                    <Stop color="#00d0ff" />
+                                    <Stop color="#004cff" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                        </Text>
+                        <Text layoutX="306.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tłuszcze nasycone">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <fill>
+                              <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+                                 <stops>
+                                    <Stop color="#00d0ff" />
+                                    <Stop color="#004cff" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                        </Text>
+                        <Text layoutX="306.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tłuszcze nienasycone">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <fill>
+                              <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+                                 <stops>
+                                    <Stop color="#00d0ff" />
+                                    <Stop color="#004cff" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                        </Text>
+                        <JFXTextField fx:id="sugarsField" alignment="CENTER" editable="false" layoutX="434.0" layoutY="329.0" />
+                        <JFXTextField fx:id="saturedField" alignment="CENTER" editable="false" layoutX="434.0" layoutY="365.0" />
+                        <JFXTextField fx:id="unsaturedField" alignment="CENTER" editable="false" layoutX="447.0" layoutY="404.0" />
+                        <JFXButton layoutX="451.0" layoutY="466.0" onAction="#sendToClient" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Wyślij do klienta" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Produkty">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="32.0" layoutY="26.0" prefHeight="200.0" prefWidth="190.0" AnchorPane.leftAnchor="28.5">
+                          <columns>
+                            <TableColumn prefWidth="190.0" text="Białko" />
+                          </columns>
+                        </TableView>
+                        <TableView layoutX="219.0" layoutY="26.0" prefHeight="200.0" prefWidth="190.0">
+                           <columns>
+                              <TableColumn prefWidth="190.0" text="Węglowodany" />
+                           </columns>
+                        </TableView>
+                        <TableView layoutX="409.0" layoutY="26.0" prefHeight="200.0" prefWidth="190.0" AnchorPane.rightAnchor="28.5">
+                           <columns>
+                              <TableColumn prefWidth="190.0" text="Tłuszcze" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
    </children>
 </AnchorPane>
