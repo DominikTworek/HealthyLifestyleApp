@@ -56,7 +56,6 @@ public class TrainerUController implements Initializable {
         try {
             allTrainer = userService.getAllTrainer();
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 
@@ -112,15 +111,25 @@ public class TrainerUController implements Initializable {
 
     @FXML
     void confirmTrainer() throws RemoteException {
-        User user = userService.getUserById(IDuser);
+        User trainer = userService.getUserById(idTrainer);
+
+        allTrainer = userService.getAllTrainer();
+
+        Iterator<User> iter = allTrainer.iterator();
 
         try {
-            if (user.getIdUser_T() > 0){
-                confirmText.setText("Możesz wybrać tylko jednego trenera!");
-                confirmText.setFill(Color.RED);
-                confirmText.setVisible(true);
-            } else {
-                userService.updateUserT(user, idTrainer);
+            if (iter.hasNext()) {
+                while (iter.hasNext()) {
+                    if (iter.next().getIdUser_U() == IDuser) {
+                        confirmText.setText("Możesz wybrać tylko jednego trenera!");
+                        confirmText.setFill(Color.RED);
+                        confirmText.setVisible(true);
+                        return;
+                    }
+                }
+
+                iter = allTrainer.iterator();
+                userService.updateUserU(trainer, IDuser);
                 confirmText.setVisible(true);
             }
         }catch (NullPointerException e){

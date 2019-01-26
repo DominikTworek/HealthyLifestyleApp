@@ -134,6 +134,7 @@ public class NutrionPlanTController implements Initializable {
     }
 
     void setComboBox(){
+            //UserService userServic
             multipierComboBox.getItems().addAll(31,32,33,34,35);
             proteinComboBox.getItems().addAll(10,15,20,25,30,35,40,45,50,55,60,65,70,75,80);
             carbohydratesComboBox.getItems().addAll(10,15,20,25,30,35,40,45,50,55,60,65,70,75,80);
