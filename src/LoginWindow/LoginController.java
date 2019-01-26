@@ -9,9 +9,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-import RegistryWindow.LoadRegistryWindow;
-
-
 
 import javafx.fxml.FXMLLoader;
 

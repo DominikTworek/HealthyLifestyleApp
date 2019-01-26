@@ -1,5 +1,7 @@
 package utilities;
 
+import oracle.jdbc.OracleDriver;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,11 +14,10 @@ public class DatabaseConnection {
         try {
             if (connection == null || connection.isClosed()) {
                 try {
-                    String DbName = "pip";
                     String User = "root";
                     String Password = "admin";
-                    DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DbName +"?autoReconnect=true&useSSL=false", User, Password);
+                    DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+                    connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", User, Password);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

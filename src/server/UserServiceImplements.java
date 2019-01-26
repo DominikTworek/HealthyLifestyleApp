@@ -1,16 +1,14 @@
 package server;
 
 import com.jfoenix.controls.JFXComboBox;
+import oracle.sql.ROWID;
 import trainerWindow.TrainerController;
 import utilities.*;
 
 import java.awt.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +21,10 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public User insertUser(User user) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "insert into user(IdUser, Login, Password, Imie, Nazwisko, Plec, Pesel, Rola) values (NULL, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into USERS(IDUSER, LOGIN, PASSWORD, IMIE, NAZWISKO, PLEC, PESEL, ROLA) values (STUDENT_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?)";
+        //String sql = "insert into students (STUDENT_ID, LOGIN, PASSWORD, IMIE, NAZWISKO, PLEC, PESEL, ROLA) values (student_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement = DatabaseConnection.getConnection().prepareStatement(sql,new String[] {"iduser"});
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getImie());
@@ -35,6 +34,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
             statement.setString(7, user.getRola());
 
             statement.executeUpdate();
+
 
             ResultSet result = statement.getGeneratedKeys();
             if (result.next()) {
@@ -60,7 +60,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     @Override
     public void updateUser(User user) throws RemoteException {
         PreparedStatement statement = null;
-        String sql = "update user set Login = ?"
+        String sql = "update USERS set Login = ?"
                 +", Password = ?"
                 +", Imie = ?"
                 +", Nazwisko = ?"
@@ -123,7 +123,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public void deteleUser(Long IdUser) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "delete from user where IdUser = ?";
+        String sql = "delete from USERS where IdUser = ?";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
 
@@ -146,7 +146,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
    @Override
     public String getLogin(String Login) throws RemoteException{
         PreparedStatement statement = null;
-        String sql = "select * from user where Login = ?";
+        String sql = "select * from USERS where Login = ?";
        String login = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -167,7 +167,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     @Override
     public String setLogin(Long IdUser) throws RemoteException {
         PreparedStatement statement = null;
-        String sql = "select * from user where IdUser = ?";
+        String sql = "select * from USERS where IdUser = ?";
         String login = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -188,7 +188,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     @Override
     public String getFieldFromUser(Long IdUser, String Field) throws RemoteException {
         PreparedStatement statement = null;
-        String sql = "select * from user where IdUser = ?";
+        String sql = "select * from USERS where IdUser = ?";
         String field = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -209,7 +209,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     @Override
     public String getTrainerFieldFromUser(String Field) throws RemoteException {
         PreparedStatement statement = null;
-        String sql = "select * from user where Rola = 'trainer' ";
+        String sql = "select * from USERS where Rola = 'trainer' ";
         String field = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -250,7 +250,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     @Override
     public String getPassword(String Login, String Password) throws RemoteException {
         PreparedStatement statement = null;
-        String sql = "select * from user where Login = ? and Password = ?";
+        String sql = "select * from USERS where Login = ? and Password = ?";
         String password = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -272,7 +272,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     @Override
     public Long getID(String Login, String Password) throws RemoteException {
         PreparedStatement statement = null;
-        String sql = "select * from user where Login = ? and Password = ?";
+        String sql = "select * from USERS where Login = ? and Password = ?";
         long id = 0;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -294,7 +294,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     @Override
     public String getPesel(String Login, String Pesel) throws RemoteException {
         PreparedStatement statement = null;
-        String sql = "select * from user where Login = ? and Pesel = ?";
+        String sql = "select * from USERS where Login = ? and Pesel = ?";
         String age = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -316,7 +316,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     @Override
     public String getRola(String Login,String Password) throws RemoteException {
         PreparedStatement statement = null;
-        String sql = "select * from user where Login = ? and Password = ?";
+        String sql = "select * from USERS where Login = ? and Password = ?";
         String rola = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -339,7 +339,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public User getUserById(Long IdUser) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "select * from user where IdUser= ?";
+        String sql = "select * from USERS where IdUser= ?";
 
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -377,7 +377,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public User getUser(String Login, String Pesel) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "select * from user where Login= ? and Pesel = ?";
+        String sql = "select * from USERS where Login= ? and Pesel = ?";
 
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -416,7 +416,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public User getTrainerById(Long IdUser) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "select * from user where IdUser= ? and rola = 'trainer'";
+        String sql = "select * from USERS where IdUser= ? and rola = 'trainer'";
 
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -453,7 +453,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public List<User> getAllUser() throws RemoteException {
         Statement statement = null;
 
-        String sql = "select * from user where rola = 'customer'";
+        String sql = "select * from USERS where rola = 'customer'";
 
         try {
             statement = DatabaseConnection.getConnection().createStatement();
@@ -496,7 +496,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public List<User> getAllTrainer() throws RemoteException {
         Statement statement = null;
 
-        String sql = "select * from user where rola = 'trainer'";
+        String sql = "select * from USERS where rola = 'trainer'";
 
         try {
             statement = DatabaseConnection.getConnection().createStatement();
@@ -539,7 +539,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public List<User> getAllTrainerSpecjalist(String Specjalizacja) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "select user.*, trainer_profile.* from user, trainer_profile where rola = 'trainer' and specjalizacja = ? and IdUser=id_trainer";
+        String sql = "select USERS.*, trainer_profile.* from USERS, trainer_profile where rola = 'trainer' and specjalizacja = ? and IdUser=id_trainer";
 
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
@@ -578,7 +578,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public List<User> getTest() throws RemoteException {
         Statement statement = null;
 
-        String sql = "select * from user";
+        String sql = "select * from USERS";
 
         try {
             statement = DatabaseConnection.getConnection().createStatement();
@@ -614,9 +614,9 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public UserProfile insertUserProfile(UserProfile userProfile) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "insert into user_profile(ID, USER_ID, height, weight, neat, goal, other) values (NULL, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into user_profile(ID, USER_ID, height, weight, neat, goal, other) values (USER_PROFILE_SEQ.nextval, ?, ?, ?, ?, ?, ?)";
         try {
-            statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement = DatabaseConnection.getConnection().prepareStatement(sql, new String[]{"ID"});
             statement.setLong(1, userProfile.getUSER_ID());
             statement.setString(2, userProfile.getHeight());
             statement.setString(3, userProfile.getWeight());
@@ -651,9 +651,9 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public TrainerProfile insertTrainerProfile(TrainerProfile trainerProfile) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "insert into trainer_profile(id_trainer_profile, id_trainer, specjalizacja, informacje) values (NULL, ?, ?, ?)";
+        String sql = "insert into trainer_profile(id_trainer_profile, id_trainer, specjalizacja, informacje) values (TRAINER_PROFILE_SEQ.nextval, ?, ?, ?)";
         try {
-            statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement = DatabaseConnection.getConnection().prepareStatement(sql, new String[]{"id_trainer_profile"});
             statement.setLong(1, trainerProfile.getId_trainer());
             statement.setString(2, trainerProfile.getSpecjalizacja());
             statement.setString(3, trainerProfile.getInformacje());
@@ -688,9 +688,9 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
         String sql = "insert into training(ID_training, chest, shoulders, biceps, triceps, back, abs, legs, " +
                 "chest_s, shoulders_s, biceps_s, triceps_s, back_s, abs_s, legs_s," +
                 "chest_p, shoulders_p, biceps_p, triceps_p, back_p, abs_p, legs_p, ID_user) " +
-                "values (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "values (TRAINING_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement = DatabaseConnection.getConnection().prepareStatement(sql, new String[]{"id_training"});
             statement.setString(1, training.getChest());
             statement.setString(2, training.getShoulders());
             statement.setString(3, training.getBiceps());
@@ -800,9 +800,9 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public Nutrition insertNutrition(Nutrition nutrition) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "insert into nutrition(ID_nutrition, calories, protein, carbs, fat, sugars, saturedfat, unsaturedfat, ID_user) values (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into nutrition(ID_nutrition, calories, protein, carbs, fat, sugars, saturedfat, unsaturedfat, ID_user) values (NUTRITION_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            statement = DatabaseConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement = DatabaseConnection.getConnection().prepareStatement(sql, new String[]{"ID_nutrition"});
             statement.setInt(1, nutrition.getCalories());
             statement.setInt(2, nutrition.getProtein());
             statement.setInt(3, nutrition.getCarbs());
