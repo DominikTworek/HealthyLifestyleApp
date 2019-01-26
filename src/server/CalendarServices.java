@@ -56,7 +56,7 @@ public class CalendarServices {
     public static ObservableList<CalendarEvent> getEventsForUserDate(Long userID, LocalDate date) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "select * from calendarevent where IdUser=? and day=? and month=? and year=?;";
+        String sql = "select * from CALENDAREVENT where IdUser=? and day=? and month=? and year=?";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
             statement.setLong(1, userID);
@@ -98,7 +98,7 @@ public class CalendarServices {
     public static void deleteEvent(Long eventID) {
         PreparedStatement statement = null;
 
-        String sql = "delete from calendarevent where IdEvent=?;";
+        String sql = "delete from CALENDAREVENT where IdEvent=?";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
             statement.setLong(1, eventID);
@@ -121,7 +121,7 @@ public class CalendarServices {
 
     public static void updateEvent(Long eventID, String title, String description, int hour) {
         PreparedStatement statement = null;
-        String sql = "update calendarevent set hour=?, title=?, description=? where IdEvent=?;";
+        String sql = "update CALENDAREVENT set hour=?, title=?, description=? where IdEvent=?";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
             statement.setInt(1, hour);
@@ -148,7 +148,7 @@ public class CalendarServices {
     public static void insertEvent(Long userID, LocalDate date, int hour, String title, String description) {
         PreparedStatement statement = null;
 
-        String sql = "insert into calendarevent(IdEvent, IdUser, day, month, year, hour, title, description) values (NULL,?,?,?,?,?,?,?);";
+        String sql = "insert into CALENDAREVENT(IdEvent, IdUser, day, month, year, hour, title, description) values (CALENDAREVENT_SEQ.nextval,?,?,?,?,?,?,?)";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
             statement.setLong(1, userID);

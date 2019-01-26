@@ -21,7 +21,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     public User insertUser(User user) throws RemoteException {
         PreparedStatement statement = null;
 
-        String sql = "insert into USERS(IDUSER, LOGIN, PASSWORD, IMIE, NAZWISKO, PLEC, PESEL, ROLA) values (STUDENT_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into USERS(IDUSER, LOGIN, PASSWORD, IMIE, NAZWISKO, PLEC, PESEL, ROLA) values (USERS_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?)";
         //String sql = "insert into students (STUDENT_ID, LOGIN, PASSWORD, IMIE, NAZWISKO, PLEC, PESEL, ROLA) values (student_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql,new String[] {"iduser"});
