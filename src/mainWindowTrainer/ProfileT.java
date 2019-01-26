@@ -221,7 +221,15 @@ public class ProfileT implements Initializable {
             trainerProfile.setId_trainer(IDuser);
             trainerProfile.setSpecjalizacja(specjalizacjaEdit.getValue().toString());
             trainerProfile.setInformacje(informacjeEdit.getText());
-            Long spr = Long.valueOf(userService.getFieldFromTrainerProfile(IDuser, "id_trainer"));
+
+            Long spr;
+            try {
+                spr = Long.valueOf(userService.getFieldFromTrainerProfile(IDuser, "id_trainer"));
+            }catch (NumberFormatException e){
+                userService.insertTrainerProfile(trainerProfile);
+                spr = Long.valueOf(userService.getFieldFromTrainerProfile(IDuser, "id_trainer"));
+            }
+
             if (!spr.equals(IDuser)) {
                 userService.insertTrainerProfile(trainerProfile);
             } else {

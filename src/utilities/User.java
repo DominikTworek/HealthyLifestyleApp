@@ -16,6 +16,19 @@ public class User implements Externalizable {
     private final StringProperty Plec = new SimpleStringProperty();
     private final StringProperty Pesel = new SimpleStringProperty();
     private final StringProperty Rola = new SimpleStringProperty();
+    private final LongProperty IdUser_T = new SimpleLongProperty();
+
+    public long getIdUser_T() {
+        return IdUser_T.get();
+    }
+
+    public LongProperty idUser_TProperty() {
+        return IdUser_T;
+    }
+
+    public void setIdUser_T(long idUser_T) {
+        this.IdUser_T.set(idUser_T);
+    }
 
     public String getRola() {
         return Rola.get();
@@ -150,8 +163,7 @@ public class User implements Externalizable {
         out.writeObject(getPlec());
         out.writeObject(getPesel());
         out.writeObject(getRola());
-
-
+        out.writeLong(getIdUser_T());
     }
 
     @Override
@@ -164,5 +176,6 @@ public class User implements Externalizable {
         setPlec((String) in.readObject());
         setPesel((String) in.readObject());
         setRola((String) in.readObject());
+        setIdUser_T(in.readLong());
     }
 }

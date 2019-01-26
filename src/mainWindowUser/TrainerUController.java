@@ -2,123 +2,131 @@ package mainWindowUser;
 
 import LoginWindow.LoadLoginWindow;
 import LoginWindow.LoginController;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import utilities.User;
 import utilities.UserService;
 
-import javax.swing.*;
 import java.net.URL;
 import java.rmi.RemoteException;
-import java.sql.ResultSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TrainerUController implements Initializable {
 
+    @FXML
+    private JFXTextField plec;
 
     @FXML
-    private TableView<User> tableBody;
+    private JFXTextField imie;
 
     @FXML
-    private TableColumn<User, String> colTrenerBody;
+    private JFXTextField nazwisko;
 
     @FXML
-    private TableColumn<User, String> colTrenerBody1;
+    private JFXTextField wiek;
 
     @FXML
-    private TableColumn<User, String> colTrenerBody11;
+    private JFXTextField specjalizacja;
 
     @FXML
-    private TableView<User> tableMental;
+    private JFXTextField inne;
 
     @FXML
-    private TableColumn<User, String> colTrenerMental;
-
-    @FXML
-    private TableColumn<User, String> colTrenerMental1;
-
-    @FXML
-    private TableColumn<User, String> colTrenerMental11;
-
-    @FXML
-    private ImageView zdjecie;
-
-    @FXML
-    private JFXTextField imieNazwisko;
+    private ImageView image;
 
     @FXML
     private JFXTextArea informacje;
 
     @FXML
-    private Text trenerWybrany;
-
-    private UserService userService = LoadLoginWindow.getUserService();
+    private Text confirmText;
 
     private Long IDuser = LoginController.getIDuser();
 
+    private UserService userService = LoadLoginWindow.getUserService();
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        setCollvalue();
-        checkTable();
-
-    }
-
-    @FXML
-    void trainerConfirm(ActionEvent event) {
-    }
-
-    void setCollvalue(){
-        ScrollPane sp = new ScrollPane(tableBody);
-        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        ScrollPane sp2 = new ScrollPane(tableMental);
-        sp2.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        colTrenerBody.setCellValueFactory(new PropertyValueFactory<User, String>("Login"));
-        colTrenerBody1.setCellValueFactory(new PropertyValueFactory<User, String>("Imie"));
-        colTrenerBody11.setCellValueFactory(new PropertyValueFactory<User, String>("Nazwisko"));
-        colTrenerMental.setCellValueFactory( new PropertyValueFactory<User, String>("Login"));
-        colTrenerMental1.setCellValueFactory( new PropertyValueFactory<User, String>("Imie"));
-        colTrenerMental11.setCellValueFactory( new PropertyValueFactory<User, String>("Nazwisko"));
-        dataBaseGetTrainers();
-    }
-
-    void dataBaseGetTrainers(){
+    List<User> allTrainer;
+    {
         try {
-                tableBody.getItems().setAll(userService.getAllTrainerSpecjalist("Budowa"));
-                tableMental.getItems().setAll(userService.getAllTrainerSpecjalist("Spalanie"));
+            allTrainer = userService.getAllTrainer();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
-    void checkTable(){
-        tableBody.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
-            @Override
-            public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
-                tableMental.setDisable(true);
-                imieNazwisko.setText(newValue.getImie()+" "+newValue.getNazwisko());
-            }
-        });
-        tableMental.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
-            @Override
-            public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
-                tableBody.setDisable(true);
-                imieNazwisko.setText(newValue.getImie()+" "+newValue.getNazwisko());
-            }
-        });
+    Iterator<User> iterator = allTrainer.iterator();
+
+    Long idTrainer;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        iterableTrainer();
     }
 
+    @FXML
+    void iterableTrainer(){
+        if(iterator.hasNext()){
+            setTrainer(iterator.next().getIdUser());
+        }
+        else {
+            iterator = allTrainer.iterator();
+            if(iterator.hasNext()){
+                setTrainer(iterator.next().getIdUser());
+            }
+        }
+    }
 
+    void setTrainer(Long TrainerID){
+            try {
+                idTrainer = TrainerID;
+                imie.setText("Imie: " + userService.getFieldFromUser(TrainerID, "Imie"));
+                nazwisko.setText("Nazwisko: " + userService.getFieldFromUser(TrainerID, "Nazwisko"));
+                wiek.setText("Wiek: " + userService.getFieldFromUser(TrainerID, "Pesel"));
+                plec.setText("Plec: " + userService.getFieldFromUser(TrainerID, "Plec"));
+                String spr_specjalizacji;
+                spr_specjalizacji = userService.getFieldFromTrainerProfile(TrainerID, "specjalizacja");
+                if (spr_specjalizacji != null) {
+                    if (spr_specjalizacji.equals("Spalanie")) {
+                        specjalizacja.setText("Specjalizacja: " + spr_specjalizacji);
+                    } else if (spr_specjalizacji.equals("Budowa")) {
+                        specjalizacja.setText("Specjalizacja: " + spr_specjalizacji);
+                    } else {
+                        specjalizacja.setText("Specjalizacja: Brak");
+                    }
+                    informacje.setText(userService.getFieldFromTrainerProfile(TrainerID, "informacje"));
+                }
+                else{
+                    specjalizacja.setText("Specjalizacja: Brak");
+                    informacje.setText("Informacje: brak");
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+    }
+
+    @FXML
+    void confirmTrainer() throws RemoteException {
+        User user = userService.getUserById(IDuser);
+
+        try {
+            if (user.getIdUser_T() > 0){
+                confirmText.setText("Możesz wybrać tylko jednego trenera!");
+                confirmText.setFill(Color.RED);
+                confirmText.setVisible(true);
+            } else {
+                userService.updateUserT(user, idTrainer);
+                confirmText.setVisible(true);
+            }
+        }catch (NullPointerException e){
+            confirmText.setVisible(false);
+        }
+
+     }
 }
+

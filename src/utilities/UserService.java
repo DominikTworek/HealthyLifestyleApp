@@ -59,4 +59,6 @@ public interface UserService extends Remote {
     Nutrition insertNutrition(Nutrition nutrition) throws RemoteException;
 
     Nutrition getNutritionByUserId(Long IdUser) throws RemoteException;
+
+    void updateUserT(User user, Long TrainerID) throws RemoteException;
 }

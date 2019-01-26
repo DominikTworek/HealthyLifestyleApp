@@ -4,8 +4,7 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.RadialGradient?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowUser.TrainerUController">
+<AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowUser.TrainerUController">
    <children>
       <Text layoutX="39.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wybierz Trenera" textAlignment="CENTER" wrappingWidth="573.0">
          <font>
@@ -29,27 +28,21 @@
             </RadialGradient>
          </fill>
       </Text>
-      <TableView fx:id="tableBody" layoutX="71.0" layoutY="91.0" prefHeight="200.0" prefWidth="77.0">
-        <columns>
-          <TableColumn fx:id="colTrenerBody" prefWidth="75.0" text="Trener" />
-            <TableColumn fx:id="colTrenerBody1" prefWidth="75.0" text="Trener" />
-            <TableColumn fx:id="colTrenerBody11" prefWidth="75.0" text="Trener" />
-        </columns>
-      </TableView>
-      <TableView fx:id="tableMental" layoutX="504.0" layoutY="91.0" prefHeight="200.0" prefWidth="77.0">
-         <columns>
-            <TableColumn fx:id="colTrenerMental" prefWidth="75.0" text="Trener" />
-            <TableColumn fx:id="colTrenerMental1" prefWidth="75.0" text="Trener" />
-            <TableColumn fx:id="colTrenerMental11" prefWidth="75.0" text="Trener" />
-         </columns>
-      </TableView>
-      <ImageView fx:id="zdjecie" fitHeight="150.0" fitWidth="200.0" layoutX="226.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXTextField fx:id="imieNazwisko" layoutX="259.0" layoutY="255.0" />
-      <JFXTextArea fx:id="informacje" layoutX="94.0" layoutY="300.0" />
-      <Text layoutX="69.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Budowa Mięśni" />
-      <Text layoutX="496.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Spalanie Tłuszczu" />
-      <JFXButton layoutX="280.0" layoutY="493.0" styleClass="menu-button" text="Zatwierdź" />
-      <Text fx:id="trenerWybrany" layoutX="249.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smalltext" text="Masz już wybranego Trenera" visible="false" />
+      <JFXButton layoutX="505.0" layoutY="491.0" onAction="#iterableTrainer" styleClass="menu-button" text="Następny" />
+      <JFXButton layoutX="46.0" layoutY="491.0" onAction="#confirmTrainer" styleClass="menu-button" text="Zatwierdź" />
+      <JFXTextField fx:id="plec" alignment="CENTER" editable="false" layoutX="90.0" layoutY="165.0" prefHeight="25.0" prefWidth="156.0" text="Płeć: Brak" />
+      <JFXTextField fx:id="imie" alignment="CENTER" editable="false" layoutX="90.0" layoutY="103.0" prefHeight="25.0" prefWidth="156.0" text="Imie: Brak" />
+      <JFXTextField fx:id="nazwisko" alignment="CENTER" editable="false" layoutX="246.0" layoutY="103.0" prefHeight="25.0" prefWidth="156.0" text="Nazwisko: Brak" />
+      <JFXTextField fx:id="wiek" alignment="CENTER" editable="false" layoutX="402.0" layoutY="103.0" prefHeight="25.0" prefWidth="156.0" text="Wiek: Brak" />
+      <JFXTextField fx:id="specjalizacja" alignment="CENTER" editable="false" layoutX="246.0" layoutY="165.0" prefHeight="25.0" prefWidth="156.0" text="Specjalizacja: Brak" />
+      <JFXTextField fx:id="inne" alignment="CENTER" editable="false" layoutX="402.0" layoutY="165.0" prefHeight="25.0" prefWidth="156.0" text="Inne: Brak" />
+      <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" layoutX="224.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../media/zdjecie.png" />
+         </image>
+      </ImageView>
+      <JFXTextArea fx:id="informacje" editable="false" layoutX="92.0" layoutY="223.0" prefHeight="98.0" prefWidth="464.0" text="Informacje o sobie: BRAK" />
+      <Text fx:id="confirmText" fill="#0fe80c" layoutX="265.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trener został wybrany." textAlignment="CENTER" visible="false" />
    </children>
    <padding>
       <Insets top="35.0" />

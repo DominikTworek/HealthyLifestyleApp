@@ -358,6 +358,8 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
                 user.setPlec(result.getString("Plec"));
                 user.setPesel(result.getString("Pesel"));
                 user.setRola(result.getString("rola"));
+                if(result.getLong("IDUSER_T")>0)
+                    user.setIdUser_T(result.getLong("IDUSER_T"));
             }
             result.close();
             return user;
@@ -877,5 +879,41 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
         }
     }
 
+    @Override
+    public void updateUserT(User user, Long TrainerID) throws RemoteException {
+        PreparedStatement statement = null;
+        String sql = "update USERS set Login = ?"
+                +", Password = ?"
+                +", Imie = ?"
+                +", Nazwisko = ?"
+                +", Plec = ?"
+                +", Pesel = ?"
+                +", rola = ?"
+                +", IDUSER_T = ?"
+                +"where IdUser= ?";
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getImie());
+            statement.setString(4, user.getNazwisko());
+            statement.setString(5, user.getPlec());
+            statement.setString(6, user.getPesel());
+            statement.setString(7, user.getRola());
+            statement.setLong(8,TrainerID);
+            statement.setLong(9, user.getIdUser());
 
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
