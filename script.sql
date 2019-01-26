@@ -1,102 +1,185 @@
-create table user
+DROP TABLE CALENDAREVENT;
+DROP TABLE NUTRITION;
+DROP TABLE TRAINING;
+DROP TABLE USER_PROFILE;
+DROP TABLE TRAINER_PROFILE;
+DROP TABLE USERS;
+
+DROP SEQUENCE CALENDAREVENT_SEQ;
+DROP SEQUENCE NUTRITION_SEQ;
+DROP SEQUENCE TRAINING_SEQ;
+DROP SEQUENCE USER_PROFILE_SEQ;
+DROP SEQUENCE TRAINER_PROFILE_SEQ;
+DROP SEQUENCE USERS_SEQ;
+
+create table users
 (
-  IdUser   int auto_increment
-    primary key,
-  Login    varchar(255) not null,
-  Password varchar(255) not null,
-  Imie     varchar(255) not null,
-  Nazwisko varchar(255) not null,
-  Plec     varchar(255) not null,
-  Pesel    varchar(255) not null,
-  Rola     varchar(255) not null
+  IdUser   number(10) 
+  primary key,
+  Login    varchar2(255) not null,
+  Password varchar2(255) not null,
+  Imie     varchar2(255) not null,
+  Nazwisko varchar2(255) not null,
+  Plec     varchar2(255) not null,
+  Pesel    varchar2(255) not null,
+  Rola     varchar2(255) not null,
+  IDUSER_T NUMBER
 );
+
+-- Generate ID using sequence and trigger
+create sequence users_seq start with 1 increment by 1;
+
+create or replace trigger users_seq_tr
+ before insert on users for each row
+ when (new.IdUser is null)
+begin
+ select users_seq.nextval into :new.IdUser from dual;
+end;
+/
 
 create table user_profile
 (
-  ID      int auto_increment
-    primary key,
-  USER_ID int          not null,
-  height  varchar(255) null,
-  weight  varchar(255) null,
-  neat    varchar(255) null,
-  goal    varchar(255) null,
-  other   varchar(512) null,
-  constraint user_fk
-  foreign key (USER_ID) references user (IdUser)
+  ID      number(10) 
+  primary key,
+  USER_ID number(10)          not null,
+  height  varchar2(255) null,
+  weight  varchar2(255) null,
+  neat    varchar2(255) null,
+  goal    varchar2(255) null,
+  other   varchar2(512) null,
+  constraint users_fk
+  foreign key (USER_ID) references users (IdUser)
 );
 
-create index user_fk
+-- Generate ID using sequence and trigger
+create sequence user_profile_seq start with 1 increment by 1;
+
+create or replace trigger user_profile_seq_tr
+ before insert on user_profile for each row
+ when (new.ID is null)
+begin
+ select user_profile_seq.nextval into :new.ID from dual;
+end;
+/
+
+create index users_fk
   on user_profile (USER_ID);
-  
-  create table training
+
+create table training
 (
-  ID_training int auto_increment
-    primary key,
-  chest       varchar(255) null,
-  shoulders   varchar(255) null,
-  biceps      varchar(255) null,
-  triceps     varchar(255) null,
-  back        varchar(255) null,
-  abs         varchar(255) null,
-  legs        varchar(255) null,
-  chest_s     int          null,
-  shoulders_s int          null,
-  biceps_s    int          null,
-  triceps_s   int          null,
-  back_s      int          null,
-  abs_s       int          null,
-  legs_s      int          null,
-  chest_p     int          null,
-  shoulders_p int          null,
-  biceps_p    int          null,
-  triceps_p   int          null,
-  back_p      int          null,
-  abs_p       int          null,
-  legs_p      int          null,
-  ID_user     int          null,
-  constraint training_user_IdUser_fk
-  foreign key (ID_user) references user (IdUser)
+  ID_training number(10) 
+  primary key,
+  chest       varchar2(255) null,
+  shoulders   varchar2(255) null,
+  biceps      varchar2(255) null,
+  triceps     varchar2(255) null,
+  back        varchar2(255) null,
+  abs         varchar2(255) null,
+  legs        varchar2(255) null,
+  chest_s     number(10)          null,
+  shoulders_s number(10)          null,
+  biceps_s    number(10)          null,
+  triceps_s   number(10)          null,
+  back_s      number(10)          null,
+  abs_s       number(10)          null,
+  legs_s      number(10)          null,
+  chest_p     number(10)          null,
+  shoulders_p number(10)          null,
+  biceps_p    number(10)          null,
+  triceps_p   number(10)          null,
+  back_p      number(10)          null,
+  abs_p       number(10)          null,
+  legs_p      number(10)          null,
+  ID_user     number(10)          null,
+  constraint training_users_IdUser_fk
+  foreign key (ID_user) references users (IdUser)
 );
 
-create index training_user_IdUser_fk
+-- Generate ID using sequence and trigger
+create sequence training_seq start with 1 increment by 1;
+
+create or replace trigger training_seq_tr
+ before insert on training for each row
+ when (new.ID_training is null)
+begin
+ select training_seq.nextval into :new.ID_training from dual;
+end;
+/
+
+create index training_users_IdUser_fk
   on training (ID_user);
 
 
 create table trainer_profile
 (
-  id_trainer_profile int auto_increment
-    primary key,
-  id_trainer         int          null,
-  specjalizacja      varchar(255) not null,
-  informacje         varchar(255) not null,
+  id_trainer_profile number(10) 
+  primary key,
+  id_trainer         number(10)          null,
+  specjalizacja      varchar2(255) not null,
+  informacje         varchar2(255) not null,
   constraint trainer_profile_user_IdUser_fk
-    foreign key (id_trainer) references user (iduser)
+  foreign key (id_trainer) references users (iduser)
 );
+
+-- Generate ID using sequence and trigger
+create sequence trainer_profile_seq start with 1 increment by 1;
+
+create or replace trigger trainer_profile_seq_tr
+ before insert on trainer_profile for each row
+ when (new.id_trainer_profile is null)
+begin
+ select trainer_profile_seq.nextval into :new.id_trainer_profile from dual;
+end;
+/
 
 create table calendarevent
 (
-  IdEvent     int auto_increment
-    primary key,
-  IdUser      int          not null,
-  day         int          not null,
-  month       int          not null,
-  year        int          not null,
-  hour        int          not null,
-  title       varchar(255) not null,
-  description varchar(255) not null
+  IdEvent     number(10) 
+  primary key,
+  IdUser      number(10)          not null,
+  day         number(10)          not null,
+  month       number(10)          not null,
+  year        number(10)          not null,
+  hour        number(10)          not null,
+  title       varchar2(255) not null,
+  description varchar2(255) not null
 )
-  collate = utf8_polish_ci;
+ ;
+
+-- Generate ID using sequence and trigger
+create sequence calendarevent_seq start with 1 increment by 1;
+
+create or replace trigger calendarevent_seq_tr
+ before insert on calendarevent for each row
+ when (new.IdEvent is null)
+begin
+ select calendarevent_seq.nextval into :new.IdEvent from dual;
+end;
+/
 
 create table nutrition
 (
-  ID_nutrition int auto_increment
-    primary key,
-  calories     int not null,
-  protein      int not null,
-  carbs        int not null,
-  fat          int not null,
-  sugars       int not null,
-  saturedfat   int not null,
-  unsaturedfat int not null,
-  ID_user      int not null
+  ID_nutrition number(10) 
+  primary key,
+  calories     number(10) not null,
+  protein      number(10) not null,
+  carbs        number(10) not null,
+  fat          number(10) not null,
+  sugars       number(10) not null,
+  saturedfat   number(10) not null,
+  unsaturedfat number(10) not null,
+  ID_user      number(10) not null
 );
+
+-- Generate ID using sequence and trigger
+create sequence nutrition_seq start with 1 increment by 1;
+
+create or replace trigger nutrition_seq_tr
+ before insert on nutrition for each row
+ when (new.ID_nutrition is null)
+begin
+ select nutrition_seq.nextval into :new.ID_nutrition from dual;
+end;
+/
+
+INSERT INTO USERS(IdUser, Login, Password, Imie, Nazwisko, Plec, Pesel, Rola) VALUES (USERS_SEQ.nextval, 'admin', 'admin', 'Admin', 'Adminowski', 'mezczyzna', '30', 'admin');
