@@ -1,11 +1,7 @@
 package server;
 
-import com.jfoenix.controls.JFXComboBox;
-import oracle.sql.ROWID;
-import trainerWindow.TrainerController;
 import utilities.*;
 
-import java.awt.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
@@ -358,8 +354,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
                 user.setPlec(result.getString("Plec"));
                 user.setPesel(result.getString("Pesel"));
                 user.setRola(result.getString("rola"));
-                if(result.getLong("IDUSER_T")>0)
-                    user.setIdUser_T(result.getLong("IDUSER_T"));
+                user.setIdUser_U(result.getLong("IDUSER_U"));
             }
             result.close();
             return user;
@@ -517,6 +512,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
                 user.setPlec(result.getString("Plec"));
                 user.setPesel(result.getString("Pesel"));
                 user.setRola(result.getString("Rola"));
+                user.setIdUser_U(result.getLong("IDUSER_U"));
                 list.add(user);
             }
 
@@ -880,7 +876,7 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     }
 
     @Override
-    public void updateUserT(User user, Long TrainerID) throws RemoteException {
+    public void updateUserU(User trainer, Long UserID) throws RemoteException {
         PreparedStatement statement = null;
         String sql = "update USERS set Login = ?"
                 +", Password = ?"
@@ -889,19 +885,19 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
                 +", Plec = ?"
                 +", Pesel = ?"
                 +", rola = ?"
-                +", IDUSER_T = ?"
+                +", IDUSER_U = ?"
                 +"where IdUser= ?";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
-            statement.setString(1, user.getLogin());
-            statement.setString(2, user.getPassword());
-            statement.setString(3, user.getImie());
-            statement.setString(4, user.getNazwisko());
-            statement.setString(5, user.getPlec());
-            statement.setString(6, user.getPesel());
-            statement.setString(7, user.getRola());
-            statement.setLong(8,TrainerID);
-            statement.setLong(9, user.getIdUser());
+            statement.setString(1, trainer.getLogin());
+            statement.setString(2, trainer.getPassword());
+            statement.setString(3, trainer.getImie());
+            statement.setString(4, trainer.getNazwisko());
+            statement.setString(5, trainer.getPlec());
+            statement.setString(6, trainer.getPesel());
+            statement.setString(7, trainer.getRola());
+            statement.setLong(8, UserID);
+            statement.setLong(9, trainer.getIdUser());
 
             statement.executeUpdate();
         } catch (SQLException e) {
