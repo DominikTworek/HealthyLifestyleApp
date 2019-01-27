@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -98,7 +99,9 @@ public class UserController extends Functions {
 
 
     public void loadMessage(ActionEvent actionEvent) throws IOException {
-        Functions.loadMainWindow("../mainWindowUser/MessageU.fxml", mainWindow);
+        FXMLLoader loader = new FXMLLoader(Functions.class.getResource("../mainWindowUser/MessageU.fxml"));
+        GridPane change = loader.load();
+        mainWindow.getChildren().setAll(change);
     }
 
     public void logout(ActionEvent actionEvent) {
