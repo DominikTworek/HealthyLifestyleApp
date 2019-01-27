@@ -1,8 +1,10 @@
 package utilities.Messages;
 
+import LoginWindow.LoadLoginWindow;
 import LoginWindow.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -12,6 +14,7 @@ import server.MessageServices;
 import server.UserServiceImplements;
 import utilities.Message;
 import utilities.User;
+import utilities.UserService;
 
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
@@ -30,6 +33,10 @@ public class NewMessageController {
     TextArea contents;
 
     private Message newMsg;
+
+    private Long IDuser = LoginController.getIDuser();
+
+    private UserService userService = LoadLoginWindow.getUserService();
 
     private void onCancel(ActionEvent e){
         Stage stage = (Stage) cancel.getScene().getWindow();
@@ -52,16 +59,44 @@ public class NewMessageController {
         Date dNow = new Date( );
         SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy hh:mm:ss");
         newMsg.setData(ft.format(dNow));
-        newMsg.setIdSender(LoginController.getIDuser());
+        newMsg.setIdSender(IDuser);
         UserServiceImplements u = new UserServiceImplements();
         //Ustawic odpowiednio
         //1.IdSender
-        newMsg.setIdSender(LoginController.getIDuser());
+        newMsg.setIdSender(IDuser);
         //2.Sender Text na imie + nazwisko
         newMsg.setSenderText(
                 u.getFieldFromUser(newMsg.getIdSender(), "Imie")+" "+
                 u.getFieldFromUser(newMsg.getIdSender(), "Nazwisko"));
         //3.IdReceiver
-        //4.Id Receiver na imie + nazwisko
+        if(userService.getUserById(IDuser).getRola().equals("customer"))
+        {
+            List<User> trainers = userService.getAllTrainer();
+            Iterator<User> iterator = trainers.iterator();
+            User trainer;
+            long trainerID = -1;
+            while (iterator.hasNext())
+            {
+                trainer = iterator.next();
+                if (trainer.getIdUser_U() == IDuser)
+                    trainerID = trainer.getIdUser();
+            }
+
+            if(trainerID!=-1) {
+                newMsg.setIdReceiver(trainerID);
+                newMsg.setReceiverText(
+                        u.getFieldFromUser(newMsg.getIdReceiver(), "Imie")+" "+
+                                u.getFieldFromUser(newMsg.getIdReceiver(), "Nazwisko"));
+            }
+            else
+                new Alert(Alert.AlertType.INFORMATION,"Nie posiadasz trenera!").showAndWait();
+        }
+        else{
+            long reciverID = userService.getUserById(IDuser).getIdUser_U();
+            newMsg.setIdReceiver(reciverID);
+            newMsg.setReceiverText(
+                    u.getFieldFromUser(newMsg.getIdReceiver(), "Imie")+" "+
+                            u.getFieldFromUser(newMsg.getIdReceiver(), "Nazwisko"));
+        }
     }
 }

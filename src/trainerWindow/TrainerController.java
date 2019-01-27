@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -97,9 +98,6 @@ public class TrainerController extends Functions implements Initializable {
         mainWindow.getChildren().setAll(change);
     }
 
-    public void loadMessages(ActionEvent actionEvent) throws IOException {
-        Functions.loadMainWindow("../mainWindowTrainer/MessageT.fxml", mainWindow);
-    }
 
     public void loadOptions(ActionEvent actionEvent) throws IOException {
         Functions.loadMainWindow("../mainWindowTrainer/OptionsT.fxml", mainWindow);
@@ -108,6 +106,12 @@ public class TrainerController extends Functions implements Initializable {
     public void logout(ActionEvent actionEvent) {
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void loadMessages(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Functions.class.getResource("../mainWindowUser/MessageU.fxml"));
+        GridPane change = loader.load();
+        mainWindow.getChildren().setAll(change);
     }
 
 }
