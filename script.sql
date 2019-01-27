@@ -3,8 +3,9 @@ DROP TABLE NUTRITION;
 DROP TABLE TRAINING;
 DROP TABLE USER_PROFILE;
 DROP TABLE TRAINER_PROFILE;
-DROP TABLE USERS;
 DROP TABLE USER_PROGRESS;
+DROP TABLE messages;
+DROP TABLE USERS;
 
 DROP SEQUENCE CALENDAREVENT_SEQ;
 DROP SEQUENCE NUTRITION_SEQ;
@@ -13,6 +14,7 @@ DROP SEQUENCE USER_PROFILE_SEQ;
 DROP SEQUENCE TRAINER_PROFILE_SEQ;
 DROP SEQUENCE USERS_SEQ;
 DROP SEQUENCE USER_PROGRESS_SEQ;
+DROP SEQUENCE messages_seq;
 
 create table users
 (
@@ -224,4 +226,26 @@ begin
 end;
 /
 
-INSERT INTO USERS(IdUser, Login, Password, Imie, Nazwisko, Plec, Pesel, Rola) VALUES (USERS_SEQ.nextval, 'admin', 'admin', 'Admin', 'Adminowski', 'mezczyzna', '30', 'admin');
+create table messages
+(
+  IdMsg   number(10) 
+  primary key,
+  IdSender number(10),
+  IdReceiver number(10),
+  senderText varchar2(255) not null,
+  receiverText varchar2(255) not null,
+  title varchar2(255) not null,
+  content varchar2(255) not null,
+  data varchar2(255) not null
+);
+
+-- Generate ID using sequence and trigger
+create sequence messages_seq start with 1 increment by 1;
+
+create or replace trigger msg_seq_tr
+ before insert on messages for each row
+ when (new.IdMsg is null)
+begin
+ select messages_seq.nextval into :new.IdMsg from dual;
+end;
+/
