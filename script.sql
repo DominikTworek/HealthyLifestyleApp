@@ -4,6 +4,7 @@ DROP TABLE TRAINING;
 DROP TABLE USER_PROFILE;
 DROP TABLE TRAINER_PROFILE;
 DROP TABLE USERS;
+DROP TABLE USER_PROGRESS;
 
 DROP SEQUENCE CALENDAREVENT_SEQ;
 DROP SEQUENCE NUTRITION_SEQ;
@@ -11,6 +12,7 @@ DROP SEQUENCE TRAINING_SEQ;
 DROP SEQUENCE USER_PROFILE_SEQ;
 DROP SEQUENCE TRAINER_PROFILE_SEQ;
 DROP SEQUENCE USERS_SEQ;
+DROP SEQUENCE USER_PROGRESS_SEQ;
 
 create table users
 (
@@ -179,6 +181,46 @@ create or replace trigger nutrition_seq_tr
  when (new.ID_nutrition is null)
 begin
  select nutrition_seq.nextval into :new.ID_nutrition from dual;
+end;
+/
+
+
+CREATE TABLE USER_PROGRESS 
+(
+  ID_PROGRESS NUMBER NOT NULL 
+, WAGA NUMBER(*, 0) NOT NULL 
+, KLATKA NUMBER(*, 0) NOT NULL 
+, TALIA NUMBER(*, 0) NOT NULL 
+, PAS NUMBER(*, 0) NOT NULL 
+, BIODRO NUMBER(*, 0) NOT NULL 
+, UDO NUMBER(*, 0) NOT NULL 
+, RAMIE NUMBER(*, 0) NOT NULL 
+, ID_USER NUMBER NOT NULL 
+, CONSTRAINT USER_PROGRESS_PK PRIMARY KEY 
+  (
+    ID_PROGRESS 
+  )
+  ENABLE 
+);
+
+ALTER TABLE USER_PROGRESS
+ADD CONSTRAINT USER_PROGRESS_FK1 FOREIGN KEY
+(
+  ID_USER 
+)
+REFERENCES USERS
+(
+  IDUSER 
+)
+ENABLE;
+
+create sequence user_progress_seq start with 1 increment by 1;
+
+create or replace trigger user_progress_seq_tr
+ before insert on USER_PROGRESS for each row
+ when (new.ID_PROGRESS is null)
+begin
+ select user_progress_seq.nextval into :new.ID_PROGRESS from dual;
 end;
 /
 

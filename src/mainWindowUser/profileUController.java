@@ -47,6 +47,16 @@ public class profileUController implements Initializable {
     }
 
     void setCombobox(){
+        UserProfile userProfile = null;
+        try {
+            userProfile = userService.getUserProfileById(IDuser);
+            heightField.setText(userProfile.getHeight());
+            weightField.setText(userProfile.getWeight());
+            neatComboBox.setValue(userProfile.getNeat());
+            goalComboBox.setValue(userProfile.getGoal());
+            otherTextArea.setText(userProfile.getOther());
+        } catch (RemoteException ignored) {}
+
         neatComboBox.getItems().addAll("Niska", "Srednia", "Wysoka");
         goalComboBox.getItems().addAll("Utrata tkanki tluszczowej", "Budowa miesni");
     }

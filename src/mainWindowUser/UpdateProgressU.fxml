@@ -1,19 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane focusTraversable="true" prefHeight="560.0" prefWidth="650.0" scaleShape="false" styleClass="root" stylesheets="@../layout/Dark.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainWindowUser.UpdateProgressUController">
    <children>
-      <Text layoutX="53.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aktualizacja Progresu" wrappingWidth="570.0">
+      <Text layoutX="209.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waga" AnchorPane.bottomAnchor="444.482421875">
          <font>
-            <Font size="92.0" />
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="36.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klatka piersiowa" AnchorPane.bottomAnchor="313.482421875">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="70.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pas" AnchorPane.bottomAnchor="224.482421875">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <JFXTextField fx:id="wagaField" alignment="CENTER" layoutX="265.0" layoutY="91.0" promptText="kg" />
+      <JFXTextField fx:id="klatkaField" alignment="CENTER" layoutX="173.0" layoutY="222.0" promptText="[cm]" />
+      <JFXTextField fx:id="taliaField" alignment="CENTER" layoutX="173.0" layoutY="267.0" promptText="[cm]" />
+      <JFXTextField fx:id="pasField" alignment="CENTER" layoutX="173.0" layoutY="312.0" promptText="[cm]" />
+      <Text layoutX="356.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Biodro">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="365.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Udo">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="357.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ramie">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <JFXTextField fx:id="biodroField" alignment="CENTER" layoutX="456.0" layoutY="221.0" promptText="[cm]" />
+      <JFXTextField fx:id="udoField" alignment="CENTER" layoutX="456.0" layoutY="268.0" promptText="[cm]" />
+      <JFXTextField fx:id="ramieField" alignment="CENTER" layoutX="456.0" layoutY="312.0" promptText="[cm]" />
+      <Text layoutX="190.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aktualizacja postępów">
+         <font>
+            <Font size="27.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="229.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pomiary ciała [cm]">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="65.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Talia">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.4777777777777778" centerY="0.5619047619047619" cycleMethod="REFLECT" focusAngle="8.13" radius="0.655813953488372">
+               <stops>
+                  <Stop color="#00d0ff" />
+                  <Stop color="#004cff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fill="#4fbcfc" layoutX="140.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Określ stałe miejsca na ciele i konskwentnie sie ich trzymaj.">
+         <font>
+            <Font size="13.0" />
          </font>
       </Text>
+      <Text fill="#4fbcfc" layoutX="207.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pomiary wykonuj raz na 2 tygodnie">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <JFXButton layoutX="498.0" layoutY="456.0" onAction="#saveProgress" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Zapisz" />
    </children>
-   <padding>
-      <Insets top="35.0" />
-   </padding>
 </AnchorPane>

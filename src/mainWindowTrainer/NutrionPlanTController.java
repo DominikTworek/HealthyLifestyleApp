@@ -9,7 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import trainerWindow.TrainerController;
 import utilities.Nutrition;
+import utilities.UserProfile;
 import utilities.UserService;
 
 import java.net.URL;
@@ -69,7 +71,20 @@ public class NutrionPlanTController implements Initializable {
 
         UserService userService = LoadLoginWindow.getUserService();
 
-        Nutrient calculateCalories() {
+        private Long trainerID = LoginController.getIDuser();
+
+        long clientID;
+        UserProfile userProfile;
+        {
+            try {
+                clientID = userService.getUserById(trainerID).getIdUser_U();
+                userProfile = userService.getUserProfileById(clientID);
+            } catch (RemoteException ignored){}
+
+
+        }
+
+    Nutrient calculateCalories() {
                 Integer caloriesValue = Integer.parseInt(weightField.getText())*(multipierComboBox.getValue());
                 Nutrient calories = new ComplexNutrient("Kalorie", caloriesValue);
 
@@ -134,7 +149,7 @@ public class NutrionPlanTController implements Initializable {
     }
 
     void setComboBox(){
-            //UserService userServic
+            if(userProfile!=null) weightField.setText(userProfile.getWeight());
             multipierComboBox.getItems().addAll(31,32,33,34,35);
             proteinComboBox.getItems().addAll(10,15,20,25,30,35,40,45,50,55,60,65,70,75,80);
             carbohydratesComboBox.getItems().addAll(10,15,20,25,30,35,40,45,50,55,60,65,70,75,80);
@@ -165,6 +180,7 @@ public class NutrionPlanTController implements Initializable {
 
     @FXML
     void sendToClient() throws RemoteException {
+        if (userProfile!=null){
         Nutrition nutrition = new Nutrition();
         nutrition.setCalories(Integer.parseInt(caloriesField.getText()));
         nutrition.setProtein(Integer.parseInt(proteidField.getText()));
@@ -173,8 +189,9 @@ public class NutrionPlanTController implements Initializable {
         nutrition.setSugars(Integer.parseInt(sugarsField.getText()));
         nutrition.setSaturedfat(Integer.parseInt(saturedField.getText()));
         nutrition.setUnsaturedfat(Integer.parseInt(unsaturedField.getText()));
-        nutrition.setID_user(6);
+        nutrition.setID_user(userProfile.getUSER_ID());
 
         userService.insertNutrition(nutrition);
+        }
     }
 }
