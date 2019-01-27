@@ -1,6 +1,7 @@
 package mainWindowTrainer;
 
 import LoginWindow.LoadLoginWindow;
+import LoginWindow.LoginController;
 import com.jfoenix.controls.JFXButton;
         import com.jfoenix.controls.JFXComboBox;
         import com.jfoenix.controls.JFXTextField;
@@ -84,6 +85,8 @@ public class TrainingPlanTController implements Initializable {
 
     private UserService userService = LoadLoginWindow.getUserService();
 
+    private Long trainerID = LoginController.getIDuser();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setComboBoxes();
@@ -114,10 +117,11 @@ public class TrainingPlanTController implements Initializable {
                     .Legs(legsComboBox.getValue())
                     .Legs_s(Integer.parseInt(legs_sField.getText()))
                     .Legs_p(Integer.parseInt(legs_pField.getText()))
-                    .ID_user(6)
+                    .ID_user(userService.getUserById(trainerID).getIdUser_U())
                     .build();
 
             userService.insertTraining(training);
+
             clearField();
         }
 
@@ -147,6 +151,10 @@ public class TrainingPlanTController implements Initializable {
         absComboBox.getSelectionModel().clearSelection();
         abs_pField.setText("");
         abs_sField.setText("");
+
+        tricepsComboBox.getSelectionModel().clearSelection();
+        triceps_pField.setText("");
+        triceps_sField.setText("");
     }
 
     void setComboBoxes(){

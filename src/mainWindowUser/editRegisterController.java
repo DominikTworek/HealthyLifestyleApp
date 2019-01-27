@@ -57,7 +57,7 @@ public class editRegisterController implements Initializable {
                 passwordField.setText(user.getPassword());
                 nameField.setText(user.getImie());
                 lastNameField.setText(user.getNazwisko());
-                genderComboBox.setPromptText(user.getPlec());
+                genderComboBox.setValue(user.getPlec());
                 ageField.setText(user.getPesel());
                 setComboBox();
             }catch (RemoteException e) {
@@ -116,7 +116,7 @@ public class editRegisterController implements Initializable {
                 user.setPassword(passwordField.getText());
                 user.setImie(nameField.getText());
                 user.setNazwisko(lastNameField.getText());
-                user.setPlec(genderComboBox.getValue().toString());
+                user.setPlec(genderComboBox.getValue());
                 user.setPesel(ageField.getText());
                 userService.updateUser(user);
                 clearField();

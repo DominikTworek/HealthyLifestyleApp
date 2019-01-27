@@ -2,10 +2,7 @@ package trainerWindow;
 
 import LoginWindow.LoadLoginWindow;
 import LoginWindow.LoginController;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.*;
 
 import javafx.event.ActionEvent;
 
@@ -53,7 +50,7 @@ public class TrainerController extends Functions implements Initializable {
     private JFXDrawer drawer;
 
     @FXML
-    private JFXComboBox<Label> comboBox;
+    private JFXTextField clientNick;
 
     @FXML
     private Text textNick;
@@ -67,6 +64,9 @@ public class TrainerController extends Functions implements Initializable {
         Functions.initMenu(hamburger, drawer, drawerVbox, mainWindow);
         try {
             textNick.setText(userService.setLogin(IDuser));
+            long tmp = userService.getUserById(IDuser).getIdUser_U();
+            if(tmp > 0)
+                clientNick.setText(userService.getUserById(tmp).getImie());
         } catch (RemoteException e) {
             e.printStackTrace();
         }

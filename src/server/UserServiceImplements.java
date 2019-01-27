@@ -646,6 +646,42 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
     }
 
     @Override
+    public UserProfile getUserProfileById(Long UserID) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "select * from USER_PROFILE where USER_ID= ?";
+
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setLong(1, UserID);
+
+            ResultSet result = statement.executeQuery();
+
+            UserProfile userProfile = null;
+            if(result.next()){
+                userProfile = new UserProfile();
+                userProfile.setUSER_ID(result.getLong("USER_ID"));
+                userProfile.setHeight(result.getString("HEIGHT"));
+                userProfile.setWeight(result.getString("WEIGHT"));
+                userProfile.setNeat(result.getString("NEAT"));
+                userProfile.setGoal(result.getString("GOAL"));
+                userProfile.setOther(result.getString("OTHER"));
+            }
+            result.close();
+            return userProfile;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public TrainerProfile insertTrainerProfile(TrainerProfile trainerProfile) throws RemoteException {
         PreparedStatement statement = null;
 
@@ -904,6 +940,87 @@ public class UserServiceImplements extends UnicastRemoteObject implements UserSe
             e.printStackTrace();
         } finally {
             if (statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public UserProgress insertUserProgress(UserProgress userProgress) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "insert into USER_PROGRESS(ID_PROGRESS,WAGA,KLATKA,TALIA,PAS,BIODRO,UDO,RAMIE,ID_USER) values (USER_PROGRESS_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql, new String[]{"ID_PROGRESS"});
+            statement.setInt(1, userProgress.getWaga());
+            statement.setInt(2, userProgress.getKlatka());
+            statement.setInt(3, userProgress.getTalia());
+            statement.setInt(4, userProgress.getPas());
+            statement.setInt(5, userProgress.getBiodro());
+            statement.setInt(6, userProgress.getUdo());
+            statement.setInt(7, userProgress.getRamie());
+            statement.setLong(8, userProgress.getId_user());
+
+            statement.executeUpdate();
+
+            ResultSet result = statement.getGeneratedKeys();
+            if (result.next())
+                userProgress.setId_progress(result.getLong(1));
+
+            result.close();
+            return userProgress;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public UserProgress getUserProgressById(Long IdUser) throws RemoteException {
+        PreparedStatement statement = null;
+
+        String sql = "select * from USER_PROGRESS where ID_USER = ?";
+
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(sql);
+            statement.setLong(1, IdUser);
+
+            ResultSet result = statement.executeQuery();
+
+            UserProgress userProgress = null;
+            while(result.next()){
+                userProgress = new UserProgress();
+                userProgress.setId_progress(result.getLong("ID_PROGRESS"));
+                userProgress.setWaga(result.getInt("WAGA"));
+                userProgress.setKlatka(result.getInt("KLATKA"));
+                userProgress.setTalia(result.getInt("TALIA"));
+                userProgress.setPas(result.getInt("PAS"));
+                userProgress.setBiodro(result.getInt("BIODRO"));
+                userProgress.setUdo(result.getInt("UDO"));
+                userProgress.setRamie(result.getInt("RAMIE"));
+                userProgress.setId_user(result.getLong("ID_USER"));
+            }
+
+            result.close();
+
+            return userProgress;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(statement != null){
                 try {
                     statement.close();
                 } catch (SQLException e) {

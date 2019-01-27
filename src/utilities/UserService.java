@@ -50,6 +50,8 @@ public interface UserService extends Remote {
 
     UserProfile insertUserProfile(UserProfile userProfile) throws RemoteException;
 
+    UserProfile getUserProfileById(Long UserID) throws RemoteException;
+
     TrainerProfile insertTrainerProfile(TrainerProfile trainerProfile) throws RemoteException;
 
     Training insertTraining(Training training) throws RemoteException;
@@ -61,4 +63,10 @@ public interface UserService extends Remote {
     Nutrition getNutritionByUserId(Long IdUser) throws RemoteException;
 
     void updateUserU(User trainer, Long UserID) throws RemoteException;
+
+    UserProgress insertUserProgress(UserProgress userProgress) throws RemoteException;
+
+    UserProgress getUserProgressById(Long IdUser) throws RemoteException;
+
+
 }
