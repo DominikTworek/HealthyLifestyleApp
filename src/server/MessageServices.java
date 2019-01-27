@@ -68,7 +68,7 @@ public class MessageServices {
     public static ObservableList<Message> getMsgForReceiver(Long receiverID){
         PreparedStatement statement = null;
 
-        String sql = "select * from MESSAGES where IdSender=?";
+        String sql = "select * from MESSAGES where IdReceiver=?";
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(sql);
             statement.setLong(1, receiverID);
