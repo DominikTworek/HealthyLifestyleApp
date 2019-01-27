@@ -112,28 +112,37 @@ public class TrainerUController implements Initializable {
     @FXML
     void confirmTrainer() throws RemoteException {
         User trainer = userService.getUserById(idTrainer);
+        System.out.println(trainer.getIdUser_U());
+        if(!(trainer.getIdUser_U()>0)) {
+            allTrainer = userService.getAllTrainer();
 
-        allTrainer = userService.getAllTrainer();
+            Iterator<User> iter = allTrainer.iterator();
 
-        Iterator<User> iter = allTrainer.iterator();
-
-        try {
-            if (iter.hasNext()) {
-                while (iter.hasNext()) {
-                    if (iter.next().getIdUser_U() == IDuser) {
-                        confirmText.setText("Możesz wybrać tylko jednego trenera!");
-                        confirmText.setFill(Color.RED);
-                        confirmText.setVisible(true);
-                        return;
+            try {
+                if (iter.hasNext()) {
+                    while (iter.hasNext()) {
+                        if (iter.next().getIdUser_U() == IDuser) {
+                            confirmText.setText("Możesz wybrać tylko jednego trenera!");
+                            confirmText.setFill(Color.RED);
+                            confirmText.setVisible(true);
+                            return;
+                        }
                     }
-                }
 
-                iter = allTrainer.iterator();
-                userService.updateUserU(trainer, IDuser);
-                confirmText.setVisible(true);
+                    iter = allTrainer.iterator();
+                    userService.updateUserU(trainer, IDuser);
+                    confirmText.setText("Trener został wybrany!");
+                    confirmText.setFill(Color.GREEN);
+                    confirmText.setVisible(true);
+                }
+            }catch (NullPointerException e){
+                confirmText.setVisible(false);
             }
-        }catch (NullPointerException e){
-            confirmText.setVisible(false);
+        }
+        else{
+            confirmText.setText("Ten trener ma już podopiecznego!");
+            confirmText.setFill(Color.RED);
+            confirmText.setVisible(true);
         }
 
      }
