@@ -6,8 +6,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -144,29 +142,6 @@
                         <JFXTextField fx:id="saturedField" alignment="CENTER" editable="false" layoutX="434.0" layoutY="365.0" />
                         <JFXTextField fx:id="unsaturedField" alignment="CENTER" editable="false" layoutX="447.0" layoutY="404.0" />
                         <JFXButton layoutX="451.0" layoutY="466.0" onAction="#sendToClient" styleClass="menu-button" stylesheets="@../layout/Dark.css" text="Wyślij do klienta" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="Produkty">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView layoutX="32.0" layoutY="26.0" prefHeight="200.0" prefWidth="190.0" AnchorPane.leftAnchor="28.5">
-                          <columns>
-                            <TableColumn prefWidth="190.0" text="Białko" />
-                          </columns>
-                        </TableView>
-                        <TableView layoutX="219.0" layoutY="26.0" prefHeight="200.0" prefWidth="190.0">
-                           <columns>
-                              <TableColumn prefWidth="190.0" text="Węglowodany" />
-                           </columns>
-                        </TableView>
-                        <TableView layoutX="409.0" layoutY="26.0" prefHeight="200.0" prefWidth="190.0" AnchorPane.rightAnchor="28.5">
-                           <columns>
-                              <TableColumn prefWidth="190.0" text="Tłuszcze" />
-                           </columns>
-                        </TableView>
                      </children>
                   </AnchorPane>
               </content>
