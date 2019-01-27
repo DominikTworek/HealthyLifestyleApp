@@ -25,7 +25,7 @@ create table users
   Plec     varchar2(255) not null,
   Pesel    varchar2(255) not null,
   Rola     varchar2(255) not null,
-  IDUSER_T NUMBER
+  IDUSER_U NUMBER
 );
 
 -- Generate ID using sequence and trigger
