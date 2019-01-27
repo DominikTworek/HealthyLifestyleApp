@@ -50,11 +50,13 @@ public class profileUController implements Initializable {
         UserProfile userProfile = null;
         try {
             userProfile = userService.getUserProfileById(IDuser);
-            heightField.setText(userProfile.getHeight());
-            weightField.setText(userProfile.getWeight());
-            neatComboBox.setValue(userProfile.getNeat());
-            goalComboBox.setValue(userProfile.getGoal());
-            otherTextArea.setText(userProfile.getOther());
+            if(userProfile!=null) {
+                heightField.setText(userProfile.getHeight());
+                weightField.setText(userProfile.getWeight());
+                neatComboBox.setValue(userProfile.getNeat());
+                goalComboBox.setValue(userProfile.getGoal());
+                otherTextArea.setText(userProfile.getOther());
+            }
         } catch (RemoteException ignored) {}
 
         neatComboBox.getItems().addAll("Niska", "Srednia", "Wysoka");
